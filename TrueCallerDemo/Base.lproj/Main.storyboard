@@ -79,7 +79,7 @@
                                             </button>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXb-VQ-bO9">
                                                 <rect key="frame" x="330.5" y="0.0" width="44.5" height="30"/>
-                                                <color key="backgroundColor" red="0.11376580595970154" green="0.22677282989025116" blue="0.915718674659729" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="backgroundColor" red="0.085279151799999994" green="0.100494504" blue="0.1411235183" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="gXb-VQ-bO9" secondAttribute="height" multiplier="3:2" id="CUl-l2-Ddo"/>
                                                 </constraints>

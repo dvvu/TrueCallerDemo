@@ -258,7 +258,12 @@
         
         // hide keyboardheaderView
         _keyboardHeaderView.constant = 0;
-        _keyboardViewHeight.constant = self.view.frame.size.height * 0.5 - _keyboardHeaderHeight;
+        
+        if(_showKeyboardButton.isHidden) {
+            
+            _keyboardViewHeight.constant = self.view.frame.size.height * 0.5 - _keyboardHeaderHeight;
+        }
+        
         [_tableView setHidden:YES];
         
         [UIView animateWithDuration:0.3f animations:^{
@@ -307,6 +312,8 @@
     
     [self hideKeyboard];
 }
+
+#pragma mark - hide KeyBoard
 
 - (void)hideKeyboard {
     
