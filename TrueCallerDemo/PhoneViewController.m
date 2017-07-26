@@ -30,12 +30,12 @@
 @property (nonatomic, weak) IBOutlet UITableView* tableView;
 @property (nonatomic) float keyboardHeaderHeight;
 @property (nonatomic) NSArray* symbolsArray;
-// new
-@property (nonatomic, strong) NITableViewModel* model;
-@property (nonatomic, strong) ContactBook* contactBook;
+
 @property (nonatomic, strong) NSArray<ContactEntity*>* contactEntityList;
 @property (nonatomic, strong) NSArray<ContactEntity*>* searchContactList;
 @property (nonatomic) dispatch_queue_t resultSearchContactQueue;
+@property (nonatomic, strong) NITableViewModel* model;
+@property (nonatomic, strong) ContactBook* contactBook;
 @property (nonatomic) UILabel* tableHeaderLabel;
 @property (nonatomic) UIView* headerView;
 
@@ -47,35 +47,13 @@
     
     [super viewDidLoad];
     
-    _keyboardHeaderHeight = KEYBOARD_HEADER_HEIGHT;
-    _symbolsArray = [NSArray arrayWithObjects:@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"*", @"#", nil];
-    _keyboardViewHeight.constant = self.view.frame.size.height * 0.5 - _keyboardHeaderHeight;
-    
-    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 25)];
-    _tableHeaderLabel = [[UILabel alloc] init];
-    _tableHeaderLabel.frame = CGRectMake(8, 0, DEVICE_WIDTH - 41, 25);
-    [_headerView addSubview:_tableHeaderLabel];
-    
-    
-    UIButton* _checkPermissionButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _checkPermissionButton.frame = CGRectMake(DEVICE_WIDTH - 33, 0, 25, 25);
-    [_checkPermissionButton setImage:[UIImage imageNamed:@"ic_clearText"] forState:UIControlStateNormal];
-    [_checkPermissionButton addTarget:self action:@selector(clearHeader:) forControlEvents:UIControlEventTouchUpInside];
-    [_headerView addSubview:_checkPermissionButton];
-    
-    _tableView.tableHeaderView = _headerView;
-    [self showHideKeyBoardheaderView:_phoneLabel.text];
-    
-    // new
-    _contactBook = [ContactBook sharedInstance];
-    [_tableView registerClass:[ContactTableViewCell class] forCellReuseIdentifier:@"ContactTableViewCell"];
-    _resultSearchContactQueue = dispatch_queue_create("RESULT_SEARCH_CONTACT_QUEUE", DISPATCH_QUEUE_SERIAL);
-    _tableView.delegate = self;
-    
+    [self prepareUI];
     [self showContactBook];
+    [self showHideKeyBoardheaderView:_phoneLabel.text];
 }
 
-// new
+#pragma mark - showContactBook
+
 - (void)showContactBook {
     
     [_contactBook getPermissionContacts:^(NSError* error) {
@@ -100,6 +78,41 @@
 
 #pragma mark - setupView
 
+- (void)prepareUI {
+    
+    // setup keyboard height
+    _keyboardHeaderHeight = KEYBOARD_HEADER_HEIGHT;
+    _keyboardViewHeight.constant = self.view.frame.size.height * 0.5 - _keyboardHeaderHeight;
+    _symbolsArray = [NSArray arrayWithObjects:@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"*", @"#", nil];
+    
+    // setup headerView
+    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 25)];
+    _headerView.layer.shadowColor = [UIColor blackColor].CGColor;
+    [_headerView setBackgroundColor:[UIColor whiteColor]];
+    _headerView.layer.masksToBounds = NO;
+    _headerView.layer.shadowOffset = CGSizeMake(0, 0.1);
+    _headerView.layer.shadowOpacity = 0.1;
+    _tableHeaderLabel = [[UILabel alloc] init];
+    _tableHeaderLabel.frame = CGRectMake(8, 0, DEVICE_WIDTH - 41, 25);
+    [_headerView addSubview:_tableHeaderLabel];
+    
+    // setup clearButton
+    UIButton* clearPhoneNumberButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    clearPhoneNumberButton.frame = CGRectMake(DEVICE_WIDTH - 33, 0, 25, 25);
+    [clearPhoneNumberButton setImage:[UIImage imageNamed:@"ic_clearText"] forState:UIControlStateNormal];
+    [clearPhoneNumberButton addTarget:self action:@selector(clearHeader:) forControlEvents:UIControlEventTouchUpInside];
+    [_headerView addSubview:clearPhoneNumberButton];
+    _tableView.tableHeaderView = _headerView;
+    
+    // setup tableView
+    _contactBook = [ContactBook sharedInstance];
+    [_tableView registerClass:[ContactTableViewCell class] forCellReuseIdentifier:@"ContactTableViewCell"];
+    _resultSearchContactQueue = dispatch_queue_create("RESULT_SEARCH_CONTACT_QUEUE", DISPATCH_QUEUE_SERIAL);
+    _tableView.delegate = self;
+}
+
+#pragma mark - setupView
+
 - (void)setupTableView {
     
     dispatch_async(_resultSearchContactQueue, ^ {
@@ -115,6 +128,12 @@
             cellObject.contactImage = contactEntity.profileImageDefault;
             [objects addObject:cellObject];
         }
+        
+        // add search celloOject
+        ContactCellObject* cellObject = [[ContactCellObject alloc] init];
+        cellObject.contactTitle = @"Tim kiem trong Truecaller";
+        cellObject.contactImage = [UIImage imageNamed:@"search"];
+        [objects addObject:cellObject];
         
         _model = [[NITableViewModel alloc] initWithListArray:objects delegate:self];
         _tableView.dataSource = _model;
@@ -181,6 +200,19 @@
     
     [self hideKeyboard];
 }
+
+#pragma mark - searchText
+
+- (void)searchText:(NSString *)searchText {
+    
+    if (searchText.length > 0) {
+        
+        NSPredicate* predicate = [NSPredicate predicateWithFormat:@"name contains[cd] %@", searchText];
+        _searchContactList = [_contactEntityList filteredArrayUsingPredicate:predicate];
+        [self setupTableView];
+    }
+}
+
 //#pragma mark - Custom header tableView
 //
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -233,6 +265,7 @@
     
     _phoneLabel.text = [_phoneLabel.text stringByAppendingString:[_symbolsArray objectAtIndex:sender.tag]];
     [self showHideKeyBoardheaderView:_phoneLabel.text];
+    [self searchText:_phoneLabel.text];
 }
 
 #pragma mark - go back phoneNumber
@@ -248,6 +281,7 @@
     }
     
     [self showHideKeyBoardheaderView:_phoneLabel.text];
+    [self searchText:_phoneLabel.text];
 }
 
 #pragma mark - hide/show KeyBoard

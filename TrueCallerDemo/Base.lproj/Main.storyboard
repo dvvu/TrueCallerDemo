@@ -89,7 +89,7 @@
                                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <state key="highlighted" image="button:gXb-VQ-bO9:image">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="back:" destination="has-kB-icG" eventType="touchUpInside" id="8XM-bW-uYQ"/>
@@ -360,10 +360,10 @@
                                 </constraints>
                             </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hnk-YT-Gl7">
-                                <rect key="frame" x="259" y="498" width="80" height="80"/>
+                                <rect key="frame" x="279" y="518" width="60" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="4fZ-zT-D16"/>
-                                    <constraint firstAttribute="height" constant="80" id="mLx-EI-lrY"/>
+                                    <constraint firstAttribute="width" constant="60" id="4fZ-zT-D16"/>
+                                    <constraint firstAttribute="height" constant="60" id="mLx-EI-lrY"/>
                                 </constraints>
                                 <state key="normal" image="ic_keyBoard"/>
                                 <connections>
@@ -480,10 +480,11 @@
         <scene sceneID="fKE-GE-FRg">
             <objects>
                 <tabBarController id="XaV-Uv-wWX" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="2pP-Ib-kD2">
+                    <tabBar key="tabBar" contentMode="scaleAspectFill" barStyle="black" id="2pP-Ib-kD2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.085279151799999994" green="0.100494504" blue="0.1411235183" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="selectedImageTintColor" red="0.113765806" green="0.2267728299" blue="0.91571867470000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
                         <segue destination="has-kB-icG" kind="relationship" relationship="viewControllers" id="UiE-3D-ZIA"/>
