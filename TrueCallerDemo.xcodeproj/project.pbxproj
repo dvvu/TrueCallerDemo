@@ -7,14 +7,55 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA2BD39F1F2703CA00CC2572 /* CallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2BD39E1F2703CA00CC2572 /* CallViewController.m */; };
+		EA2BD3A21F2735D400CC2572 /* PhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2BD3A11F2735D400CC2572 /* PhoneViewController.m */; };
 		EA6022311F259757001591BC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022301F259757001591BC /* main.m */; };
 		EA6022341F259757001591BC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022331F259757001591BC /* AppDelegate.m */; };
 		EA6022371F259757001591BC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022361F259757001591BC /* ViewController.m */; };
 		EA60223A1F259757001591BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA6022381F259757001591BC /* Main.storyboard */; };
-		EA60223C1F259757001591BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA60223B1F259757001591BC /* Assets.xcassets */; };
 		EA60223F1F259757001591BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA60223D1F259757001591BC /* LaunchScreen.storyboard */; };
 		EA60224A1F259757001591BC /* TrueCallerDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022491F259757001591BC /* TrueCallerDemoTests.m */; };
 		EA6022551F259757001591BC /* TrueCallerDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022541F259757001591BC /* TrueCallerDemoUITests.m */; };
+		EA6022691F25A133001591BC /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022661F25A133001591BC /* ContactsViewController.m */; };
+		EA60226A1F25A133001591BC /* FriendsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022681F25A133001591BC /* FriendsTableViewController.m */; };
+		EA60226E1F25A14D001591BC /* ResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA60226D1F25A14D001591BC /* ResultTableViewController.m */; };
+		EA6022721F25A166001591BC /* ContactCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022711F25A166001591BC /* ContactCache.m */; };
+		EA6022761F25A1B0001591BC /* ContactBook.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022751F25A1B0001591BC /* ContactBook.m */; };
+		EA60227E1F25A1C3001591BC /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022791F25A1C3001591BC /* ContactTableViewCell.m */; };
+		EA60227F1F25A1C3001591BC /* ContactCellObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA60227B1F25A1C3001591BC /* ContactCellObject.m */; };
+		EA6022801F25A1C3001591BC /* FriendContactCellObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA60227D1F25A1C3001591BC /* FriendContactCellObject.m */; };
+		EA6022841F25A1DC001591BC /* ContactEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022831F25A1DC001591BC /* ContactEntity.m */; };
+		EA60229F1F25A280001591BC /* NICellCatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022891F25A280001591BC /* NICellCatalog.m */; };
+		EA6022A01F25A280001591BC /* NICellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = EA60228B1F25A280001591BC /* NICellFactory.m */; };
+		EA6022A11F25A280001591BC /* NIFormCellCatalog.m in Sources */ = {isa = PBXBuildFile; fileRef = EA60228E1F25A280001591BC /* NIFormCellCatalog.m */; };
+		EA6022A21F25A280001591BC /* NIMutableTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022911F25A280001591BC /* NIMutableTableViewModel.m */; };
+		EA6022A31F25A280001591BC /* NICellBackgrounds.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022941F25A280001591BC /* NICellBackgrounds.m */; };
+		EA6022A41F25A280001591BC /* NIRadioGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022971F25A280001591BC /* NIRadioGroup.m */; };
+		EA6022A51F25A280001591BC /* NIRadioGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022991F25A280001591BC /* NIRadioGroupController.m */; };
+		EA6022A61F25A280001591BC /* NITableViewActions.m in Sources */ = {isa = PBXBuildFile; fileRef = EA60229B1F25A280001591BC /* NITableViewActions.m */; };
+		EA6022A71F25A280001591BC /* NITableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA60229D1F25A280001591BC /* NITableViewModel.m */; };
+		EA6022D51F25A2A3001591BC /* NIActions.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022A91F25A2A3001591BC /* NIActions.m */; };
+		EA6022D61F25A2A3001591BC /* NIButtonUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022AC1F25A2A3001591BC /* NIButtonUtilities.m */; };
+		EA6022D71F25A2A3001591BC /* NICommonMetrics.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022AE1F25A2A3001591BC /* NICommonMetrics.m */; };
+		EA6022D81F25A2A3001591BC /* NIDebuggingTools.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022B01F25A2A3001591BC /* NIDebuggingTools.m */; };
+		EA6022D91F25A2A3001591BC /* NIDeviceOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022B21F25A2A3001591BC /* NIDeviceOrientation.m */; };
+		EA6022DA1F25A2A3001591BC /* NIError.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022B41F25A2A3001591BC /* NIError.m */; };
+		EA6022DB1F25A2A3001591BC /* NIFoundationMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022B61F25A2A3001591BC /* NIFoundationMethods.m */; };
+		EA6022DC1F25A2A3001591BC /* NIImageUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022B81F25A2A3001591BC /* NIImageUtilities.m */; };
+		EA6022DD1F25A2A3001591BC /* NIInMemoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022BA1F25A2A3001591BC /* NIInMemoryCache.m */; };
+		EA6022DE1F25A2A3001591BC /* NINetworkActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022BE1F25A2A3001591BC /* NINetworkActivity.m */; };
+		EA6022DF1F25A2A3001591BC /* NINonEmptyCollectionTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022C01F25A2A3001591BC /* NINonEmptyCollectionTesting.m */; };
+		EA6022E01F25A2A3001591BC /* NINonRetainingCollections.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022C21F25A2A3001591BC /* NINonRetainingCollections.m */; };
+		EA6022E11F25A2A3001591BC /* NIOperations.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022C41F25A2A3001591BC /* NIOperations.m */; };
+		EA6022E21F25A2A3001591BC /* NIPaths.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022C71F25A2A3001591BC /* NIPaths.m */; };
+		EA6022E31F25A2A3001591BC /* NIRuntimeClassModifications.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022CA1F25A2A3001591BC /* NIRuntimeClassModifications.m */; };
+		EA6022E41F25A2A3001591BC /* NISDKAvailability.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022CC1F25A2A3001591BC /* NISDKAvailability.m */; };
+		EA6022E51F25A2A3001591BC /* NISnapshotRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022CE1F25A2A3001591BC /* NISnapshotRotation.m */; };
+		EA6022E61F25A2A3001591BC /* NIState.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022D01F25A2A3001591BC /* NIState.m */; };
+		EA6022E71F25A2A3001591BC /* NIViewRecycler.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022D21F25A2A3001591BC /* NIViewRecycler.m */; };
+		EA6022E81F25A2A3001591BC /* UIResponder+NimbusCore.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022D41F25A2A3001591BC /* UIResponder+NimbusCore.m */; };
+		EA6022EF1F25CFD0001591BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA6022EE1F25CFD0001591BC /* Assets.xcassets */; };
+		EA6022F21F2602D5001591BC /* GlobalVars.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022F11F2602D5001591BC /* GlobalVars.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +76,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EA2BD39D1F2703CA00CC2572 /* CallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallViewController.h; sourceTree = "<group>"; };
+		EA2BD39E1F2703CA00CC2572 /* CallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallViewController.m; sourceTree = "<group>"; };
+		EA2BD3A01F2735D400CC2572 /* PhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneViewController.h; sourceTree = "<group>"; };
+		EA2BD3A11F2735D400CC2572 /* PhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneViewController.m; sourceTree = "<group>"; };
 		EA60222C1F259757001591BC /* TrueCallerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrueCallerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA6022301F259757001591BC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EA6022321F259757001591BC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -42,7 +87,6 @@
 		EA6022351F259757001591BC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		EA6022361F259757001591BC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		EA6022391F259757001591BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		EA60223B1F259757001591BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA60223E1F259757001591BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EA6022401F259757001591BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA6022451F259757001591BC /* TrueCallerDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrueCallerDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +95,95 @@
 		EA6022501F259757001591BC /* TrueCallerDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrueCallerDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA6022541F259757001591BC /* TrueCallerDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrueCallerDemoUITests.m; sourceTree = "<group>"; };
 		EA6022561F259757001591BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA6022651F25A133001591BC /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
+		EA6022661F25A133001591BC /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
+		EA6022671F25A133001591BC /* FriendsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsTableViewController.h; sourceTree = "<group>"; };
+		EA6022681F25A133001591BC /* FriendsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsTableViewController.m; sourceTree = "<group>"; };
+		EA60226C1F25A14D001591BC /* ResultTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultTableViewController.h; sourceTree = "<group>"; };
+		EA60226D1F25A14D001591BC /* ResultTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultTableViewController.m; sourceTree = "<group>"; };
+		EA6022701F25A166001591BC /* ContactCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCache.h; sourceTree = "<group>"; };
+		EA6022711F25A166001591BC /* ContactCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCache.m; sourceTree = "<group>"; };
+		EA6022741F25A1B0001591BC /* ContactBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactBook.h; sourceTree = "<group>"; };
+		EA6022751F25A1B0001591BC /* ContactBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactBook.m; sourceTree = "<group>"; };
+		EA6022781F25A1C3001591BC /* ContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactTableViewCell.h; sourceTree = "<group>"; };
+		EA6022791F25A1C3001591BC /* ContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactTableViewCell.m; sourceTree = "<group>"; };
+		EA60227A1F25A1C3001591BC /* ContactCellObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCellObject.h; sourceTree = "<group>"; };
+		EA60227B1F25A1C3001591BC /* ContactCellObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCellObject.m; sourceTree = "<group>"; };
+		EA60227C1F25A1C3001591BC /* FriendContactCellObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendContactCellObject.h; sourceTree = "<group>"; };
+		EA60227D1F25A1C3001591BC /* FriendContactCellObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendContactCellObject.m; sourceTree = "<group>"; };
+		EA6022821F25A1DC001591BC /* ContactEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactEntity.h; sourceTree = "<group>"; };
+		EA6022831F25A1DC001591BC /* ContactEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactEntity.m; sourceTree = "<group>"; };
+		EA6022851F25A1EB001591BC /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		EA6022891F25A280001591BC /* NICellCatalog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NICellCatalog.m; sourceTree = "<group>"; };
+		EA60228A1F25A280001591BC /* NICellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NICellFactory.h; sourceTree = "<group>"; };
+		EA60228B1F25A280001591BC /* NICellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NICellFactory.m; sourceTree = "<group>"; };
+		EA60228C1F25A280001591BC /* NICellFactory+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NICellFactory+Private.h"; sourceTree = "<group>"; };
+		EA60228D1F25A280001591BC /* NIFormCellCatalog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIFormCellCatalog.h; sourceTree = "<group>"; };
+		EA60228E1F25A280001591BC /* NIFormCellCatalog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIFormCellCatalog.m; sourceTree = "<group>"; };
+		EA60228F1F25A280001591BC /* NimbusModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NimbusModels.h; sourceTree = "<group>"; };
+		EA6022901F25A280001591BC /* NIMutableTableViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIMutableTableViewModel.h; sourceTree = "<group>"; };
+		EA6022911F25A280001591BC /* NIMutableTableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIMutableTableViewModel.m; sourceTree = "<group>"; };
+		EA6022921F25A280001591BC /* NIMutableTableViewModel+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NIMutableTableViewModel+Private.h"; sourceTree = "<group>"; };
+		EA6022931F25A280001591BC /* NICellBackgrounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NICellBackgrounds.h; sourceTree = "<group>"; };
+		EA6022941F25A280001591BC /* NICellBackgrounds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NICellBackgrounds.m; sourceTree = "<group>"; };
+		EA6022951F25A280001591BC /* NICellCatalog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NICellCatalog.h; sourceTree = "<group>"; };
+		EA6022961F25A280001591BC /* NIRadioGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIRadioGroup.h; sourceTree = "<group>"; };
+		EA6022971F25A280001591BC /* NIRadioGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIRadioGroup.m; sourceTree = "<group>"; };
+		EA6022981F25A280001591BC /* NIRadioGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIRadioGroupController.h; sourceTree = "<group>"; };
+		EA6022991F25A280001591BC /* NIRadioGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIRadioGroupController.m; sourceTree = "<group>"; };
+		EA60229A1F25A280001591BC /* NITableViewActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NITableViewActions.h; sourceTree = "<group>"; };
+		EA60229B1F25A280001591BC /* NITableViewActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NITableViewActions.m; sourceTree = "<group>"; };
+		EA60229C1F25A280001591BC /* NITableViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NITableViewModel.h; sourceTree = "<group>"; };
+		EA60229D1F25A280001591BC /* NITableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NITableViewModel.m; sourceTree = "<group>"; };
+		EA60229E1F25A280001591BC /* NITableViewModel+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NITableViewModel+Private.h"; sourceTree = "<group>"; };
+		EA6022A81F25A2A3001591BC /* NIActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIActions.h; sourceTree = "<group>"; };
+		EA6022A91F25A2A3001591BC /* NIActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIActions.m; sourceTree = "<group>"; };
+		EA6022AA1F25A2A3001591BC /* NIActions+Subclassing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NIActions+Subclassing.h"; sourceTree = "<group>"; };
+		EA6022AB1F25A2A3001591BC /* NIButtonUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIButtonUtilities.h; sourceTree = "<group>"; };
+		EA6022AC1F25A2A3001591BC /* NIButtonUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIButtonUtilities.m; sourceTree = "<group>"; };
+		EA6022AD1F25A2A3001591BC /* NICommonMetrics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NICommonMetrics.h; sourceTree = "<group>"; };
+		EA6022AE1F25A2A3001591BC /* NICommonMetrics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NICommonMetrics.m; sourceTree = "<group>"; };
+		EA6022AF1F25A2A3001591BC /* NIDebuggingTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIDebuggingTools.h; sourceTree = "<group>"; };
+		EA6022B01F25A2A3001591BC /* NIDebuggingTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIDebuggingTools.m; sourceTree = "<group>"; };
+		EA6022B11F25A2A3001591BC /* NIDeviceOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIDeviceOrientation.h; sourceTree = "<group>"; };
+		EA6022B21F25A2A3001591BC /* NIDeviceOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIDeviceOrientation.m; sourceTree = "<group>"; };
+		EA6022B31F25A2A3001591BC /* NIError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIError.h; sourceTree = "<group>"; };
+		EA6022B41F25A2A3001591BC /* NIError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIError.m; sourceTree = "<group>"; };
+		EA6022B51F25A2A3001591BC /* NIFoundationMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIFoundationMethods.h; sourceTree = "<group>"; };
+		EA6022B61F25A2A3001591BC /* NIFoundationMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIFoundationMethods.m; sourceTree = "<group>"; };
+		EA6022B71F25A2A3001591BC /* NIImageUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIImageUtilities.h; sourceTree = "<group>"; };
+		EA6022B81F25A2A3001591BC /* NIImageUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIImageUtilities.m; sourceTree = "<group>"; };
+		EA6022B91F25A2A3001591BC /* NIInMemoryCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIInMemoryCache.h; sourceTree = "<group>"; };
+		EA6022BA1F25A2A3001591BC /* NIInMemoryCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIInMemoryCache.m; sourceTree = "<group>"; };
+		EA6022BB1F25A2A3001591BC /* NimbusCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NimbusCore.h; sourceTree = "<group>"; };
+		EA6022BC1F25A2A3001591BC /* NimbusCore+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NimbusCore+Additions.h"; sourceTree = "<group>"; };
+		EA6022BD1F25A2A3001591BC /* NINetworkActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NINetworkActivity.h; sourceTree = "<group>"; };
+		EA6022BE1F25A2A3001591BC /* NINetworkActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NINetworkActivity.m; sourceTree = "<group>"; };
+		EA6022BF1F25A2A3001591BC /* NINonEmptyCollectionTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NINonEmptyCollectionTesting.h; sourceTree = "<group>"; };
+		EA6022C01F25A2A3001591BC /* NINonEmptyCollectionTesting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NINonEmptyCollectionTesting.m; sourceTree = "<group>"; };
+		EA6022C11F25A2A3001591BC /* NINonRetainingCollections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NINonRetainingCollections.h; sourceTree = "<group>"; };
+		EA6022C21F25A2A3001591BC /* NINonRetainingCollections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NINonRetainingCollections.m; sourceTree = "<group>"; };
+		EA6022C31F25A2A3001591BC /* NIOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIOperations.h; sourceTree = "<group>"; };
+		EA6022C41F25A2A3001591BC /* NIOperations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIOperations.m; sourceTree = "<group>"; };
+		EA6022C51F25A2A3001591BC /* NIOperations+Subclassing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NIOperations+Subclassing.h"; sourceTree = "<group>"; };
+		EA6022C61F25A2A3001591BC /* NIPaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIPaths.h; sourceTree = "<group>"; };
+		EA6022C71F25A2A3001591BC /* NIPaths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIPaths.m; sourceTree = "<group>"; };
+		EA6022C81F25A2A3001591BC /* NIPreprocessorMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIPreprocessorMacros.h; sourceTree = "<group>"; };
+		EA6022C91F25A2A3001591BC /* NIRuntimeClassModifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIRuntimeClassModifications.h; sourceTree = "<group>"; };
+		EA6022CA1F25A2A3001591BC /* NIRuntimeClassModifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIRuntimeClassModifications.m; sourceTree = "<group>"; };
+		EA6022CB1F25A2A3001591BC /* NISDKAvailability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NISDKAvailability.h; sourceTree = "<group>"; };
+		EA6022CC1F25A2A3001591BC /* NISDKAvailability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NISDKAvailability.m; sourceTree = "<group>"; };
+		EA6022CD1F25A2A3001591BC /* NISnapshotRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NISnapshotRotation.h; sourceTree = "<group>"; };
+		EA6022CE1F25A2A3001591BC /* NISnapshotRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NISnapshotRotation.m; sourceTree = "<group>"; };
+		EA6022CF1F25A2A3001591BC /* NIState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIState.h; sourceTree = "<group>"; };
+		EA6022D01F25A2A3001591BC /* NIState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIState.m; sourceTree = "<group>"; };
+		EA6022D11F25A2A3001591BC /* NIViewRecycler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIViewRecycler.h; sourceTree = "<group>"; };
+		EA6022D21F25A2A3001591BC /* NIViewRecycler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIViewRecycler.m; sourceTree = "<group>"; };
+		EA6022D31F25A2A3001591BC /* UIResponder+NimbusCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIResponder+NimbusCore.h"; sourceTree = "<group>"; };
+		EA6022D41F25A2A3001591BC /* UIResponder+NimbusCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+NimbusCore.m"; sourceTree = "<group>"; };
+		EA6022EE1F25CFD0001591BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EA6022F01F2602D5001591BC /* GlobalVars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalVars.h; sourceTree = "<group>"; };
+		EA6022F11F2602D5001591BC /* GlobalVars.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalVars.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,14 +234,15 @@
 		EA60222E1F259757001591BC /* TrueCallerDemo */ = {
 			isa = PBXGroup;
 			children = (
-				EA6022321F259757001591BC /* AppDelegate.h */,
-				EA6022331F259757001591BC /* AppDelegate.m */,
-				EA6022351F259757001591BC /* ViewController.h */,
-				EA6022361F259757001591BC /* ViewController.m */,
-				EA6022381F259757001591BC /* Main.storyboard */,
-				EA60223B1F259757001591BC /* Assets.xcassets */,
-				EA60223D1F259757001591BC /* LaunchScreen.storyboard */,
-				EA6022401F259757001591BC /* Info.plist */,
+				EA6022E91F25A2D4001591BC /* delegate */,
+				EA6022861F25A24A001591BC /* nimbus */,
+				EA6022811F25A1D4001591BC /* Entities */,
+				EA6022771F25A1B9001591BC /* ContactCells */,
+				EA6022731F25A1A2001591BC /* ContactBookLoader */,
+				EA60226F1F25A158001591BC /* CacheImahe */,
+				EA60226B1F25A139001591BC /* ResultTableViewContrller */,
+				EA6022641F25A124001591BC /* ViewController */,
+				EA6022EA1F25A2EA001591BC /* views */,
 				EA60222F1F259757001591BC /* Supporting Files */,
 			);
 			path = TrueCallerDemo;
@@ -138,6 +272,185 @@
 				EA6022561F259757001591BC /* Info.plist */,
 			);
 			path = TrueCallerDemoUITests;
+			sourceTree = "<group>";
+		};
+		EA6022641F25A124001591BC /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EA6022351F259757001591BC /* ViewController.h */,
+				EA6022361F259757001591BC /* ViewController.m */,
+				EA6022651F25A133001591BC /* ContactsViewController.h */,
+				EA6022661F25A133001591BC /* ContactsViewController.m */,
+				EA6022671F25A133001591BC /* FriendsTableViewController.h */,
+				EA6022681F25A133001591BC /* FriendsTableViewController.m */,
+				EA2BD39D1F2703CA00CC2572 /* CallViewController.h */,
+				EA2BD39E1F2703CA00CC2572 /* CallViewController.m */,
+				EA2BD3A01F2735D400CC2572 /* PhoneViewController.h */,
+				EA2BD3A11F2735D400CC2572 /* PhoneViewController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		EA60226B1F25A139001591BC /* ResultTableViewContrller */ = {
+			isa = PBXGroup;
+			children = (
+				EA60226C1F25A14D001591BC /* ResultTableViewController.h */,
+				EA60226D1F25A14D001591BC /* ResultTableViewController.m */,
+			);
+			name = ResultTableViewContrller;
+			sourceTree = "<group>";
+		};
+		EA60226F1F25A158001591BC /* CacheImahe */ = {
+			isa = PBXGroup;
+			children = (
+				EA6022701F25A166001591BC /* ContactCache.h */,
+				EA6022711F25A166001591BC /* ContactCache.m */,
+			);
+			name = CacheImahe;
+			sourceTree = "<group>";
+		};
+		EA6022731F25A1A2001591BC /* ContactBookLoader */ = {
+			isa = PBXGroup;
+			children = (
+				EA6022741F25A1B0001591BC /* ContactBook.h */,
+				EA6022751F25A1B0001591BC /* ContactBook.m */,
+			);
+			name = ContactBookLoader;
+			sourceTree = "<group>";
+		};
+		EA6022771F25A1B9001591BC /* ContactCells */ = {
+			isa = PBXGroup;
+			children = (
+				EA6022781F25A1C3001591BC /* ContactTableViewCell.h */,
+				EA6022791F25A1C3001591BC /* ContactTableViewCell.m */,
+				EA60227A1F25A1C3001591BC /* ContactCellObject.h */,
+				EA60227B1F25A1C3001591BC /* ContactCellObject.m */,
+				EA60227C1F25A1C3001591BC /* FriendContactCellObject.h */,
+				EA60227D1F25A1C3001591BC /* FriendContactCellObject.m */,
+			);
+			name = ContactCells;
+			sourceTree = "<group>";
+		};
+		EA6022811F25A1D4001591BC /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				EA6022821F25A1DC001591BC /* ContactEntity.h */,
+				EA6022831F25A1DC001591BC /* ContactEntity.m */,
+			);
+			name = Entities;
+			sourceTree = "<group>";
+		};
+		EA6022861F25A24A001591BC /* nimbus */ = {
+			isa = PBXGroup;
+			children = (
+				EA6022881F25A269001591BC /* Core */,
+				EA6022871F25A262001591BC /* Models */,
+			);
+			name = nimbus;
+			sourceTree = "<group>";
+		};
+		EA6022871F25A262001591BC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EA6022891F25A280001591BC /* NICellCatalog.m */,
+				EA60228A1F25A280001591BC /* NICellFactory.h */,
+				EA60228B1F25A280001591BC /* NICellFactory.m */,
+				EA60228C1F25A280001591BC /* NICellFactory+Private.h */,
+				EA60228D1F25A280001591BC /* NIFormCellCatalog.h */,
+				EA60228E1F25A280001591BC /* NIFormCellCatalog.m */,
+				EA60228F1F25A280001591BC /* NimbusModels.h */,
+				EA6022901F25A280001591BC /* NIMutableTableViewModel.h */,
+				EA6022911F25A280001591BC /* NIMutableTableViewModel.m */,
+				EA6022921F25A280001591BC /* NIMutableTableViewModel+Private.h */,
+				EA6022931F25A280001591BC /* NICellBackgrounds.h */,
+				EA6022941F25A280001591BC /* NICellBackgrounds.m */,
+				EA6022951F25A280001591BC /* NICellCatalog.h */,
+				EA6022961F25A280001591BC /* NIRadioGroup.h */,
+				EA6022971F25A280001591BC /* NIRadioGroup.m */,
+				EA6022981F25A280001591BC /* NIRadioGroupController.h */,
+				EA6022991F25A280001591BC /* NIRadioGroupController.m */,
+				EA60229A1F25A280001591BC /* NITableViewActions.h */,
+				EA60229B1F25A280001591BC /* NITableViewActions.m */,
+				EA60229C1F25A280001591BC /* NITableViewModel.h */,
+				EA60229D1F25A280001591BC /* NITableViewModel.m */,
+				EA60229E1F25A280001591BC /* NITableViewModel+Private.h */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		EA6022881F25A269001591BC /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				EA6022A81F25A2A3001591BC /* NIActions.h */,
+				EA6022A91F25A2A3001591BC /* NIActions.m */,
+				EA6022AA1F25A2A3001591BC /* NIActions+Subclassing.h */,
+				EA6022AB1F25A2A3001591BC /* NIButtonUtilities.h */,
+				EA6022AC1F25A2A3001591BC /* NIButtonUtilities.m */,
+				EA6022AD1F25A2A3001591BC /* NICommonMetrics.h */,
+				EA6022AE1F25A2A3001591BC /* NICommonMetrics.m */,
+				EA6022AF1F25A2A3001591BC /* NIDebuggingTools.h */,
+				EA6022B01F25A2A3001591BC /* NIDebuggingTools.m */,
+				EA6022B11F25A2A3001591BC /* NIDeviceOrientation.h */,
+				EA6022B21F25A2A3001591BC /* NIDeviceOrientation.m */,
+				EA6022B31F25A2A3001591BC /* NIError.h */,
+				EA6022B41F25A2A3001591BC /* NIError.m */,
+				EA6022B51F25A2A3001591BC /* NIFoundationMethods.h */,
+				EA6022B61F25A2A3001591BC /* NIFoundationMethods.m */,
+				EA6022B71F25A2A3001591BC /* NIImageUtilities.h */,
+				EA6022B81F25A2A3001591BC /* NIImageUtilities.m */,
+				EA6022B91F25A2A3001591BC /* NIInMemoryCache.h */,
+				EA6022BA1F25A2A3001591BC /* NIInMemoryCache.m */,
+				EA6022BB1F25A2A3001591BC /* NimbusCore.h */,
+				EA6022BC1F25A2A3001591BC /* NimbusCore+Additions.h */,
+				EA6022BD1F25A2A3001591BC /* NINetworkActivity.h */,
+				EA6022BE1F25A2A3001591BC /* NINetworkActivity.m */,
+				EA6022BF1F25A2A3001591BC /* NINonEmptyCollectionTesting.h */,
+				EA6022C01F25A2A3001591BC /* NINonEmptyCollectionTesting.m */,
+				EA6022C11F25A2A3001591BC /* NINonRetainingCollections.h */,
+				EA6022C21F25A2A3001591BC /* NINonRetainingCollections.m */,
+				EA6022C31F25A2A3001591BC /* NIOperations.h */,
+				EA6022C41F25A2A3001591BC /* NIOperations.m */,
+				EA6022C51F25A2A3001591BC /* NIOperations+Subclassing.h */,
+				EA6022C61F25A2A3001591BC /* NIPaths.h */,
+				EA6022C71F25A2A3001591BC /* NIPaths.m */,
+				EA6022C81F25A2A3001591BC /* NIPreprocessorMacros.h */,
+				EA6022C91F25A2A3001591BC /* NIRuntimeClassModifications.h */,
+				EA6022CA1F25A2A3001591BC /* NIRuntimeClassModifications.m */,
+				EA6022CB1F25A2A3001591BC /* NISDKAvailability.h */,
+				EA6022CC1F25A2A3001591BC /* NISDKAvailability.m */,
+				EA6022CD1F25A2A3001591BC /* NISnapshotRotation.h */,
+				EA6022CE1F25A2A3001591BC /* NISnapshotRotation.m */,
+				EA6022CF1F25A2A3001591BC /* NIState.h */,
+				EA6022D01F25A2A3001591BC /* NIState.m */,
+				EA6022D11F25A2A3001591BC /* NIViewRecycler.h */,
+				EA6022D21F25A2A3001591BC /* NIViewRecycler.m */,
+				EA6022D31F25A2A3001591BC /* UIResponder+NimbusCore.h */,
+				EA6022D41F25A2A3001591BC /* UIResponder+NimbusCore.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		EA6022E91F25A2D4001591BC /* delegate */ = {
+			isa = PBXGroup;
+			children = (
+				EA6022851F25A1EB001591BC /* Constants.h */,
+				EA6022321F259757001591BC /* AppDelegate.h */,
+				EA6022331F259757001591BC /* AppDelegate.m */,
+				EA6022F01F2602D5001591BC /* GlobalVars.h */,
+				EA6022F11F2602D5001591BC /* GlobalVars.m */,
+			);
+			name = delegate;
+			sourceTree = "<group>";
+		};
+		EA6022EA1F25A2EA001591BC /* views */ = {
+			isa = PBXGroup;
+			children = (
+				EA6022EE1F25CFD0001591BC /* Assets.xcassets */,
+				EA6022381F259757001591BC /* Main.storyboard */,
+				EA60223D1F259757001591BC /* LaunchScreen.storyboard */,
+				EA6022401F259757001591BC /* Info.plist */,
+			);
+			name = views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,6 +520,7 @@
 				TargetAttributes = {
 					EA60222B1F259757001591BC = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 2FXVJFZPXW;
 						ProvisioningStyle = Automatic;
 					};
 					EA6022441F259757001591BC = {
@@ -247,7 +561,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA60223F1F259757001591BC /* LaunchScreen.storyboard in Resources */,
-				EA60223C1F259757001591BC /* Assets.xcassets in Resources */,
+				EA6022EF1F25CFD0001591BC /* Assets.xcassets in Resources */,
 				EA60223A1F259757001591BC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -273,9 +587,50 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA6022801F25A1C3001591BC /* FriendContactCellObject.m in Sources */,
+				EA6022D61F25A2A3001591BC /* NIButtonUtilities.m in Sources */,
 				EA6022371F259757001591BC /* ViewController.m in Sources */,
+				EA6022DD1F25A2A3001591BC /* NIInMemoryCache.m in Sources */,
+				EA6022A61F25A280001591BC /* NITableViewActions.m in Sources */,
+				EA6022D81F25A2A3001591BC /* NIDebuggingTools.m in Sources */,
+				EA6022E31F25A2A3001591BC /* NIRuntimeClassModifications.m in Sources */,
+				EA6022DA1F25A2A3001591BC /* NIError.m in Sources */,
+				EA60227F1F25A1C3001591BC /* ContactCellObject.m in Sources */,
+				EA6022691F25A133001591BC /* ContactsViewController.m in Sources */,
+				EA6022A31F25A280001591BC /* NICellBackgrounds.m in Sources */,
+				EA60226A1F25A133001591BC /* FriendsTableViewController.m in Sources */,
+				EA6022DC1F25A2A3001591BC /* NIImageUtilities.m in Sources */,
 				EA6022341F259757001591BC /* AppDelegate.m in Sources */,
+				EA6022A11F25A280001591BC /* NIFormCellCatalog.m in Sources */,
+				EA6022A51F25A280001591BC /* NIRadioGroupController.m in Sources */,
+				EA6022E01F25A2A3001591BC /* NINonRetainingCollections.m in Sources */,
+				EA6022D71F25A2A3001591BC /* NICommonMetrics.m in Sources */,
+				EA6022DE1F25A2A3001591BC /* NINetworkActivity.m in Sources */,
+				EA6022A41F25A280001591BC /* NIRadioGroup.m in Sources */,
+				EA6022A71F25A280001591BC /* NITableViewModel.m in Sources */,
+				EA6022DF1F25A2A3001591BC /* NINonEmptyCollectionTesting.m in Sources */,
+				EA60226E1F25A14D001591BC /* ResultTableViewController.m in Sources */,
+				EA6022A01F25A280001591BC /* NICellFactory.m in Sources */,
+				EA2BD39F1F2703CA00CC2572 /* CallViewController.m in Sources */,
+				EA6022D51F25A2A3001591BC /* NIActions.m in Sources */,
+				EA6022E11F25A2A3001591BC /* NIOperations.m in Sources */,
+				EA6022E61F25A2A3001591BC /* NIState.m in Sources */,
+				EA6022A21F25A280001591BC /* NIMutableTableViewModel.m in Sources */,
+				EA6022D91F25A2A3001591BC /* NIDeviceOrientation.m in Sources */,
+				EA6022E41F25A2A3001591BC /* NISDKAvailability.m in Sources */,
+				EA6022E81F25A2A3001591BC /* UIResponder+NimbusCore.m in Sources */,
+				EA6022F21F2602D5001591BC /* GlobalVars.m in Sources */,
+				EA6022841F25A1DC001591BC /* ContactEntity.m in Sources */,
+				EA6022E21F25A2A3001591BC /* NIPaths.m in Sources */,
+				EA6022DB1F25A2A3001591BC /* NIFoundationMethods.m in Sources */,
 				EA6022311F259757001591BC /* main.m in Sources */,
+				EA60229F1F25A280001591BC /* NICellCatalog.m in Sources */,
+				EA6022721F25A166001591BC /* ContactCache.m in Sources */,
+				EA6022761F25A1B0001591BC /* ContactBook.m in Sources */,
+				EA6022E51F25A2A3001591BC /* NISnapshotRotation.m in Sources */,
+				EA2BD3A21F2735D400CC2572 /* PhoneViewController.m in Sources */,
+				EA6022E71F25A2A3001591BC /* NIViewRecycler.m in Sources */,
+				EA60227E1F25A1C3001591BC /* ContactTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,7 +726,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -414,7 +769,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -426,7 +781,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2FXVJFZPXW;
 				INFOPLIST_FILE = TrueCallerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = VNG.TrueCallerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -437,7 +794,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2FXVJFZPXW;
 				INFOPLIST_FILE = TrueCallerDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = VNG.TrueCallerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -509,6 +868,7 @@
 				EA60225B1F259757001591BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EA60225C1F259757001591BC /* Build configuration list for PBXNativeTarget "TrueCallerDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -517,6 +877,7 @@
 				EA60225E1F259757001591BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EA60225F1F259757001591BC /* Build configuration list for PBXNativeTarget "TrueCallerDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -525,6 +886,7 @@
 				EA6022611F259757001591BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
