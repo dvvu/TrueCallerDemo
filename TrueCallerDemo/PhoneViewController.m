@@ -13,7 +13,6 @@
 #import "ResultTableViewController.h"
 #import "ContactCellObject.h"
 #import "ContactTableViewCell.h"
-#import "CallViewController.h"
 #import "ContactCache.h"
 #import "NimbusModels.h"
 #import "NimbusCore.h"
