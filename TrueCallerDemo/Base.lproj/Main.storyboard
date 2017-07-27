@@ -78,7 +78,7 @@
             </objects>
             <point key="canvasLocation" x="1410" y="922"/>
         </scene>
-        <!--Phone View Controller-->
+        <!--Call-->
         <scene sceneID="jeR-qx-yZX">
             <objects>
                 <viewController id="has-kB-icG" customClass="PhoneViewController" sceneMemberID="viewController">
@@ -396,7 +396,7 @@
                             <constraint firstItem="lee-RQ-Sdk" firstAttribute="leading" secondItem="i6d-79-vaa" secondAttribute="leading" id="x3Z-bF-xxb"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" image="ic_phone" badgeValue="2" id="v20-up-dZl"/>
+                    <tabBarItem key="tabBarItem" title="Call" image="ic_phone" badgeValue="2" id="v20-up-dZl"/>
                     <connections>
                         <outlet property="backgroundView" destination="Pi8-93-6r9" id="oEZ-YS-vjc"/>
                         <outlet property="keyBoardView" destination="lee-RQ-Sdk" id="CWw-B7-b6m"/>

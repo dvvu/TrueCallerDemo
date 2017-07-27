@@ -7,16 +7,14 @@
 //
 
 #import "PhoneViewController.h"
-#import "Constants.h"
-
-// new
-#import "ResultTableViewController.h"
-#import "ContactCellObject.h"
 #import "ContactTableViewCell.h"
+#import "ContactCellObject.h"
+#import "ContactEntity.h"
 #import "ContactCache.h"
 #import "NimbusModels.h"
 #import "NimbusCore.h"
 #import "ContactBook.h"
+#import "Constants.h"
 
 @interface PhoneViewController () <NITableViewModelDelegate, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
@@ -125,6 +123,7 @@
             ContactCellObject* cellObject = [[ContactCellObject alloc] init];
             cellObject.contactTitle = contactEntity.name;
             cellObject.identifier = contactEntity.identifier;
+            cellObject.phoneNumber = contactEntity.phone;
             cellObject.contactImage = contactEntity.profileImageDefault;
             [objects addObject:cellObject];
         }
@@ -149,8 +148,23 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ContactCellObject* cellObject = [_model objectAtIndexPath:indexPath];
-    NSLog(@"%@", cellObject.contactTitle);
+    if (indexPath.row == _searchContactList.count - 1) {
+        
+        // search into directory Cell
+        
+    } else {
+        
+        // action click to call contact cell.
+        ContactCellObject* cellObject = [_model objectAtIndexPath:indexPath];
+        NSLog(@"%@", cellObject.phoneNumber);
+        
+        NSString* phoneNumber = [cellObject.phoneNumber objectAtIndex:0];
+        
+        if (phoneNumber) {
+            
+            [[[UIAlertView alloc] initWithTitle:@"Do you want to call?" message: phoneNumber delegate:self cancelButtonTitle:@"Call" otherButtonTitles:@"Close", nil] show];
+        }
+    }
     
     [UIView animateWithDuration:0.2 animations: ^ {
         
@@ -261,7 +275,10 @@
 
 - (IBAction)call:(id)sender {
     
-     [[[UIAlertView alloc] initWithTitle:@"Do you want to call?" message: _phoneLabel.text delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil] show];
+    if ([_phoneLabel.text length] > 0) {
+        
+         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel:" stringByAppendingString:_phoneLabel.text]]];
+    }
 }
 
 #pragma mark - alertViewDelegate
@@ -270,7 +287,7 @@
    
     if (buttonIndex == 0) {
         
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel:" stringByAppendingString:_phoneLabel.text]]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel:" stringByAppendingString:alertView.message]]];
     }
 }
 

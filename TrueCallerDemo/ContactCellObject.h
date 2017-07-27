@@ -11,6 +11,7 @@
 @protocol ContactModelProtocol <NSObject>
 
 @property (readonly, nonatomic, copy) NSString* contactTitle;
+@property (readonly, nonatomic, copy) NSMutableArray<NSString*>* phoneNumber;
 @property (readonly, nonatomic) UIImage* contactImage;
 
 @end
@@ -18,6 +19,7 @@
 @interface ContactCellObject : NITitleCellObject <ContactModelProtocol>
 
 @property (nonatomic, copy) NSString* contactTitle;
+@property (nonatomic, copy) NSMutableArray<NSString*>* phoneNumber;
 @property (nonatomic, weak) NSString* identifier;
 @property (nonatomic) UIImage* contactImage;
 
