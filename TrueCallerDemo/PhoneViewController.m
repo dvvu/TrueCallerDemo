@@ -108,6 +108,7 @@
     _contactBook = [ContactBook sharedInstance];
     [_tableView registerClass:[ContactTableViewCell class] forCellReuseIdentifier:@"ContactTableViewCell"];
     _resultSearchContactQueue = dispatch_queue_create("RESULT_SEARCH_CONTACT_QUEUE", DISPATCH_QUEUE_SERIAL);
+    
     _tableView.delegate = self;
 }
 
@@ -140,10 +141,9 @@
         
         dispatch_async(dispatch_get_main_queue(), ^ {
             
-            [self.tableView reloadData];
+            [_tableView reloadData];
         });
     });
-    
 }
 
 #pragma mark - selected
@@ -194,24 +194,40 @@
     return height;
 }
 
-#pragma mark - scroll
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
-    [self hideKeyboard];
-}
-
 #pragma mark - searchText
 
 - (void)searchText:(NSString *)searchText {
     
     if (searchText.length > 0) {
         
-        NSPredicate* predicate = [NSPredicate predicateWithFormat:@"name contains[cd] %@", searchText];
-        _searchContactList = [_contactEntityList filteredArrayUsingPredicate:predicate];
+        NSMutableArray* mutableArray = [[NSMutableArray alloc] init];;
+        
+        for (int i = 0; i < _contactEntityList.count; i++) {
+
+            NSArray* phone = [_contactEntityList objectAtIndex:i].phone;
+            NSPredicate* predicate = [NSPredicate predicateWithFormat:@"SELF contains[cd] %@", searchText];
+            if ([phone filteredArrayUsingPredicate:predicate].count > 0) {
+                
+                [mutableArray addObject:[_contactEntityList objectAtIndex:i]];
+            }
+        }
+        
+        _searchContactList = mutableArray;
         [self setupTableView];
     }
 }
+
+#pragma mark - scroll
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    
+    [self hideKeyboard];
+}
+
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    
+//    _headerView.frame = CGRectMake(0, scrollView.contentOffset.y, _headerView.frame.size.width, _headerView.frame.size.height);
+//}
 
 //#pragma mark - Custom header tableView
 //

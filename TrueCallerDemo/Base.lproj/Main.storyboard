@@ -315,35 +315,9 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_trueCaller" translatesAutoresizingMaskIntoConstraints="NO" id="Vxd-ft-rdA">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="198"/>
                                     </imageView>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2Gd-OO-5Ds">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2Gd-OO-5Ds">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="198"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="YRJ-Gd-80p">
-                                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YRJ-Gd-80p" id="Se9-Ou-P2s">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </tableViewCellContentView>
-                                            </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="7HX-cu-Ygu">
-                                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7HX-cu-Ygu" id="S7i-1i-BfF">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </tableViewCellContentView>
-                                            </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="GwR-vM-uUW">
-                                                <rect key="frame" x="0.0" y="116" width="375" height="44"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GwR-vM-uUW" id="bJ3-Lx-ubJ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </tableViewCellContentView>
-                                            </tableViewCell>
-                                        </prototypes>
                                         <sections/>
                                     </tableView>
                                 </subviews>
@@ -385,7 +359,7 @@
                             <constraint firstItem="lee-RQ-Sdk" firstAttribute="leading" secondItem="i6d-79-vaa" secondAttribute="leading" id="x3Z-bF-xxb"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" badgeValue="2" systemItem="search" id="v20-up-dZl"/>
+                    <tabBarItem key="tabBarItem" image="ic_phone" badgeValue="2" id="v20-up-dZl"/>
                     <connections>
                         <outlet property="backgroundView" destination="Pi8-93-6r9" id="oEZ-YS-vjc"/>
                         <outlet property="keyBoardView" destination="lee-RQ-Sdk" id="CWw-B7-b6m"/>
@@ -398,7 +372,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="We9-Tw-7Po" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2456.8000000000002" y="462.8185907046477"/>
+            <point key="canvasLocation" x="2457" y="183"/>
         </scene>
         <!--Contacts View Controller-->
         <scene sceneID="FzI-ag-Lit">
@@ -419,63 +393,6 @@
             </objects>
             <point key="canvasLocation" x="3396" y="-839.73013493253382"/>
         </scene>
-        <!--Call View Controller-->
-        <scene sceneID="e8m-c9-dxg">
-            <objects>
-                <viewController id="Iuw-CU-CCh" customClass="CallViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="YOK-qu-ZTl"/>
-                        <viewControllerLayoutGuide type="bottom" id="TUc-W5-hvV"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="mhr-9F-gtQ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_trueCaller" translatesAutoresizingMaskIntoConstraints="NO" id="PiO-m1-qBc">
-                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K5I-8s-Zrw">
-                                <rect key="frame" x="279" y="530" width="80" height="80"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="duj-3a-yyj"/>
-                                    <constraint firstAttribute="height" constant="80" id="gGz-Fu-PuF"/>
-                                </constraints>
-                                <state key="normal" image="ic_fl"/>
-                                <connections>
-                                    <action selector="showKeyboard:" destination="Iuw-CU-CCh" eventType="touchUpInside" id="UH9-Li-1OG"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P4k-Um-LUR">
-                                <rect key="frame" x="0.0" y="20" width="375" height="27"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="27" id="gN6-Ws-MSv"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="K5I-8s-Zrw" firstAttribute="trailing" secondItem="mhr-9F-gtQ" secondAttribute="trailingMargin" id="0gW-lh-B9u"/>
-                            <constraint firstItem="PiO-m1-qBc" firstAttribute="leading" secondItem="mhr-9F-gtQ" secondAttribute="leading" id="9WI-bO-qwm"/>
-                            <constraint firstItem="P4k-Um-LUR" firstAttribute="leading" secondItem="mhr-9F-gtQ" secondAttribute="leading" id="AZ0-ki-QBw"/>
-                            <constraint firstItem="P4k-Um-LUR" firstAttribute="top" secondItem="YOK-qu-ZTl" secondAttribute="bottom" id="ClZ-xy-BNQ"/>
-                            <constraint firstItem="TUc-W5-hvV" firstAttribute="top" secondItem="K5I-8s-Zrw" secondAttribute="bottom" constant="8" id="Q1x-ux-7oT"/>
-                            <constraint firstItem="TUc-W5-hvV" firstAttribute="top" secondItem="PiO-m1-qBc" secondAttribute="bottom" id="Tmm-sl-5jx"/>
-                            <constraint firstAttribute="trailing" secondItem="PiO-m1-qBc" secondAttribute="trailing" id="k84-kO-2G3"/>
-                            <constraint firstItem="PiO-m1-qBc" firstAttribute="top" secondItem="YOK-qu-ZTl" secondAttribute="bottom" id="nfb-cS-4qg"/>
-                            <constraint firstAttribute="trailing" secondItem="P4k-Um-LUR" secondAttribute="trailing" id="qDI-qr-w0r"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" image="ic_phone" badgeValue="2" id="Kn6-8v-Y5Z"/>
-                    <connections>
-                        <outlet property="searBarView" destination="P4k-Um-LUR" id="Ihl-cU-PHo"/>
-                        <outlet property="showKeyboardButton" destination="K5I-8s-Zrw" id="uVO-gf-da8"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jUr-cs-CDi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2456.8000000000002" y="-188.45577211394306"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="fKE-GE-FRg">
             <objects>
@@ -488,7 +405,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="has-kB-icG" kind="relationship" relationship="viewControllers" id="UiE-3D-ZIA"/>
-                        <segue destination="Iuw-CU-CCh" kind="relationship" relationship="viewControllers" id="Qwi-bc-Pzq"/>
                         <segue destination="VdF-Er-Cnd" kind="relationship" relationship="viewControllers" id="3I6-PC-SrW"/>
                     </connections>
                 </tabBarController>
@@ -565,7 +481,6 @@ AgEAAAAAAAAAPAAAAAAAAAAAAAAAAAAAAdo
         </image>
         <image name="call" width="360" height="360"/>
         <image name="close" width="512" height="512"/>
-        <image name="ic_fl" width="609" height="609"/>
         <image name="ic_keyBoard" width="512" height="512"/>
         <image name="ic_phone" width="20" height="20"/>
         <image name="ic_trueCaller" width="512" height="512"/>
