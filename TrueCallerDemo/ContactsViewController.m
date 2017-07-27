@@ -142,7 +142,12 @@
         for (int i = 0; i < contacts; i++) {
             
             NSString* name = [_contactEntityList[i].name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-            NSString* firstChar = [name substringToIndex:1];
+            NSString* firstChar = @"";
+            
+            if ([name length] > 0) {
+                
+                firstChar = [name substringToIndex:1];
+            }
             
             if ([groupNameContact.uppercaseString rangeOfString:firstChar.uppercaseString].location == NSNotFound) {
                 
@@ -163,7 +168,12 @@
             
             ContactEntity* contactEntity = _contactEntityList[i];
             NSString* name = [_contactEntityList[i].name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-            NSString* firstChar = [name substringToIndex:1];
+            NSString* firstChar = @"";
+            
+            if ([name length] > 0) {
+                
+                firstChar = [name substringToIndex:1];
+            }
         
             NSRange range = [groupNameContact rangeOfString:firstChar];
         

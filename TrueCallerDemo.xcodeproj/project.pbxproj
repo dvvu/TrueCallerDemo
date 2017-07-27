@@ -65,6 +65,7 @@
 		EABC39A51F2990B300335C8E /* IncomingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EABC39A21F2990B300335C8E /* IncomingCallViewController.m */; };
 		EABC39A61F2990B300335C8E /* OutgoingCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EABC39A41F2990B300335C8E /* OutgoingCallViewController.m */; };
 		EABC39A91F2990BA00335C8E /* CallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EABC39A81F2990BA00335C8E /* CallViewController.m */; };
+		EABC39AC1F29A70C00335C8E /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EABC39AB1F29A70C00335C8E /* ContactsUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,6 +206,7 @@
 		EABC39A41F2990B300335C8E /* OutgoingCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutgoingCallViewController.m; sourceTree = "<group>"; };
 		EABC39A71F2990BA00335C8E /* CallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallViewController.h; sourceTree = "<group>"; };
 		EABC39A81F2990BA00335C8E /* CallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallViewController.m; sourceTree = "<group>"; };
+		EABC39AB1F29A70C00335C8E /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +214,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EABC39AC1F29A70C00335C8E /* ContactsUI.framework in Frameworks */,
 				EABC399D1F298B1000335C8E /* PushKit.framework in Frameworks */,
 				EABC399B1F298B0900335C8E /* Intents.framework in Frameworks */,
 				EABC39991F298B0200335C8E /* CallKit.framework in Frameworks */,
@@ -509,6 +512,7 @@
 		EABC39951F298AFB00335C8E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EABC39AB1F29A70C00335C8E /* ContactsUI.framework */,
 				EABC399C1F298B1000335C8E /* PushKit.framework */,
 				EABC399A1F298B0900335C8E /* Intents.framework */,
 				EABC39981F298B0200335C8E /* CallKit.framework */,

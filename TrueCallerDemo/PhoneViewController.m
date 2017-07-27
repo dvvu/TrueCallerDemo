@@ -16,7 +16,10 @@
 #import "ContactBook.h"
 #import "Constants.h"
 
-@interface PhoneViewController () <NITableViewModelDelegate, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>
+#import <Contacts/Contacts.h>
+#import <ContactsUI/ContactsUI.h>
+
+@interface PhoneViewController () <NITableViewModelDelegate, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, CNContactViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint* keyboardHeaderView;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint* keyboardViewHeight;
@@ -148,7 +151,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == _searchContactList.count - 1) {
+    if (indexPath.row == _searchContactList.count) {
         
         // search into directory Cell
         
@@ -213,12 +216,13 @@
     
     if (searchText.length > 0) {
         
-        NSMutableArray* mutableArray = [[NSMutableArray alloc] init];;
+        NSMutableArray* mutableArray = [[NSMutableArray alloc] init];
         
         for (int i = 0; i < _contactEntityList.count; i++) {
 
             NSArray* phone = [_contactEntityList objectAtIndex:i].phone;
             NSPredicate* predicate = [NSPredicate predicateWithFormat:@"SELF contains[cd] %@", searchText];
+            
             if ([phone filteredArrayUsingPredicate:predicate].count > 0) {
                 
                 [mutableArray addObject:[_contactEntityList objectAtIndex:i]];
@@ -237,26 +241,6 @@
     [self hideKeyboard];
 }
 
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    
-//    _headerView.frame = CGRectMake(0, scrollView.contentOffset.y, _headerView.frame.size.width, _headerView.frame.size.height);
-//}
-
-//#pragma mark - Custom header tableView
-//
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//
-//    return _headerView;
-//}
-//
-//#pragma mark - height for header tableView
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    
-//    return UITableViewAutomaticDimension;;
-//}
-// non new
-
 #pragma mark - clear header
 
 - (IBAction)clearHeader:(id)sender {
@@ -269,6 +253,23 @@
 
 - (IBAction)addContact:(id)sender {
     
+    CNMutableContact* contact = [[CNMutableContact alloc] init];
+    CNLabeledValue* homePhone = [CNLabeledValue labeledValueWithLabel:CNLabelHome value:[CNPhoneNumber phoneNumberWithStringValue:_phoneLabel.text]];
+    contact.phoneNumbers = @[homePhone];
+    
+    CNContactViewController* contactViewController = [CNContactViewController viewControllerForNewContact:contact];
+    contactViewController.delegate = self;
+    UINavigationController* navContactViewController = [[UINavigationController alloc] initWithRootViewController:contactViewController];
+    contactViewController.title = @"Add Contact";
+    [self presentViewController:navContactViewController animated:NO completion:nil];
+}
+
+- (void)contactViewController:(CNContactViewController *)viewController didCompleteWithContact:(nullable CNContact *)contact {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    _contactBook = [ContactBook sharedInstance];
+    [self showContactBook];
+    [self setupTableView];
 }
 
 #pragma mark - call
