@@ -288,7 +288,8 @@
    
     if (buttonIndex == 0) {
         
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel:" stringByAppendingString:alertView.message]]];
+        NSString* phoneNumber = [alertView.message stringByReplacingOccurrencesOfString:@" " withString:@""];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel:" stringByAppendingString:phoneNumber]]];
     }
 }
 
