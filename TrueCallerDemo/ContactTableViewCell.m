@@ -135,4 +135,9 @@
     
 }
 
++ (CGFloat)heightForObject:(id)object atIndexPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView {
+    
+    return 60;
+}
+
 @end
