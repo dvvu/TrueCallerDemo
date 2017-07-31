@@ -11,6 +11,6 @@
 
 @interface ResultTableViewController : UITableViewController
 
-@property (nonatomic, strong) NSArray<ContactEntity*>* listContactBook;
+- (void)repareData:(NSArray<ContactEntity*>*) listContactBook;
 
 @end

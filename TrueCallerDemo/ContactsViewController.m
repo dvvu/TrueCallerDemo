@@ -1,4 +1,3 @@
-
 //
 //  ContactsViewController.m
 //  NimbusExample
@@ -16,16 +15,17 @@
 #import "NimbusCore.h"
 #import "Constants.h"
 #import "ContactCache.h"
+#import "GlobalVars.h"
 
-@interface ContactsViewController () <NITableViewModelDelegate, UISearchResultsUpdating>
+@interface ContactsViewController () <NITableViewModelDelegate, UISearchResultsUpdating, ABPersonViewControllerDelegate>
 
-@property (nonatomic) dispatch_queue_t contactQueue;
-@property (nonatomic, strong) ContactBook* contactBook;
-@property (nonatomic, strong) NSArray<ContactEntity*>* contactEntityList;
-@property (nonatomic, strong) NIMutableTableViewModel* model;
-@property (nonatomic, strong) UISearchController* searchController;
 @property (nonatomic, strong) ResultTableViewController* searchResultTableViewController;
+@property (nonatomic, strong) UISearchController* searchController;
 @property (nonatomic, strong) UIButton* checkPermissionButton;
+@property (nonatomic, strong) NIMutableTableViewModel* model;
+@property (nonatomic) dispatch_queue_t contactQueue;
+@property (nonatomic) GlobalVars* globalVars;
+
 @end
 
 @implementation ContactsViewController
@@ -45,38 +45,17 @@
     return sharedInstance;
 }
 
-
 - (void)viewDidLoad {
    
     [super viewDidLoad];
-    
-    _contactQueue = dispatch_queue_create("SHOWER_CONTACT_QUEUE", DISPATCH_QUEUE_SERIAL);
-    _contactBook = [ContactBook sharedInstance];
-     self.title = @"Contacts";
-    [self setupTableMode];
-    
-    switch ([CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts]) {
-        
-        case CNAuthorizationStatusNotDetermined: {
-          
-            _checkPermissionButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-            _checkPermissionButton.frame = CGRectMake(20, self.view.frame.size.height/2, 100, 25);
-            [_checkPermissionButton setTitle:@"Allow access to contacts" forState:UIControlStateNormal];
-            [_checkPermissionButton addTarget:self action:@selector(accessContacts:) forControlEvents:UIControlEventTouchUpInside];
-            [self.view addSubview:_checkPermissionButton];
-        }
-            break;
-            
-        default:
-            
-            [self showContactBook];
-            break;
-    }
+    _globalVars =  [GlobalVars sharedInstance];
+    self.title = @"Contacts";
 }
 
-- (IBAction)accessContacts:(id)sender {
+- (void)prepareData {
     
-    [self showContactBook];
+    [self setupTableMode];
+    [self setupData];
 }
 
 #pragma mark - config TableMode
@@ -85,35 +64,9 @@
     
     _model = [[NIMutableTableViewModel alloc] initWithDelegate:self];
     [_model setSectionIndexType:NITableViewModelSectionIndexDynamic showsSearch:NO showsSummary:NO];
-   
+    _contactQueue = dispatch_queue_create("SHOW_CONTACT_QUEUE", DISPATCH_QUEUE_SERIAL);
     [self.tableView registerClass:[ContactTableViewCell class] forCellReuseIdentifier:@"ContactTableViewCell"];
-    self.tableView.dataSource = _model;
     [self createSearchController];
-}
-
-#pragma mark - Show Contacts
-
-- (void)showContactBook {
-    
-    [_contactBook getPermissionContacts:^(NSError* error) {
-        
-        if((error.code == ContactAuthorizationStatusDenied) || (error.code == ContactAuthorizationStatusRestricted)) {
-            
-            [[[UIAlertView alloc] initWithTitle:@"This app requires access to your contacts to function properly." message: @"Please! Go to setting!" delegate:self cancelButtonTitle:@"CLOSE" otherButtonTitles:@"GO TO SETTING", nil] show];
-        } else {
-           
-            [_contactBook getContacts:^(NSMutableArray* contactEntityList, NSError* error) {
-                if(error.code == ContactLoadingFailError) {
-                  
-                    [[[UIAlertView alloc] initWithTitle:@"This Contact is empty." message: @"Please! Check your contacts and try again!" delegate:nil cancelButtonTitle:@"CLOSE" otherButtonTitles: nil, nil] show];
-                } else {
-                    
-                    _contactEntityList = [NSArray arrayWithArray:contactEntityList];
-                    [self setupData];
-                }
-            }];
-        }
-    }];
 }
 
 #pragma mark - Create searchBar
@@ -135,20 +88,24 @@
     
     dispatch_async(_contactQueue, ^ {
         
-        int contacts = (int)_contactEntityList.count;
+        int contacts = (int)_globalVars.contactEntityList.count;
         NSString* groupNameContact = @"";
 
         // Run on background to get name group
         for (int i = 0; i < contacts; i++) {
             
-            NSString* name = [_contactEntityList[i].name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-            NSString* firstChar = [name substringToIndex:1];
+            NSString* name = [_globalVars.contactEntityList[i].name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            NSString* firstChar = @"";
+            
+            if ([name length] > 0) {
+                
+                firstChar = [name substringToIndex:1];
+            }
             
             if ([groupNameContact.uppercaseString rangeOfString:firstChar.uppercaseString].location == NSNotFound) {
                 
                 groupNameContact = [groupNameContact stringByAppendingString:firstChar];
             }
-
         }
         
         int characterGroupNameCount = (int)[groupNameContact length];
@@ -161,9 +118,14 @@
                 [_model addSectionWithTitle:[groupNameContact substringWithRange:NSMakeRange(i,1)]];
             }
             
-            ContactEntity* contactEntity = _contactEntityList[i];
-            NSString* name = [_contactEntityList[i].name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-            NSString* firstChar = [name substringToIndex:1];
+            ContactEntity* contactEntity = _globalVars.contactEntityList[i];
+            NSString* name = [_globalVars.contactEntityList[i].name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            NSString* firstChar = @"";
+            
+            if ([name length] > 0) {
+                
+                firstChar = [name substringToIndex:1];
+            }
         
             NSRange range = [groupNameContact rangeOfString:firstChar];
         
@@ -171,6 +133,7 @@
                 
                 ContactCellObject* cellObject = [[ContactCellObject alloc] init];
                 cellObject.contactTitle = contactEntity.name;
+                cellObject.phoneNumber = contactEntity.phone;
                 cellObject.identifier = contactEntity.identifier;
                 cellObject.contactImage = contactEntity.profileImageDefault;
                 [_model addObject:cellObject toSection:range.location];
@@ -178,6 +141,7 @@
         }
         
         [_model updateSectionIndex];
+        self.tableView.dataSource = _model;
         
         // Run on main Thread
         dispatch_async(dispatch_get_main_queue(), ^ {
@@ -196,10 +160,21 @@
     if (searchString.length > 0) {
 
         NSPredicate* predicate = [NSPredicate predicateWithFormat:@"name contains[cd] %@", searchString];
-        _searchResultTableViewController.listContactBook = [_contactEntityList filteredArrayUsingPredicate:predicate];
-        [_searchResultTableViewController viewWillAppear:true];
+        
+        NSArray<ContactEntity*>* contactEntityList = [_globalVars.contactEntityList filteredArrayUsingPredicate:predicate];
+      
+        if (contactEntityList) {
+    
+            [_searchResultTableViewController repareData:contactEntityList];
+        }
     }
-
+    
+    if (!searchController.active) {
+        
+        // click Cancel button.
+        NSLog(@"%f", self.tableView.frame.size.width);
+        [self.view layoutIfNeeded];
+    }
 }
 
 #pragma mark - selected
@@ -213,6 +188,30 @@
         
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }];
+    
+    // Fetch the address book
+    ABAddressBookRef addressBook = ABAddressBookCreate();
+    CFArrayRef people = ABAddressBookCopyPeopleWithName(addressBook, (__bridge CFStringRef)cellObject.contactTitle);
+    
+    if ((people != nil) && (CFArrayGetCount(people) > 0)) {
+        
+        ABRecordRef person = CFArrayGetValueAtIndex(people, 0);
+        ABPersonViewController* picker = [[ABPersonViewController alloc] init];
+        picker.personViewDelegate = self;
+        picker.displayedPerson = person;
+        
+        // Allow users to edit the person’s information
+        picker.allowsEditing = YES;
+        
+        [self.navigationController pushViewController:picker animated:YES];
+    }
+}
+
+#pragma mark - ABPersonview delegate
+
+- (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
+    
+    return TRUE;
 }
 
 #pragma mark - heigh for cell

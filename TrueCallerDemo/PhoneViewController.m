@@ -7,36 +7,36 @@
 //
 
 #import "PhoneViewController.h"
-#import "Constants.h"
-
-// new
-#import "ResultTableViewController.h"
-#import "ContactCellObject.h"
+#import "AddressBookUI/AddressBookUI.h"
+#import "AddressBook/AddressBook.h"
 #import "ContactTableViewCell.h"
-#import "CallViewController.h"
+#import "ContactsUI/ContactsUI.h"
+#import "Contacts/Contacts.h"
+#import "ContactCellObject.h"
+#import "ContactEntity.h"
 #import "ContactCache.h"
 #import "NimbusModels.h"
 #import "NimbusCore.h"
 #import "ContactBook.h"
+#import "Constants.h"
+#import "GlobalVars.h"
 
-@interface PhoneViewController () <NITableViewModelDelegate, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>
+@interface PhoneViewController () <NITableViewModelDelegate, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, CNContactViewControllerDelegate, ABNewPersonViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint* keyboardHeaderView;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint* keyboardViewHeight;
-@property (nonatomic, weak) IBOutlet UILabel* phoneLabel;
-@property (nonatomic, weak) IBOutlet UIView* keyBoardView;
-@property (nonatomic, weak) IBOutlet UIView* backgroundView;
 @property (nonatomic, weak) IBOutlet UIButton* showKeyboardButton;
 @property (nonatomic, weak) IBOutlet UITableView* tableView;
-@property (nonatomic) float keyboardHeaderHeight;
-@property (nonatomic) NSArray* symbolsArray;
-
-@property (nonatomic, strong) NSArray<ContactEntity*>* contactEntityList;
+@property (nonatomic, weak) IBOutlet UIView* backgroundView;
+@property (nonatomic, weak) IBOutlet UIView* keyBoardView;
+@property (nonatomic, weak) IBOutlet UILabel* phoneLabel;
 @property (nonatomic, strong) NSArray<ContactEntity*>* searchContactList;
 @property (nonatomic) dispatch_queue_t resultSearchContactQueue;
 @property (nonatomic, strong) NITableViewModel* model;
-@property (nonatomic, strong) ContactBook* contactBook;
+@property (nonatomic) float keyboardHeaderHeight;
 @property (nonatomic) UILabel* tableHeaderLabel;
+@property (nonatomic) NSArray* symbolsArray;
+@property (nonatomic) GlobalVars* globalVars;
 @property (nonatomic) UIView* headerView;
 
 @end
@@ -47,33 +47,14 @@
     
     [super viewDidLoad];
     
-    [self prepareUI];
-    [self showContactBook];
-    [self showHideKeyBoardheaderView:_phoneLabel.text];
+    _globalVars = [GlobalVars sharedInstance];
 }
 
-#pragma mark - showContactBook
-
-- (void)showContactBook {
+- (void)prepareData {
     
-    [_contactBook getPermissionContacts:^(NSError* error) {
-        
-        if((error.code == ContactAuthorizationStatusDenied) || (error.code == ContactAuthorizationStatusRestricted)) {
-            
-            [[[UIAlertView alloc] initWithTitle:@"This app requires access to your contacts to function properly." message: @"Please! Go to setting!" delegate:self cancelButtonTitle:@"CLOSE" otherButtonTitles:@"GO TO SETTING", nil] show];
-        } else {
-            
-            [_contactBook getContacts:^(NSMutableArray* contactEntityList, NSError* error) {
-                if(error.code == ContactLoadingFailError) {
-                    
-                    [[[UIAlertView alloc] initWithTitle:@"This Contact is empty." message: @"Please! Check your contacts and try again!" delegate:nil cancelButtonTitle:@"CLOSE" otherButtonTitles: nil, nil] show];
-                } else {
-                    
-                    _contactEntityList = [NSArray arrayWithArray:contactEntityList];
-                }
-            }];
-        }
-    }];
+    [self searchText:_phoneLabel.text];
+    [self prepareUI];
+    [self setupData];
 }
 
 #pragma mark - setupView
@@ -88,10 +69,11 @@
     // setup headerView
     _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 25)];
     _headerView.layer.shadowColor = [UIColor blackColor].CGColor;
-    [_headerView setBackgroundColor:[UIColor whiteColor]];
     _headerView.layer.masksToBounds = NO;
     _headerView.layer.shadowOffset = CGSizeMake(0, 0.1);
     _headerView.layer.shadowOpacity = 0.1;
+    [_headerView setBackgroundColor:[UIColor whiteColor]];
+    
     _tableHeaderLabel = [[UILabel alloc] init];
     _tableHeaderLabel.frame = CGRectMake(8, 0, DEVICE_WIDTH - 41, 25);
     [_headerView addSubview:_tableHeaderLabel];
@@ -105,16 +87,14 @@
     _tableView.tableHeaderView = _headerView;
     
     // setup tableView
-    _contactBook = [ContactBook sharedInstance];
     [_tableView registerClass:[ContactTableViewCell class] forCellReuseIdentifier:@"ContactTableViewCell"];
     _resultSearchContactQueue = dispatch_queue_create("RESULT_SEARCH_CONTACT_QUEUE", DISPATCH_QUEUE_SERIAL);
-    
     _tableView.delegate = self;
 }
 
 #pragma mark - setupView
 
-- (void)setupTableView {
+- (void)setupData {
     
     dispatch_async(_resultSearchContactQueue, ^ {
         
@@ -126,6 +106,7 @@
             ContactCellObject* cellObject = [[ContactCellObject alloc] init];
             cellObject.contactTitle = contactEntity.name;
             cellObject.identifier = contactEntity.identifier;
+            cellObject.phoneNumber = contactEntity.phone;
             cellObject.contactImage = contactEntity.profileImageDefault;
             [objects addObject:cellObject];
         }
@@ -140,7 +121,8 @@
         _tableView.dataSource = _model;
         
         dispatch_async(dispatch_get_main_queue(), ^ {
-            
+           
+            [self showHideKeyBoardheaderView:_phoneLabel.text];
             [_tableView reloadData];
         });
     });
@@ -150,8 +132,23 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ContactCellObject* cellObject = [_model objectAtIndexPath:indexPath];
-    NSLog(@"%@", cellObject.contactTitle);
+    if (indexPath.row == _searchContactList.count) {
+        
+        // search into directory Cell
+        
+    } else {
+        
+        // action click to call contact cell.
+        ContactCellObject* cellObject = [_model objectAtIndexPath:indexPath];
+        NSLog(@"%@", cellObject.phoneNumber);
+        
+        NSString* phoneNumber = [cellObject.phoneNumber objectAtIndex:0];
+        
+        if (phoneNumber) {
+            
+            [[[UIAlertView alloc] initWithTitle:@"Do you want to call?" message: phoneNumber delegate:self cancelButtonTitle:@"Call" otherButtonTitles:@"Close", nil] show];
+        }
+    }
     
     [UIView animateWithDuration:0.2 animations: ^ {
         
@@ -200,20 +197,21 @@
     
     if (searchText.length > 0) {
         
-        NSMutableArray* mutableArray = [[NSMutableArray alloc] init];;
+        NSMutableArray* mutableArray = [[NSMutableArray alloc] init];
         
-        for (int i = 0; i < _contactEntityList.count; i++) {
+        for (int i = 0; i < _globalVars.contactEntityList.count; i++) {
 
-            NSArray* phone = [_contactEntityList objectAtIndex:i].phone;
+            NSArray* phone = [_globalVars.contactEntityList objectAtIndex:i].phone;
             NSPredicate* predicate = [NSPredicate predicateWithFormat:@"SELF contains[cd] %@", searchText];
+            
             if ([phone filteredArrayUsingPredicate:predicate].count > 0) {
                 
-                [mutableArray addObject:[_contactEntityList objectAtIndex:i]];
+                [mutableArray addObject:[_globalVars.contactEntityList objectAtIndex:i]];
             }
         }
         
         _searchContactList = mutableArray;
-        [self setupTableView];
+        [self setupData];
     }
 }
 
@@ -223,26 +221,6 @@
     
     [self hideKeyboard];
 }
-
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    
-//    _headerView.frame = CGRectMake(0, scrollView.contentOffset.y, _headerView.frame.size.width, _headerView.frame.size.height);
-//}
-
-//#pragma mark - Custom header tableView
-//
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//
-//    return _headerView;
-//}
-//
-//#pragma mark - height for header tableView
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    
-//    return UITableViewAutomaticDimension;;
-//}
-// non new
 
 #pragma mark - clear header
 
@@ -256,13 +234,88 @@
 
 - (IBAction)addContact:(id)sender {
     
+    if (iOS_VERSION_GREATER_THAN_OR_EQUAL_TO(9.0)) {
+        
+        CNMutableContact* contact = [[CNMutableContact alloc] init];
+        CNLabeledValue* homePhone = [CNLabeledValue labeledValueWithLabel:CNLabelHome value:[CNPhoneNumber phoneNumberWithStringValue:_phoneLabel.text]];
+        contact.phoneNumbers = @[homePhone];
+        
+        CNContactViewController* contactViewController = [CNContactViewController viewControllerForNewContact:contact];
+        contactViewController.delegate = self;
+        UINavigationController* navContactViewController = [[UINavigationController alloc] initWithRootViewController:contactViewController];
+        contactViewController.title = @"Add Contact";
+        [self presentViewController:navContactViewController animated:NO completion:nil];
+
+    } else {
+        
+        // Creating new entry
+        ABAddressBookRef addressBook = ABAddressBookCreate();
+        ABRecordRef person = ABPersonCreate();
+        
+        // Adding phone numbers
+        ABMutableMultiValueRef phoneNumberMultiValue = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+        ABMultiValueAddValueAndLabel(phoneNumberMultiValue,(__bridge CFTypeRef)(_phoneLabel.text), (CFStringRef)@"", NULL);
+        ABRecordSetValue(person, kABPersonPhoneProperty, phoneNumberMultiValue, nil);
+        CFRelease(phoneNumberMultiValue);
+        
+        // Adding person to the address book
+        ABAddressBookAddRecord(addressBook, person, nil);
+        CFRelease(addressBook);
+        
+        // Creating view controller for a new contact
+        ABNewPersonViewController* newPersonViewController = [[ABNewPersonViewController alloc] init];
+        [newPersonViewController setNewPersonViewDelegate:self];
+        [newPersonViewController setDisplayedPerson:person];
+        CFRelease(person);
+        
+        UINavigationController* navContactViewController = [[UINavigationController alloc] initWithRootViewController:newPersonViewController];
+        newPersonViewController.title = @"Add Contact";
+        [self presentViewController:navContactViewController animated:NO completion:nil];
+    }
+}
+
+#pragma mark - addContact delegate ABAddressBook
+
+- (void)newPersonViewController:(ABNewPersonViewController *)newPersonViewController didCompleteWithNewPerson:(ABRecordRef)person {
+    
+    if (person) {
+        
+        // click done buttton
+        [_delegate reloadViewControllerDelegate:YES];
+    } else {
+        
+        // click cacel button
+        [_delegate reloadViewControllerDelegate:NO];
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - addContact delegate CNContact
+
+- (void)contactViewController:(CNContactViewController *)viewController didCompleteWithContact:(nullable CNContact *)contact {
+    
+    if (contact) {
+        
+        // click done buttton
+        [_delegate reloadViewControllerDelegate:YES];
+    } else {
+        
+        // click cacel button
+        [_delegate reloadViewControllerDelegate:NO];
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - call
 
 - (IBAction)call:(id)sender {
     
-     [[[UIAlertView alloc] initWithTitle:@"Do you want to call?" message: _phoneLabel.text delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil] show];
+    if ([_phoneLabel.text length] > 0) {
+        
+         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel:" stringByAppendingString:_phoneLabel.text]]];
+    }
 }
 
 #pragma mark - alertViewDelegate
@@ -271,7 +324,8 @@
    
     if (buttonIndex == 0) {
         
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel:" stringByAppendingString:_phoneLabel.text]]];
+        NSString* phoneNumber = [alertView.message stringByReplacingOccurrencesOfString:@" " withString:@""];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel:" stringByAppendingString:phoneNumber]]];
     }
 }
 
@@ -339,18 +393,18 @@
 
 - (IBAction)showKeyboard:(id)sender {
     
-    // hide keyboard
+    // show keyboard
     if ([_phoneLabel.text length] > 0) {
         
         _keyboardViewHeight.constant = self.view.frame.size.height * 0.5;
     } else {
         
-        _keyboardViewHeight.constant = self.view.frame.size.height *0.5 - _keyboardHeaderHeight;
+        _keyboardViewHeight.constant = self.view.frame.size.height * 0.5 - _keyboardHeaderHeight;
     }
     
     [_showKeyboardButton setHidden:YES];
     
-    [UIView animateWithDuration:0.3f animations:^{
+    [UIView animateWithDuration:0.3f animations:^ {
         
         [self.view layoutIfNeeded];
     }];

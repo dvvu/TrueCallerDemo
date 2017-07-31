@@ -8,15 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "ContactEntity.h"
 
 @interface GlobalVars : NSObject
 
 #pragma mark - singleton
 + (GlobalVars *)sharedInstance;
 
-@property (nonatomic, strong) NSArray* contactEntityList;
-@property (nonatomic) BOOL isAccessContacts;
-
-- (void)getContactBook;
+#pragma mark - global variable contactEntityList
+@property (nonatomic, strong) NSArray<ContactEntity*>* contactEntityList;
 
 @end

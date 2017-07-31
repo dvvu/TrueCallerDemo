@@ -21,4 +21,7 @@
 #pragma mark - get contact
 - (void)getContacts:(void (^)(NSMutableArray* contactlist,NSError* error))completion;
 
+#pragma mark - add contact
+- (void)addContactEntity:(UIViewController *)controller;
+
 @end

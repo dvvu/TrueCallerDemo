@@ -13,4 +13,7 @@
 #pragma mark - singleton
 + (instancetype)sharedInstance;
 
+#pragma mark - prepare Data
+- (void)prepareData;
+
 @end

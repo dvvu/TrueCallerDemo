@@ -1,188 +1,179 @@
 //
-//  CallViewController.m
-//  TrueCallerDemo
+//  CallViewController.h
+//  CallKitDemo
 //
-//  Created by Doan Van Vu on 7/25/17.
+//  Created by Doan Van Vu on 7/19/17.
 //  Copyright © 2017 Doan Van Vu. All rights reserved.
 //
 
-#import "ResultTableViewController.h"
-#import "ContactCellObject.h"
-#import "ContactTableViewCell.h"
 #import "CallViewController.h"
-#import "ContactCache.h"
-#import "NimbusModels.h"
-#import "NimbusCore.h"
-#import "ContactBook.h"
-#import "Constants.h"
+#import "CallManager.h"
+#import "AppDelegate.h"
 
+@interface CallViewController () <CallManagerDelegate>
 
-@interface CallViewController () <UISearchResultsUpdating, UISearchBarDelegate>
+@property (weak, nonatomic) IBOutlet UILabel* infoLabel;
+@property (weak, nonatomic) IBOutlet UILabel* timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel* callerLabel;
+@property (weak, nonatomic) IBOutlet UIButton* holdButton;
+@property (weak, nonatomic) IBOutlet UIButton* endButton;
 
-@property (weak, nonatomic) IBOutlet UIView* searBarView;
-@property (weak, nonatomic) IBOutlet UIButton* showKeyboardButton;
+@property (nonatomic, strong) NSDateComponentsFormatter* timeFormatter;
+@property (nonatomic, strong) NSTimer* callDurationTimer;
 
-@property (nonatomic, strong) NITableViewModel* model;
-@property (nonatomic) UITapGestureRecognizer* tapRecognizer;
-
-@property (nonatomic, strong) ContactBook* contactBook;
-@property (nonatomic, strong) UIButton* checkPermissionButton;
-
-@property (nonatomic, strong) NSArray<ContactEntity*>* contactEntityList;
-
-@property (nonatomic) dispatch_queue_t resultSearchContactQueue;
-@property (nonatomic) float keyboardHeight;
-
-@property (nonatomic, strong) ResultTableViewController* searchResultTableViewController;
-@property (nonatomic, strong) UISearchController* searchController;
+@property (nonatomic, assign) NSTimeInterval callDuration;
+@property (nonatomic, assign) BOOL isOnHold;
+@property (nonatomic) UIBackgroundTaskIdentifier backgroundUpdateTask;
 
 @end
 
 @implementation CallViewController
 
 - (void)viewDidLoad {
-   
+    
     [super viewDidLoad];
-
-    _contactBook = [ContactBook sharedInstance];
-    _resultSearchContactQueue = dispatch_queue_create("RESULT_SEARCH_CONTACT_QUEUE", DISPATCH_QUEUE_SERIAL);
     
-    switch ([CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts]) {
-            
-        case CNAuthorizationStatusNotDetermined: {
-            
-            _checkPermissionButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-            _checkPermissionButton.frame = CGRectMake(20, self.view.frame.size.height/2, 100, 25);
-            [_checkPermissionButton setTitle:@"Allow access to contacts" forState:UIControlStateNormal];
-            [_checkPermissionButton addTarget:self action:@selector(accessContacts:) forControlEvents:UIControlEventTouchUpInside];
-            [self.view addSubview:_checkPermissionButton];
-        }
-            break;
-            
-        default:
-            
-            [self showContactBook];
-            break;
-    }
-    [self createSearchController];
-}
-
-- (IBAction)accessContacts:(id)sender {
-    
-    [self showContactBook];
-}
-
-- (void)showContactBook {
-    
-    [_contactBook getPermissionContacts:^(NSError* error) {
-        
-        if((error.code == ContactAuthorizationStatusDenied) || (error.code == ContactAuthorizationStatusRestricted)) {
-            
-            [[[UIAlertView alloc] initWithTitle:@"This app requires access to your contacts to function properly." message: @"Please! Go to setting!" delegate:self cancelButtonTitle:@"CLOSE" otherButtonTitles:@"GO TO SETTING", nil] show];
-        } else {
-            
-            [_contactBook getContacts:^(NSMutableArray* contactEntityList, NSError* error) {
-                if(error.code == ContactLoadingFailError) {
-                    
-                    [[[UIAlertView alloc] initWithTitle:@"This Contact is empty." message: @"Please! Check your contacts and try again!" delegate:nil cancelButtonTitle:@"CLOSE" otherButtonTitles: nil, nil] show];
-                } else {
-                    
-                    _contactEntityList = [NSArray arrayWithArray:contactEntityList];
-                }
-            }];
-        }
-    }];
-}
-
-- (void)createSearchController {
-    
-    _searchResultTableViewController = [[ResultTableViewController alloc] init];
-    _searchController = [[UISearchController alloc] initWithSearchResultsController:_searchResultTableViewController];
-    _searchController.searchResultsUpdater = self;
-    _searchController.searchBar.searchBarStyle = UISearchBarStyleDefault;
-    _searchController.dimsBackgroundDuringPresentation = NO;
-    [_searchController.searchBar sizeToFit];
-    _searchController.searchBar.showsCancelButton = NO;
-    _searchController.searchBar.delegate = self;
-    [_searBarView addSubview:_searchController.searchBar];
-    
-    UITextField* searchTextField = [((UITextField *)[_searchController.searchBar.subviews objectAtIndex:0]).subviews lastObject];
-    searchTextField.layer.cornerRadius = 15.0f;
-    searchTextField.textAlignment = NSTextAlignmentLeft;
-    searchTextField.leftView = nil;
-    searchTextField.placeholder = @"";
-    searchTextField.rightViewMode = UITextFieldViewModeAlways;
+    _callerLabel.text = _phoneNumber;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
     
-    [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-}
-
-- (void)keyboardWillShow:(NSNotification *)notification {
-    
-    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    _keyboardHeight = -keyboardSize.height;
-    [self moveFrameToVerticalPosition:_keyboardHeight/2 forDuration:0.3f];
-//    [_showKeyboardButton setHidden:YES];
-    [self.view layoutIfNeeded];
-}
-
-- (void)keyboardWillHide:(NSNotification *)notification {
-    
-    [self moveFrameToVerticalPosition:0.0f forDuration:0.3f];
-    [_showKeyboardButton setHidden:NO];
-}
-
-- (void)moveFrameToVerticalPosition:(float)position forDuration:(float)duration {
-    
-    CGRect frame = self.view.frame;
-    frame.origin.y = position;
-    
-    [UIView animateWithDuration:duration animations:^{
+    if (_phoneNumber) {
         
-        self.view.frame = frame;
+        [CallManager sharedInstance].delegate = self;
+        
+        if (_isIncoming) {
+            
+             //Since the app may be suspended while waiting for the delayed action to begin,
+             //start a background task.
+            [self beginBackgroundUpdateTask];
+          
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 4 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                
+                [self performCall:^{
+                    
+                    [self endBackgroundUpdateTask];
+                }];
+            });
+
+        } else {
+            
+            [[CallManager sharedInstance] startCallWithPhoneNumber:_phoneNumber];
+        }
+    }
+}
+
+- (void) beginBackgroundUpdateTask {
+    
+    _backgroundUpdateTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        
+        [self endBackgroundUpdateTask];
     }];
 }
 
-- (IBAction)showKeyboard:(id)sender {
+- (void) endBackgroundUpdateTask {
     
-    [_searchController.searchBar becomeFirstResponder];
+    [[UIApplication sharedApplication] endBackgroundTask: _backgroundUpdateTask];
+    _backgroundUpdateTask = UIBackgroundTaskInvalid;
 }
 
-#pragma mark - updateSearchResultViewController
+#pragma mark - Getters
 
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+- (NSDateComponentsFormatter *)timeFormatter {
     
-    NSString* searchString = searchController.searchBar.text;
-    searchController.searchBar.showsCancelButton = NO;
-    
-    if (searchString.length > 0) {
+    if (!_timeFormatter) {
         
-        NSPredicate* predicate = [NSPredicate predicateWithFormat:@"name contains[cd] %@", searchString];
-        _searchResultTableViewController.listContactBook = [_contactEntityList filteredArrayUsingPredicate:predicate];
-        [_searchResultTableViewController viewWillAppear:true];
+        _timeFormatter = [[NSDateComponentsFormatter alloc] init];
+        _timeFormatter.unitsStyle = NSDateComponentsFormatterUnitsStylePositional;
+        _timeFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
+        _timeFormatter.allowedUnits = NSCalendarUnitMinute | NSCalendarUnitSecond;
     }
-    
+    return _timeFormatter;
 }
 
-#pragma mark - UISearchBarDelegate
+#pragma mark - Actions
 
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+- (IBAction)endButtonTapped:(id)sender {
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-      
-        self.searchController.searchBar.showsCancelButton = NO;
-    });
+    [[CallManager sharedInstance] endCall];
+}
+
+- (IBAction)holdButtonTapped:(UIButton  *)sender {
+    
+    _isOnHold = !_isOnHold;
+    [_holdButton setTitle:(_isOnHold ? @"   RESUME   " : @"   HOLD   ") forState:UIControlStateNormal];
+    [[CallManager sharedInstance] holdCall:_isOnHold];
+}
+
+#pragma mark - CallManagerDelegate
+
+- (void)callDidAnswer {
+    
+    _timeLabel.hidden = NO;
+    _holdButton.hidden = NO;
+    _endButton.hidden = NO;
+    _infoLabel.text = @"Active";
+    [self startTimer];
+}
+
+- (void)callDidEnd {
+    
+    [_callDurationTimer invalidate];
+    _callDurationTimer = nil;
+    _holdButton.hidden = YES;
+    _endButton.hidden = YES;
+    _infoLabel.text = @"Ended";
+    [self performSelector:@selector(dismiss) withObject:nil afterDelay:1.f];
+}
+
+- (void)callDidHold:(BOOL)isOnHold {
+    
+    if (isOnHold) {
+        
+        [_callDurationTimer invalidate];
+        _callDurationTimer = nil;
+        [_holdButton setTitle:@"   RESUME   " forState:UIControlStateNormal];
+        _infoLabel.text = @"On Hold";
+    } else {
+        
+        [self startTimer];
+        [_holdButton setTitle:@"   HOLD   " forState:UIControlStateNormal];
+        _infoLabel.text = @"Active";
+    }
+}
+
+- (void)callDidFail {
+    
+    [_callDurationTimer invalidate];
+    _callDurationTimer = nil;
+    _infoLabel.text = @"Failed";
+    [self performSelector:@selector(dismiss) withObject:nil afterDelay:1.f];
+}
+
+#pragma mark - Utilities
+
+- (void)performCall:(void(^)())completion {
+    
+    [[CallManager sharedInstance] reportIncomingCallForUUID:_uuid phoneNumber:_phoneNumber];
+}
+
+- (void)dismiss {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)startTimer {
+    
+    __weak CallViewController* weakSelf = self;
+    
+    _callDurationTimer = [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        
+        weakSelf.timeLabel.text = [weakSelf.timeFormatter stringFromTimeInterval:weakSelf.callDuration++];
+    }];
 }
 
 @end
+
+
