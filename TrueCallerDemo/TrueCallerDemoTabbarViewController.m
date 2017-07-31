@@ -108,8 +108,7 @@
             _globalVars.contactEntityList = [NSArray arrayWithArray:contactEntityList];
             [_backgroundView setHidden:YES];
             
-            // if Exiting Data-> reload ViewController if need
-            
+            // if Exiting Data-> reload ViewController if need  
             for (UIViewController* viewController in self.viewControllers) {
                 
                 if ([viewController isKindOfClass:[UINavigationController class]]) {

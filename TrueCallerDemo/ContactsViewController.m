@@ -160,8 +160,13 @@
     if (searchString.length > 0) {
 
         NSPredicate* predicate = [NSPredicate predicateWithFormat:@"name contains[cd] %@", searchString];
-        _searchResultTableViewController.listContactBook = [_globalVars.contactEntityList filteredArrayUsingPredicate:predicate];
-        [_searchResultTableViewController viewWillAppear:true];
+        
+        NSArray<ContactEntity*>* contactEntityList = [_globalVars.contactEntityList filteredArrayUsingPredicate:predicate];
+      
+        if (contactEntityList) {
+    
+            [_searchResultTableViewController repareData:contactEntityList];
+        }
     }
     
     if (!searchController.active) {
@@ -171,7 +176,6 @@
         [self.view layoutIfNeeded];
     }
 }
-
 
 #pragma mark - selected
 

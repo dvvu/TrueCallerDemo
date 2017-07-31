@@ -19,6 +19,7 @@
 
 @property (nonatomic) dispatch_queue_t resultSearchContactQueue;
 @property (nonatomic, strong ) NITableViewModel* model;
+@property (nonatomic, strong) NSArray<ContactEntity*>* listContactBook;
 
 @end
 
@@ -34,14 +35,20 @@
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
     [self.tableView registerClass:[ContactTableViewCell class] forCellReuseIdentifier:@"ContactTableViewCell"];
-    _resultSearchContactQueue = dispatch_queue_create("RESULT_SEARCH_CONTACT_QUEUE", DISPATCH_QUEUE_SERIAL);
+    
 }
 
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
 
     [super viewWillAppear:true];
+    
+}
+
+- (void)repareData:(NSArray<ContactEntity*>*) listContactBook {
+    
+    _listContactBook = listContactBook;
+    _resultSearchContactQueue = dispatch_queue_create("RESULT_SEARCH_CONTACT_QUEUE", DISPATCH_QUEUE_SERIAL);
     [self setupTableView];
-    self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
 }
 
 #pragma mark - setupView
@@ -101,7 +108,6 @@
         
         // Allow users to edit the person’s information
         picker.allowsEditing = YES;
-        
         [self.navigationController pushViewController:picker animated:YES];
     }
 }
