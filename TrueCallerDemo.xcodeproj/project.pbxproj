@@ -270,14 +270,9 @@
 		EA60222E1F259757001591BC /* TrueCallerDemo */ = {
 			isa = PBXGroup;
 			children = (
-				EA6022861F25A24A001591BC /* nimbus */,
-				EABC398D1F298AAA00335C8E /* audio */,
-				EABC397F1F2989C900335C8E /* callManager */,
 				EA6022E91F25A2D4001591BC /* delegate */,
-				EA6022811F25A1D4001591BC /* Entities */,
-				EA6022771F25A1B9001591BC /* ContactCells */,
-				EA6022731F25A1A2001591BC /* ContactBookLoader */,
-				EA60226F1F25A158001591BC /* CacheImahe */,
+				EA7F13121F2F0ADB0030FCEC /* CallKit */,
+				EA7F13111F2F0AA60030FCEC /* Contacts */,
 				EA6022641F25A124001591BC /* ViewController */,
 				EA6022EA1F25A2EA001591BC /* views */,
 				EA60222F1F259757001591BC /* Supporting Files */,
@@ -314,22 +309,10 @@
 		EA6022641F25A124001591BC /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				EA60226B1F25A139001591BC /* ResultTableViewContrller */,
-				EABC39831F298A8200335C8E /* inoutCommingCallController */,
-				EABC39AA1F29915300335C8E /* ContactViewController */,
 				EA6022351F259757001591BC /* ViewController.h */,
 				EA6022361F259757001591BC /* ViewController.m */,
 			);
 			name = ViewController;
-			sourceTree = "<group>";
-		};
-		EA60226B1F25A139001591BC /* ResultTableViewContrller */ = {
-			isa = PBXGroup;
-			children = (
-				EA60226C1F25A14D001591BC /* ResultTableViewController.h */,
-				EA60226D1F25A14D001591BC /* ResultTableViewController.m */,
-			);
-			name = ResultTableViewContrller;
 			sourceTree = "<group>";
 		};
 		EA60226F1F25A158001591BC /* CacheImahe */ = {
@@ -486,6 +469,29 @@
 			name = views;
 			sourceTree = "<group>";
 		};
+		EA7F13111F2F0AA60030FCEC /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				EA6022861F25A24A001591BC /* nimbus */,
+				EA6022811F25A1D4001591BC /* Entities */,
+				EA60226F1F25A158001591BC /* CacheImahe */,
+				EA6022771F25A1B9001591BC /* ContactCells */,
+				EA6022731F25A1A2001591BC /* ContactBookLoader */,
+				EABC39AA1F29915300335C8E /* ContactViewController */,
+			);
+			name = Contacts;
+			sourceTree = "<group>";
+		};
+		EA7F13121F2F0ADB0030FCEC /* CallKit */ = {
+			isa = PBXGroup;
+			children = (
+				EABC398D1F298AAA00335C8E /* audio */,
+				EABC397F1F2989C900335C8E /* callManager */,
+				EABC39831F298A8200335C8E /* inoutCommingCallController */,
+			);
+			name = CallKit;
+			sourceTree = "<group>";
+		};
 		EABC397F1F2989C900335C8E /* callManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -534,6 +540,8 @@
 		EABC39AA1F29915300335C8E /* ContactViewController */ = {
 			isa = PBXGroup;
 			children = (
+				EA60226C1F25A14D001591BC /* ResultTableViewController.h */,
+				EA60226D1F25A14D001591BC /* ResultTableViewController.m */,
 				EA6022651F25A133001591BC /* ContactsViewController.h */,
 				EA6022661F25A133001591BC /* ContactsViewController.m */,
 				EA6022671F25A133001591BC /* FriendsTableViewController.h */,

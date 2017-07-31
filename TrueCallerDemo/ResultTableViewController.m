@@ -7,15 +7,15 @@
 //
 
 #import "ResultTableViewController.h"
-#import "NimbusModels.h"
-#import "ContactCellObject.h"
 #import "ContactTableViewCell.h"
+#import "ContactCellObject.h"
+#import "ContactEntity.h"
+#import "NimbusModels.h"
+#import "ContactCache.h"
 #import "ContactBook.h"
 #import "NimbusCore.h"
-#import "ContactEntity.h"
-#import "ContactCache.h"
 
-@interface ResultTableViewController () <NITableViewModelDelegate>
+@interface ResultTableViewController () <NITableViewModelDelegate, ABPersonViewControllerDelegate>
 
 @property (nonatomic) dispatch_queue_t resultSearchContactQueue;
 @property (nonatomic, strong ) NITableViewModel* model;
@@ -32,8 +32,8 @@
     self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
     // Dimiss keyboard when drag
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-    [self.tableView registerClass:[ContactTableViewCell class] forCellReuseIdentifier:@"ContactTableViewCell"];
     
+    [self.tableView registerClass:[ContactTableViewCell class] forCellReuseIdentifier:@"ContactTableViewCell"];
     _resultSearchContactQueue = dispatch_queue_create("RESULT_SEARCH_CONTACT_QUEUE", DISPATCH_QUEUE_SERIAL);
 }
 
@@ -41,6 +41,7 @@
 
     [super viewWillAppear:true];
     [self setupTableView];
+    self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
 }
 
 #pragma mark - setupView
@@ -58,6 +59,7 @@
                 ContactCellObject* cellObject = [[ContactCellObject alloc] init];
                 cellObject.contactTitle = contactEntity.name;
                 cellObject.identifier = contactEntity.identifier;
+                cellObject.phoneNumber = contactEntity.phone;
                 cellObject.contactImage = contactEntity.profileImageDefault;
                 [objects addObject:cellObject];
             }
@@ -85,6 +87,30 @@
         
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }];
+    
+    // Fetch the address book
+    ABAddressBookRef addressBook = ABAddressBookCreate();
+    CFArrayRef people = ABAddressBookCopyPeopleWithName(addressBook, (__bridge CFStringRef)cellObject.contactTitle);
+    
+    if ((people != nil) && (CFArrayGetCount(people) > 0)) {
+        
+        ABRecordRef person = CFArrayGetValueAtIndex(people, 0);
+        ABPersonViewController* picker = [[ABPersonViewController alloc] init];
+        picker.personViewDelegate = self;
+        picker.displayedPerson = person;
+        
+        // Allow users to edit the person’s information
+        picker.allowsEditing = YES;
+        
+        [self.navigationController pushViewController:picker animated:YES];
+    }
+}
+
+#pragma mark - ABPersonview delegate
+
+- (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
+    
+    return TRUE;
 }
 
 #pragma mark - heigh for cell

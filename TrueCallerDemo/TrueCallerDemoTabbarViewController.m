@@ -116,7 +116,11 @@
                     
                     // ContactsViewController
                     UINavigationController* contactViewController = (UINavigationController *)viewController;
-                    [contactViewController.viewControllers[0] prepareData];
+                  
+                    if ([contactViewController.viewControllers[0] isKindOfClass:[ContactsViewController class]]) {
+                    
+                        [contactViewController.viewControllers[0] prepareData];
+                    }
                 } else {
                     
                     if ([viewController isKindOfClass:[PhoneViewController class]]) {
@@ -137,6 +141,7 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
   
+    NSLog(@"%@", viewController.title);
 }
 
 #pragma mark - updateViewDelegate

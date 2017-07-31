@@ -11,8 +11,10 @@
 
 @interface PhoneViewController : ViewController
 
+#pragma mark - TabbarDelegate to notify TabbarController update Data
 @property (nonatomic, strong) id<TabbarDelegate> delegate;
 
+#pragma mark - prepare Data
 - (void)prepareData;
 
 @end

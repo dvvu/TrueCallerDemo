@@ -17,7 +17,7 @@
 #import "ContactCache.h"
 #import "GlobalVars.h"
 
-@interface ContactsViewController () <NITableViewModelDelegate, UISearchResultsUpdating>
+@interface ContactsViewController () <NITableViewModelDelegate, UISearchResultsUpdating, ABPersonViewControllerDelegate>
 
 @property (nonatomic, strong) ResultTableViewController* searchResultTableViewController;
 @property (nonatomic, strong) UISearchController* searchController;
@@ -133,6 +133,7 @@
                 
                 ContactCellObject* cellObject = [[ContactCellObject alloc] init];
                 cellObject.contactTitle = contactEntity.name;
+                cellObject.phoneNumber = contactEntity.phone;
                 cellObject.identifier = contactEntity.identifier;
                 cellObject.contactImage = contactEntity.profileImageDefault;
                 [_model addObject:cellObject toSection:range.location];
@@ -141,6 +142,7 @@
         
         [_model updateSectionIndex];
         self.tableView.dataSource = _model;
+        
         // Run on main Thread
         dispatch_async(dispatch_get_main_queue(), ^ {
             
@@ -161,7 +163,15 @@
         _searchResultTableViewController.listContactBook = [_globalVars.contactEntityList filteredArrayUsingPredicate:predicate];
         [_searchResultTableViewController viewWillAppear:true];
     }
+    
+    if (!searchController.active) {
+        
+        // click Cancel button.
+        NSLog(@"%f", self.tableView.frame.size.width);
+        [self.view layoutIfNeeded];
+    }
 }
+
 
 #pragma mark - selected
 
@@ -174,6 +184,30 @@
         
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }];
+    
+    // Fetch the address book
+    ABAddressBookRef addressBook = ABAddressBookCreate();
+    CFArrayRef people = ABAddressBookCopyPeopleWithName(addressBook, (__bridge CFStringRef)cellObject.contactTitle);
+    
+    if ((people != nil) && (CFArrayGetCount(people) > 0)) {
+        
+        ABRecordRef person = CFArrayGetValueAtIndex(people, 0);
+        ABPersonViewController* picker = [[ABPersonViewController alloc] init];
+        picker.personViewDelegate = self;
+        picker.displayedPerson = person;
+        
+        // Allow users to edit the person’s information
+        picker.allowsEditing = YES;
+        
+        [self.navigationController pushViewController:picker animated:YES];
+    }
+}
+
+#pragma mark - ABPersonview delegate
+
+- (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
+    
+    return TRUE;
 }
 
 #pragma mark - heigh for cell
