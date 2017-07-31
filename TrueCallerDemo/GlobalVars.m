@@ -7,12 +7,9 @@
 //
 
 #import "GlobalVars.h"
-#import "ContactBook.h"
 #import "Constants.h"
 
 @interface GlobalVars ()
-
-@property (nonatomic, strong) ContactBook* contactBook;
 
 @end
 
@@ -38,7 +35,6 @@
     if (self) {
         
         _contactEntityList = [[NSArray alloc] init];
-        _contactBook = [ContactBook sharedInstance];
     }
     
     return self;

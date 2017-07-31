@@ -7,7 +7,12 @@
 //
 
 #import "ViewController.h"
+#import "TabbarDelegate.h"
 
 @interface PhoneViewController : ViewController
+
+@property (nonatomic, strong) id<TabbarDelegate> delegate;
+
+- (void)prepareData;
 
 @end

@@ -5,10 +5,13 @@
 //  Created by Doan Van Vu on 7/25/17.
 //  Copyright © 2017 Doan Van Vu. All rights reserved.
 //
-#import <ContactsUI/ContactsUI.h>
+
 #import "PhoneViewController.h"
+#import "AddressBookUI/AddressBookUI.h"
+#import "AddressBook/AddressBook.h"
 #import "ContactTableViewCell.h"
-#import <Contacts/Contacts.h>
+#import "ContactsUI/ContactsUI.h"
+#import "Contacts/Contacts.h"
 #import "ContactCellObject.h"
 #import "ContactEntity.h"
 #import "ContactCache.h"
@@ -18,9 +21,7 @@
 #import "Constants.h"
 #import "GlobalVars.h"
 
-#import "TabbarDelegate.h"
-
-@interface PhoneViewController () <NITableViewModelDelegate, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, CNContactViewControllerDelegate>
+@interface PhoneViewController () <NITableViewModelDelegate, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, CNContactViewControllerDelegate, ABNewPersonViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint* keyboardHeaderView;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint* keyboardViewHeight;
@@ -29,7 +30,6 @@
 @property (nonatomic, weak) IBOutlet UIView* backgroundView;
 @property (nonatomic, weak) IBOutlet UIView* keyBoardView;
 @property (nonatomic, weak) IBOutlet UILabel* phoneLabel;
-
 @property (nonatomic, strong) NSArray<ContactEntity*>* searchContactList;
 @property (nonatomic) dispatch_queue_t resultSearchContactQueue;
 @property (nonatomic, strong) NITableViewModel* model;
@@ -39,8 +39,6 @@
 @property (nonatomic) GlobalVars* globalVars;
 @property (nonatomic) UIView* headerView;
 
-@property (nonatomic, weak) id<TabbarDelegate> delegate;
-
 @end
 
 @implementation PhoneViewController
@@ -49,9 +47,14 @@
     
     [super viewDidLoad];
     
-    [self prepareUI];
-    [self showHideKeyBoardheaderView:_phoneLabel.text];
     _globalVars = [GlobalVars sharedInstance];
+}
+
+- (void)prepareData {
+    
+    [self searchText:_phoneLabel.text];
+    [self prepareUI];
+    [self setupData];
 }
 
 #pragma mark - setupView
@@ -91,7 +94,7 @@
 
 #pragma mark - setupView
 
-- (void)setupTableView {
+- (void)setupData {
     
     dispatch_async(_resultSearchContactQueue, ^ {
         
@@ -118,7 +121,8 @@
         _tableView.dataSource = _model;
         
         dispatch_async(dispatch_get_main_queue(), ^ {
-            
+           
+            [self showHideKeyBoardheaderView:_phoneLabel.text];
             [_tableView reloadData];
         });
     });
@@ -207,7 +211,7 @@
         }
         
         _searchContactList = mutableArray;
-        [self setupTableView];
+        [self setupData];
     }
 }
 
@@ -230,30 +234,78 @@
 
 - (IBAction)addContact:(id)sender {
     
-    CNMutableContact* contact = [[CNMutableContact alloc] init];
-    CNLabeledValue* homePhone = [CNLabeledValue labeledValueWithLabel:CNLabelHome value:[CNPhoneNumber phoneNumberWithStringValue:_phoneLabel.text]];
-    contact.phoneNumbers = @[homePhone];
-    
-    CNContactViewController* contactViewController = [CNContactViewController viewControllerForNewContact:contact];
-    contactViewController.delegate = self;
-    UINavigationController* navContactViewController = [[UINavigationController alloc] initWithRootViewController:contactViewController];
-    contactViewController.title = @"Add Contact";
-    [self presentViewController:navContactViewController animated:NO completion:nil];
+    if (iOS_VERSION_GREATER_THAN_OR_EQUAL_TO(9.0)) {
+        
+        CNMutableContact* contact = [[CNMutableContact alloc] init];
+        CNLabeledValue* homePhone = [CNLabeledValue labeledValueWithLabel:CNLabelHome value:[CNPhoneNumber phoneNumberWithStringValue:_phoneLabel.text]];
+        contact.phoneNumbers = @[homePhone];
+        
+        CNContactViewController* contactViewController = [CNContactViewController viewControllerForNewContact:contact];
+        contactViewController.delegate = self;
+        UINavigationController* navContactViewController = [[UINavigationController alloc] initWithRootViewController:contactViewController];
+        contactViewController.title = @"Add Contact";
+        [self presentViewController:navContactViewController animated:NO completion:nil];
+
+    } else {
+        
+        // Creating new entry
+        ABAddressBookRef addressBook = ABAddressBookCreate();
+        ABRecordRef person = ABPersonCreate();
+        
+        // Adding phone numbers
+        ABMutableMultiValueRef phoneNumberMultiValue = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+        ABMultiValueAddValueAndLabel(phoneNumberMultiValue,(__bridge CFTypeRef)(_phoneLabel.text), (CFStringRef)@"", NULL);
+        ABRecordSetValue(person, kABPersonPhoneProperty, phoneNumberMultiValue, nil);
+        CFRelease(phoneNumberMultiValue);
+        
+        // Adding person to the address book
+        ABAddressBookAddRecord(addressBook, person, nil);
+        CFRelease(addressBook);
+        
+        // Creating view controller for a new contact
+        ABNewPersonViewController* newPersonViewController = [[ABNewPersonViewController alloc] init];
+        [newPersonViewController setNewPersonViewDelegate:self];
+        [newPersonViewController setDisplayedPerson:person];
+        CFRelease(person);
+        
+        UINavigationController* navContactViewController = [[UINavigationController alloc] initWithRootViewController:newPersonViewController];
+        newPersonViewController.title = @"Add Contact";
+        [self presentViewController:navContactViewController animated:NO completion:nil];
+    }
 }
+
+#pragma mark - addContact delegate ABAddressBook
+
+- (void)newPersonViewController:(ABNewPersonViewController *)newPersonViewController didCompleteWithNewPerson:(ABRecordRef)person {
+    
+    if (person) {
+        
+        // click done buttton
+        [_delegate reloadViewControllerDelegate:YES];
+    } else {
+        
+        // click cacel button
+        [_delegate reloadViewControllerDelegate:NO];
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - addContact delegate CNContact
 
 - (void)contactViewController:(CNContactViewController *)viewController didCompleteWithContact:(nullable CNContact *)contact {
     
     if (contact) {
         
-        // click cacel button
-        [self setupTableView];
-        [_delegate updateTabelViewDelegate:YES];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        // click done buttton
+        [_delegate reloadViewControllerDelegate:YES];
     } else {
         
-        [_delegate updateTabelViewDelegate:NO];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        // click cacel button
+        [_delegate reloadViewControllerDelegate:NO];
     }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - call
@@ -347,12 +399,12 @@
         _keyboardViewHeight.constant = self.view.frame.size.height * 0.5;
     } else {
         
-        _keyboardViewHeight.constant = self.view.frame.size.height *0.5 - _keyboardHeaderHeight;
+        _keyboardViewHeight.constant = self.view.frame.size.height * 0.5 - _keyboardHeaderHeight;
     }
     
     [_showKeyboardButton setHidden:YES];
     
-    [UIView animateWithDuration:0.3f animations:^{
+    [UIView animateWithDuration:0.3f animations:^ {
         
         [self.view layoutIfNeeded];
     }];

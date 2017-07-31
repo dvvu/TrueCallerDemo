@@ -10,6 +10,6 @@
 
 @protocol TabbarDelegate <NSObject>
 
-- (void)updateTabelViewDelegate:(BOOL)isUpdateTabelView;
+- (void)reloadViewControllerDelegate:(BOOL)isUpdateTabelView;
 
 @end

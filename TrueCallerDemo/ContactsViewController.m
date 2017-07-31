@@ -48,16 +48,14 @@
 - (void)viewDidLoad {
    
     [super viewDidLoad];
-    
     _globalVars =  [GlobalVars sharedInstance];
     self.title = @"Contacts";
-    [self setupTableMode];
-    [self setupData];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)prepareData {
     
-    [super viewWillAppear:YES];
+    [self setupTableMode];
+    [self setupData];
 }
 
 #pragma mark - config TableMode
@@ -69,7 +67,6 @@
     _contactQueue = dispatch_queue_create("SHOW_CONTACT_QUEUE", DISPATCH_QUEUE_SERIAL);
     [self.tableView registerClass:[ContactTableViewCell class] forCellReuseIdentifier:@"ContactTableViewCell"];
     [self createSearchController];
-    self.tableView.dataSource = _model;
 }
 
 #pragma mark - Create searchBar
@@ -143,7 +140,7 @@
         }
         
         [_model updateSectionIndex];
-        
+        self.tableView.dataSource = _model;
         // Run on main Thread
         dispatch_async(dispatch_get_main_queue(), ^ {
             
