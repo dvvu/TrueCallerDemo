@@ -5,9 +5,10 @@
 //  Created by Doan Van Vu on 7/25/17.
 //  Copyright © 2017 Doan Van Vu. All rights reserved.
 //
-
+#import <ContactsUI/ContactsUI.h>
 #import "PhoneViewController.h"
 #import "ContactTableViewCell.h"
+#import <Contacts/Contacts.h>
 #import "ContactCellObject.h"
 #import "ContactEntity.h"
 #import "ContactCache.h"
@@ -15,29 +16,30 @@
 #import "NimbusCore.h"
 #import "ContactBook.h"
 #import "Constants.h"
+#import "GlobalVars.h"
 
-#import <Contacts/Contacts.h>
-#import <ContactsUI/ContactsUI.h>
+#import "TabbarDelegate.h"
 
 @interface PhoneViewController () <NITableViewModelDelegate, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, CNContactViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint* keyboardHeaderView;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint* keyboardViewHeight;
-@property (nonatomic, weak) IBOutlet UILabel* phoneLabel;
-@property (nonatomic, weak) IBOutlet UIView* keyBoardView;
-@property (nonatomic, weak) IBOutlet UIView* backgroundView;
 @property (nonatomic, weak) IBOutlet UIButton* showKeyboardButton;
 @property (nonatomic, weak) IBOutlet UITableView* tableView;
-@property (nonatomic) float keyboardHeaderHeight;
-@property (nonatomic) NSArray* symbolsArray;
+@property (nonatomic, weak) IBOutlet UIView* backgroundView;
+@property (nonatomic, weak) IBOutlet UIView* keyBoardView;
+@property (nonatomic, weak) IBOutlet UILabel* phoneLabel;
 
-@property (nonatomic, strong) NSArray<ContactEntity*>* contactEntityList;
 @property (nonatomic, strong) NSArray<ContactEntity*>* searchContactList;
 @property (nonatomic) dispatch_queue_t resultSearchContactQueue;
 @property (nonatomic, strong) NITableViewModel* model;
-@property (nonatomic, strong) ContactBook* contactBook;
+@property (nonatomic) float keyboardHeaderHeight;
 @property (nonatomic) UILabel* tableHeaderLabel;
+@property (nonatomic) NSArray* symbolsArray;
+@property (nonatomic) GlobalVars* globalVars;
 @property (nonatomic) UIView* headerView;
+
+@property (nonatomic, weak) id<TabbarDelegate> delegate;
 
 @end
 
@@ -48,32 +50,8 @@
     [super viewDidLoad];
     
     [self prepareUI];
-    [self showContactBook];
     [self showHideKeyBoardheaderView:_phoneLabel.text];
-}
-
-#pragma mark - showContactBook
-
-- (void)showContactBook {
-    
-    [_contactBook getPermissionContacts:^(NSError* error) {
-        
-        if((error.code == ContactAuthorizationStatusDenied) || (error.code == ContactAuthorizationStatusRestricted)) {
-            
-            [[[UIAlertView alloc] initWithTitle:@"This app requires access to your contacts to function properly." message: @"Please! Go to setting!" delegate:self cancelButtonTitle:@"CLOSE" otherButtonTitles:@"GO TO SETTING", nil] show];
-        } else {
-            
-            [_contactBook getContacts:^(NSMutableArray* contactEntityList, NSError* error) {
-                if(error.code == ContactLoadingFailError) {
-                    
-                    [[[UIAlertView alloc] initWithTitle:@"This Contact is empty." message: @"Please! Check your contacts and try again!" delegate:nil cancelButtonTitle:@"CLOSE" otherButtonTitles: nil, nil] show];
-                } else {
-                    
-                    _contactEntityList = [NSArray arrayWithArray:contactEntityList];
-                }
-            }];
-        }
-    }];
+    _globalVars = [GlobalVars sharedInstance];
 }
 
 #pragma mark - setupView
@@ -88,10 +66,11 @@
     // setup headerView
     _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 25)];
     _headerView.layer.shadowColor = [UIColor blackColor].CGColor;
-    [_headerView setBackgroundColor:[UIColor whiteColor]];
     _headerView.layer.masksToBounds = NO;
     _headerView.layer.shadowOffset = CGSizeMake(0, 0.1);
     _headerView.layer.shadowOpacity = 0.1;
+    [_headerView setBackgroundColor:[UIColor whiteColor]];
+    
     _tableHeaderLabel = [[UILabel alloc] init];
     _tableHeaderLabel.frame = CGRectMake(8, 0, DEVICE_WIDTH - 41, 25);
     [_headerView addSubview:_tableHeaderLabel];
@@ -105,10 +84,8 @@
     _tableView.tableHeaderView = _headerView;
     
     // setup tableView
-    _contactBook = [ContactBook sharedInstance];
     [_tableView registerClass:[ContactTableViewCell class] forCellReuseIdentifier:@"ContactTableViewCell"];
     _resultSearchContactQueue = dispatch_queue_create("RESULT_SEARCH_CONTACT_QUEUE", DISPATCH_QUEUE_SERIAL);
-    
     _tableView.delegate = self;
 }
 
@@ -218,14 +195,14 @@
         
         NSMutableArray* mutableArray = [[NSMutableArray alloc] init];
         
-        for (int i = 0; i < _contactEntityList.count; i++) {
+        for (int i = 0; i < _globalVars.contactEntityList.count; i++) {
 
-            NSArray* phone = [_contactEntityList objectAtIndex:i].phone;
+            NSArray* phone = [_globalVars.contactEntityList objectAtIndex:i].phone;
             NSPredicate* predicate = [NSPredicate predicateWithFormat:@"SELF contains[cd] %@", searchText];
             
             if ([phone filteredArrayUsingPredicate:predicate].count > 0) {
                 
-                [mutableArray addObject:[_contactEntityList objectAtIndex:i]];
+                [mutableArray addObject:[_globalVars.contactEntityList objectAtIndex:i]];
             }
         }
         
@@ -266,10 +243,17 @@
 
 - (void)contactViewController:(CNContactViewController *)viewController didCompleteWithContact:(nullable CNContact *)contact {
     
-    [self dismissViewControllerAnimated:YES completion:nil];
-    _contactBook = [ContactBook sharedInstance];
-    [self showContactBook];
-    [self setupTableView];
+    if (contact) {
+        
+        // click cacel button
+        [self setupTableView];
+        [_delegate updateTabelViewDelegate:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        
+        [_delegate updateTabelViewDelegate:NO];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark - call
@@ -357,7 +341,7 @@
 
 - (IBAction)showKeyboard:(id)sender {
     
-    // hide keyboard
+    // show keyboard
     if ([_phoneLabel.text length] > 0) {
         
         _keyboardViewHeight.constant = self.view.frame.size.height * 0.5;

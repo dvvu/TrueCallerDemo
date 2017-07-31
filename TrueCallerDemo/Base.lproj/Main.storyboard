@@ -76,7 +76,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1410" y="922"/>
+            <point key="canvasLocation" x="1630" y="1311"/>
         </scene>
         <!--Call-->
         <scene sceneID="jeR-qx-yZX">
@@ -409,7 +409,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="We9-Tw-7Po" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2457" y="183"/>
+            <point key="canvasLocation" x="2374" y="-197"/>
         </scene>
         <!--Contacts View Controller-->
         <scene sceneID="FzI-ag-Lit">
@@ -428,12 +428,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qQe-74-Xcg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3396" y="-839.73013493253382"/>
+            <point key="canvasLocation" x="3082" y="-842"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--True Caller Demo Tabbar View Controller-->
         <scene sceneID="fKE-GE-FRg">
             <objects>
-                <tabBarController id="XaV-Uv-wWX" sceneMemberID="viewController">
+                <tabBarController id="XaV-Uv-wWX" customClass="TrueCallerDemoTabbarViewController" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleAspectFill" barStyle="black" id="2pP-Ib-kD2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -447,7 +447,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WTS-PM-8Ag" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1447" y="-125"/>
+            <point key="canvasLocation" x="1492" y="-523"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="c6a-ED-RmR">
@@ -465,13 +465,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4MF-op-vSd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="607" y="922"/>
+            <point key="canvasLocation" x="927" y="1310"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="znp-zI-As8">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VdF-Er-Cnd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="contacts" id="Cpc-3u-VRM"/>
+                    <tabBarItem key="tabBarItem" tag="1" systemItem="contacts" id="Cpc-3u-VRM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="83o-g8-hZ7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -484,7 +484,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JNh-k8-IYh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2456.8000000000002" y="-839.73013493253382"/>
+            <point key="canvasLocation" x="2374" y="-842"/>
         </scene>
         <!--Incoming Call View Controller-->
         <scene sceneID="lCl-dC-LdK">

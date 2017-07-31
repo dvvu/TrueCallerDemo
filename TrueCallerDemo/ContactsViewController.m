@@ -1,4 +1,3 @@
-
 //
 //  ContactsViewController.m
 //  NimbusExample
@@ -16,16 +15,17 @@
 #import "NimbusCore.h"
 #import "Constants.h"
 #import "ContactCache.h"
+#import "GlobalVars.h"
 
 @interface ContactsViewController () <NITableViewModelDelegate, UISearchResultsUpdating>
 
-@property (nonatomic) dispatch_queue_t contactQueue;
-@property (nonatomic, strong) ContactBook* contactBook;
-@property (nonatomic, strong) NSArray<ContactEntity*>* contactEntityList;
-@property (nonatomic, strong) NIMutableTableViewModel* model;
-@property (nonatomic, strong) UISearchController* searchController;
 @property (nonatomic, strong) ResultTableViewController* searchResultTableViewController;
+@property (nonatomic, strong) UISearchController* searchController;
 @property (nonatomic, strong) UIButton* checkPermissionButton;
+@property (nonatomic, strong) NIMutableTableViewModel* model;
+@property (nonatomic) dispatch_queue_t contactQueue;
+@property (nonatomic) GlobalVars* globalVars;
+
 @end
 
 @implementation ContactsViewController
@@ -45,38 +45,19 @@
     return sharedInstance;
 }
 
-
 - (void)viewDidLoad {
    
     [super viewDidLoad];
     
-    _contactQueue = dispatch_queue_create("SHOWER_CONTACT_QUEUE", DISPATCH_QUEUE_SERIAL);
-    _contactBook = [ContactBook sharedInstance];
-     self.title = @"Contacts";
+    _globalVars =  [GlobalVars sharedInstance];
+    self.title = @"Contacts";
     [self setupTableMode];
-    
-    switch ([CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts]) {
-        
-        case CNAuthorizationStatusNotDetermined: {
-          
-            _checkPermissionButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-            _checkPermissionButton.frame = CGRectMake(20, self.view.frame.size.height/2, 100, 25);
-            [_checkPermissionButton setTitle:@"Allow access to contacts" forState:UIControlStateNormal];
-            [_checkPermissionButton addTarget:self action:@selector(accessContacts:) forControlEvents:UIControlEventTouchUpInside];
-            [self.view addSubview:_checkPermissionButton];
-        }
-            break;
-            
-        default:
-            
-            [self showContactBook];
-            break;
-    }
+    [self setupData];
 }
 
-- (IBAction)accessContacts:(id)sender {
+- (void)viewWillAppear:(BOOL)animated {
     
-    [self showContactBook];
+    [super viewWillAppear:YES];
 }
 
 #pragma mark - config TableMode
@@ -85,35 +66,10 @@
     
     _model = [[NIMutableTableViewModel alloc] initWithDelegate:self];
     [_model setSectionIndexType:NITableViewModelSectionIndexDynamic showsSearch:NO showsSummary:NO];
-   
+    _contactQueue = dispatch_queue_create("SHOW_CONTACT_QUEUE", DISPATCH_QUEUE_SERIAL);
     [self.tableView registerClass:[ContactTableViewCell class] forCellReuseIdentifier:@"ContactTableViewCell"];
-    self.tableView.dataSource = _model;
     [self createSearchController];
-}
-
-#pragma mark - Show Contacts
-
-- (void)showContactBook {
-    
-    [_contactBook getPermissionContacts:^(NSError* error) {
-        
-        if((error.code == ContactAuthorizationStatusDenied) || (error.code == ContactAuthorizationStatusRestricted)) {
-            
-            [[[UIAlertView alloc] initWithTitle:@"This app requires access to your contacts to function properly." message: @"Please! Go to setting!" delegate:self cancelButtonTitle:@"CLOSE" otherButtonTitles:@"GO TO SETTING", nil] show];
-        } else {
-           
-            [_contactBook getContacts:^(NSMutableArray* contactEntityList, NSError* error) {
-                if(error.code == ContactLoadingFailError) {
-                  
-                    [[[UIAlertView alloc] initWithTitle:@"This Contact is empty." message: @"Please! Check your contacts and try again!" delegate:nil cancelButtonTitle:@"CLOSE" otherButtonTitles: nil, nil] show];
-                } else {
-                    
-                    _contactEntityList = [NSArray arrayWithArray:contactEntityList];
-                    [self setupData];
-                }
-            }];
-        }
-    }];
+    self.tableView.dataSource = _model;
 }
 
 #pragma mark - Create searchBar
@@ -135,13 +91,13 @@
     
     dispatch_async(_contactQueue, ^ {
         
-        int contacts = (int)_contactEntityList.count;
+        int contacts = (int)_globalVars.contactEntityList.count;
         NSString* groupNameContact = @"";
 
         // Run on background to get name group
         for (int i = 0; i < contacts; i++) {
             
-            NSString* name = [_contactEntityList[i].name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            NSString* name = [_globalVars.contactEntityList[i].name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             NSString* firstChar = @"";
             
             if ([name length] > 0) {
@@ -153,7 +109,6 @@
                 
                 groupNameContact = [groupNameContact stringByAppendingString:firstChar];
             }
-
         }
         
         int characterGroupNameCount = (int)[groupNameContact length];
@@ -166,8 +121,8 @@
                 [_model addSectionWithTitle:[groupNameContact substringWithRange:NSMakeRange(i,1)]];
             }
             
-            ContactEntity* contactEntity = _contactEntityList[i];
-            NSString* name = [_contactEntityList[i].name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            ContactEntity* contactEntity = _globalVars.contactEntityList[i];
+            NSString* name = [_globalVars.contactEntityList[i].name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             NSString* firstChar = @"";
             
             if ([name length] > 0) {
@@ -206,10 +161,9 @@
     if (searchString.length > 0) {
 
         NSPredicate* predicate = [NSPredicate predicateWithFormat:@"name contains[cd] %@", searchString];
-        _searchResultTableViewController.listContactBook = [_contactEntityList filteredArrayUsingPredicate:predicate];
+        _searchResultTableViewController.listContactBook = [_globalVars.contactEntityList filteredArrayUsingPredicate:predicate];
         [_searchResultTableViewController viewWillAppear:true];
     }
-
 }
 
 #pragma mark - selected
