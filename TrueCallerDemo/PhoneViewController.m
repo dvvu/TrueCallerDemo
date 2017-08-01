@@ -19,7 +19,6 @@
 #import "NimbusCore.h"
 #import "ContactBook.h"
 #import "Constants.h"
-#import "GlobalVars.h"
 
 @interface PhoneViewController () <NITableViewModelDelegate, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, CNContactViewControllerDelegate, ABNewPersonViewControllerDelegate>
 
@@ -30,13 +29,14 @@
 @property (nonatomic, weak) IBOutlet UIView* backgroundView;
 @property (nonatomic, weak) IBOutlet UIView* keyBoardView;
 @property (nonatomic, weak) IBOutlet UILabel* phoneLabel;
+
 @property (nonatomic, strong) NSArray<ContactEntity*>* searchContactList;
+@property (nonatomic, strong) NSArray<ContactEntity*>* contactEntityList;
 @property (nonatomic) dispatch_queue_t resultSearchContactQueue;
 @property (nonatomic, strong) NITableViewModel* model;
 @property (nonatomic) float keyboardHeaderHeight;
 @property (nonatomic) UILabel* tableHeaderLabel;
 @property (nonatomic) NSArray* symbolsArray;
-@property (nonatomic) GlobalVars* globalVars;
 @property (nonatomic) UIView* headerView;
 
 @end
@@ -47,10 +47,11 @@
     
     [super viewDidLoad];
     
-    _globalVars = [GlobalVars sharedInstance];
 }
 
-- (void)prepareData {
+- (void)prepareData:(NSArray<ContactEntity*>*)contactEntityList {
+    
+    _contactEntityList = contactEntityList;
     
     [self searchText:_phoneLabel.text];
     [self prepareUI];
@@ -199,14 +200,14 @@
         
         NSMutableArray* mutableArray = [[NSMutableArray alloc] init];
         
-        for (int i = 0; i < _globalVars.contactEntityList.count; i++) {
+        for (int i = 0; i < _contactEntityList.count; i++) {
 
-            NSArray* phone = [_globalVars.contactEntityList objectAtIndex:i].phone;
+            NSArray* phone = [_contactEntityList objectAtIndex:i].phone;
             NSPredicate* predicate = [NSPredicate predicateWithFormat:@"SELF contains[cd] %@", searchText];
             
             if ([phone filteredArrayUsingPredicate:predicate].count > 0) {
                 
-                [mutableArray addObject:[_globalVars.contactEntityList objectAtIndex:i]];
+                [mutableArray addObject:[_contactEntityList objectAtIndex:i]];
             }
         }
         

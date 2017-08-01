@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "TabbarDelegate.h"
+#import "ContactEntity.h"
 
 @interface PhoneViewController : ViewController
 
@@ -15,6 +16,6 @@
 @property (nonatomic, strong) id<TabbarDelegate> delegate;
 
 #pragma mark - prepare Data
-- (void)prepareData;
+- (void)prepareData:(NSArray<ContactEntity*>*)contactEntityList;
 
 @end

@@ -12,16 +12,13 @@
 #import "ContactEntity.h"
 #import "ContactBook.h"
 #import "Constants.h"
-#import "GlobalVars.h"
 #import "TabbarDelegate.h"
 
 @interface TrueCallerDemoTabbarViewController () <UITabBarControllerDelegate, UIAlertViewDelegate, TabbarDelegate>
 
-@property (nonatomic) BOOL isUpdateViewContoller;
-@property (nonatomic, strong) UIView* backgroundView;
 @property (nonatomic, strong) ContactBook* contactBook;
-@property (nonatomic, strong) ContactsViewController* contactsViewController;
-@property (nonatomic) GlobalVars* globalVars;
+@property (nonatomic, strong) UIView* backgroundView;
+@property (nonatomic) BOOL isUpdateViewContoller;
 
 @end
 
@@ -33,10 +30,9 @@
     self.delegate = self;
     
     _contactBook = [ContactBook sharedInstance];
-    _globalVars =[GlobalVars sharedInstance];
-    
     _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT - self.tabBar.frame.size.height)];
     [_backgroundView setBackgroundColor:[UIColor lightGrayColor]];
+    
     [self.view addSubview:_backgroundView];
     
     if (iOS_VERSION_GREATER_THAN_OR_EQUAL_TO(9.0)) {
@@ -105,7 +101,6 @@
             [[[UIAlertView alloc] initWithTitle:@"This Contact is empty." message: @"Please! Check your contacts and try again!" delegate:nil cancelButtonTitle:@"CLOSE" otherButtonTitles: nil, nil] show];
         } else {
             
-            _globalVars.contactEntityList = [NSArray arrayWithArray:contactEntityList];
             [_backgroundView setHidden:YES];
             
             // if Exiting Data-> reload ViewController if need  
@@ -114,12 +109,15 @@
                 if ([viewController isKindOfClass:[UINavigationController class]]) {
                     
                     // ContactsViewController
-                    UINavigationController* contactViewController = (UINavigationController *)viewController;
+                    UINavigationController* navContactViewController = (UINavigationController *)viewController;
                   
-                    if ([contactViewController.viewControllers[0] isKindOfClass:[ContactsViewController class]]) {
                     
-                        [contactViewController.viewControllers[0] prepareData];
+                    if ([navContactViewController.viewControllers[0] isKindOfClass:[ContactsViewController class]]) {
+                       
+                        ContactsViewController* contactViewController = (ContactsViewController *)navContactViewController.viewControllers[0];
+                        [contactViewController prepareData:contactEntityList];
                     }
+                    
                 } else {
                     
                     if ([viewController isKindOfClass:[PhoneViewController class]]) {
@@ -127,11 +125,10 @@
                         // PhoneViewController
                         PhoneViewController* phoneViewController = (PhoneViewController *)viewController;
                         phoneViewController.delegate = self;
-                        [phoneViewController prepareData];
+                        [phoneViewController prepareData:contactEntityList];;
                     }
                 }
             }
-            
         }
     }];
 }

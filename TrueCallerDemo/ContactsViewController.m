@@ -15,16 +15,16 @@
 #import "NimbusCore.h"
 #import "Constants.h"
 #import "ContactCache.h"
-#import "GlobalVars.h"
+
 
 @interface ContactsViewController () <NITableViewModelDelegate, UISearchResultsUpdating, ABPersonViewControllerDelegate>
 
 @property (nonatomic, strong) ResultTableViewController* searchResultTableViewController;
+@property (nonatomic, strong) NSArray<ContactEntity*>* contactEntityList;
 @property (nonatomic, strong) UISearchController* searchController;
 @property (nonatomic, strong) UIButton* checkPermissionButton;
 @property (nonatomic, strong) NIMutableTableViewModel* model;
 @property (nonatomic) dispatch_queue_t contactQueue;
-@property (nonatomic) GlobalVars* globalVars;
 
 @end
 
@@ -48,11 +48,12 @@
 - (void)viewDidLoad {
    
     [super viewDidLoad];
-    _globalVars =  [GlobalVars sharedInstance];
     self.title = @"Contacts";
 }
 
-- (void)prepareData {
+- (void)prepareData:(NSArray<ContactEntity*>*)contactEntityList {
+    
+    _contactEntityList = contactEntityList;
     
     [self setupTableMode];
     [self setupData];
@@ -88,13 +89,13 @@
     
     dispatch_async(_contactQueue, ^ {
         
-        int contacts = (int)_globalVars.contactEntityList.count;
+        int contacts = (int)_contactEntityList.count;
         NSString* groupNameContact = @"";
 
         // Run on background to get name group
         for (int i = 0; i < contacts; i++) {
             
-            NSString* name = [_globalVars.contactEntityList[i].name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            NSString* name = [_contactEntityList[i].name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             NSString* firstChar = @"";
             
             if ([name length] > 0) {
@@ -118,8 +119,8 @@
                 [_model addSectionWithTitle:[groupNameContact substringWithRange:NSMakeRange(i,1)]];
             }
             
-            ContactEntity* contactEntity = _globalVars.contactEntityList[i];
-            NSString* name = [_globalVars.contactEntityList[i].name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            ContactEntity* contactEntity = _contactEntityList[i];
+            NSString* name = [_contactEntityList[i].name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             NSString* firstChar = @"";
             
             if ([name length] > 0) {
@@ -161,7 +162,7 @@
 
         NSPredicate* predicate = [NSPredicate predicateWithFormat:@"name contains[cd] %@", searchString];
         
-        NSArray<ContactEntity*>* contactEntityList = [_globalVars.contactEntityList filteredArrayUsingPredicate:predicate];
+        NSArray<ContactEntity*>* contactEntityList = [_contactEntityList filteredArrayUsingPredicate:predicate];
       
         if (contactEntityList) {
     
