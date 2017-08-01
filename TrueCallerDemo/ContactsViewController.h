@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ContactEntity.h"
 
 @interface ContactsViewController : UITableViewController
 
@@ -14,6 +15,6 @@
 + (instancetype)sharedInstance;
 
 #pragma mark - prepare Data
-- (void)prepareData;
+- (void)prepareData:(NSArray<ContactEntity*>*)contactEntityList;
 
 @end

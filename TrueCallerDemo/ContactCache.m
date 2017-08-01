@@ -11,11 +11,12 @@
 
 @interface ContactCache()
 
-@property (nonatomic, strong) NSCache* contactCache;
-@property (nonatomic) NSUInteger totalPixel;
-@property (nonatomic, strong) NSMutableArray<NSString*> *keyList;
-@property (nonatomic) NSUInteger maxCacheSize;
+@property (nonatomic, strong) NSMutableArray<NSString*>* keyList;
 @property (nonatomic) dispatch_queue_t cacheImageQueue;
+@property (nonatomic, strong) NSCache* contactCache;
+@property (nonatomic) NSUInteger maxCacheSize;
+@property (nonatomic) NSUInteger totalPixel;
+
 @end
 
 @implementation ContactCache

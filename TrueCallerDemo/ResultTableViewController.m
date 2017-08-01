@@ -33,15 +33,7 @@
     self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
     // Dimiss keyboard when drag
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-    
     [self.tableView registerClass:[ContactTableViewCell class] forCellReuseIdentifier:@"ContactTableViewCell"];
-    
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-
-    [super viewWillAppear:true];
-    
 }
 
 - (void)repareData:(NSArray<ContactEntity*>*) listContactBook {
@@ -80,7 +72,6 @@
             });
         }
     });
-    
 }
 
 #pragma mark - selected

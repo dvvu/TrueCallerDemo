@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		EA2BD3A21F2735D400CC2572 /* PhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2BD3A11F2735D400CC2572 /* PhoneViewController.m */; };
+		EA5EE7451F301BFF00B30AF2 /* CallDirectoryHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5EE7441F301BFF00B30AF2 /* CallDirectoryHandler.m */; };
+		EA5EE7491F301BFF00B30AF2 /* TrueCaller.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EA5EE7411F301BFF00B30AF2 /* TrueCaller.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EA6022311F259757001591BC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022301F259757001591BC /* main.m */; };
 		EA6022341F259757001591BC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022331F259757001591BC /* AppDelegate.m */; };
 		EA6022371F259757001591BC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022361F259757001591BC /* ViewController.m */; };
@@ -54,7 +56,6 @@
 		EA6022E71F25A2A3001591BC /* NIViewRecycler.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022D21F25A2A3001591BC /* NIViewRecycler.m */; };
 		EA6022E81F25A2A3001591BC /* UIResponder+NimbusCore.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022D41F25A2A3001591BC /* UIResponder+NimbusCore.m */; };
 		EA6022EF1F25CFD0001591BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA6022EE1F25CFD0001591BC /* Assets.xcassets */; };
-		EA7691391F2D75C20059512A /* GlobalVars.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7691381F2D75C20059512A /* GlobalVars.m */; };
 		EABC39921F298AB700335C8E /* Ringtone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EABC398E1F298AB700335C8E /* Ringtone.mp3 */; };
 		EABC39931F298AB700335C8E /* Ringtone.caf in Resources */ = {isa = PBXBuildFile; fileRef = EABC398F1F298AB700335C8E /* Ringtone.caf */; };
 		EABC39941F298AB700335C8E /* Audio.m in Sources */ = {isa = PBXBuildFile; fileRef = EABC39911F298AB700335C8E /* Audio.m */; };
@@ -68,9 +69,17 @@
 		EABC39A91F2990BA00335C8E /* CallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EABC39A81F2990BA00335C8E /* CallViewController.m */; };
 		EABC39AC1F29A70C00335C8E /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EABC39AB1F29A70C00335C8E /* ContactsUI.framework */; };
 		EABC39B01F29EA5200335C8E /* TrueCallerDemoTabbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EABC39AF1F29EA5200335C8E /* TrueCallerDemoTabbarViewController.m */; };
+		EAE9F10F1F303D0D00D8CB93 /* ContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE9F10E1F303D0D00D8CB93 /* ContactViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		EA5EE7471F301BFF00B30AF2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA6022241F259757001591BC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EA5EE7401F301BFF00B30AF2;
+			remoteInfo = TrueCaller;
+		};
 		EA6022461F259757001591BC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EA6022241F259757001591BC /* Project object */;
@@ -87,9 +96,27 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		EA7F13261F2F643A0030FCEC /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				EA5EE7491F301BFF00B30AF2 /* TrueCaller.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		EA2BD3A01F2735D400CC2572 /* PhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneViewController.h; sourceTree = "<group>"; };
 		EA2BD3A11F2735D400CC2572 /* PhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneViewController.m; sourceTree = "<group>"; };
+		EA5EE7411F301BFF00B30AF2 /* TrueCaller.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TrueCaller.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA5EE7431F301BFF00B30AF2 /* CallDirectoryHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CallDirectoryHandler.h; sourceTree = "<group>"; };
+		EA5EE7441F301BFF00B30AF2 /* CallDirectoryHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CallDirectoryHandler.m; sourceTree = "<group>"; };
+		EA5EE7461F301BFF00B30AF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA60222C1F259757001591BC /* TrueCallerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrueCallerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA6022301F259757001591BC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EA6022321F259757001591BC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -192,8 +219,6 @@
 		EA6022D31F25A2A3001591BC /* UIResponder+NimbusCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIResponder+NimbusCore.h"; sourceTree = "<group>"; };
 		EA6022D41F25A2A3001591BC /* UIResponder+NimbusCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+NimbusCore.m"; sourceTree = "<group>"; };
 		EA6022EE1F25CFD0001591BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EA7691371F2D75C20059512A /* GlobalVars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalVars.h; sourceTree = "<group>"; };
-		EA7691381F2D75C20059512A /* GlobalVars.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalVars.m; sourceTree = "<group>"; };
 		EABC398E1F298AB700335C8E /* Ringtone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Ringtone.mp3; sourceTree = "<group>"; };
 		EABC398F1F298AB700335C8E /* Ringtone.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ringtone.caf; sourceTree = "<group>"; };
 		EABC39901F298AB700335C8E /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.h; sourceTree = "<group>"; };
@@ -214,9 +239,18 @@
 		EABC39AD1F29E69A00335C8E /* TabbarDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabbarDelegate.h; sourceTree = "<group>"; };
 		EABC39AE1F29EA5200335C8E /* TrueCallerDemoTabbarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrueCallerDemoTabbarViewController.h; sourceTree = "<group>"; };
 		EABC39AF1F29EA5200335C8E /* TrueCallerDemoTabbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrueCallerDemoTabbarViewController.m; sourceTree = "<group>"; };
+		EAE9F10D1F303D0D00D8CB93 /* ContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactViewController.h; sourceTree = "<group>"; };
+		EAE9F10E1F303D0D00D8CB93 /* ContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EA5EE73E1F301BFF00B30AF2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EA6022291F259757001591BC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -246,12 +280,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EA5EE7421F301BFF00B30AF2 /* TrueCaller */ = {
+			isa = PBXGroup;
+			children = (
+				EA5EE7431F301BFF00B30AF2 /* CallDirectoryHandler.h */,
+				EA5EE7441F301BFF00B30AF2 /* CallDirectoryHandler.m */,
+				EA5EE7461F301BFF00B30AF2 /* Info.plist */,
+			);
+			path = TrueCaller;
+			sourceTree = "<group>";
+		};
 		EA6022231F259757001591BC = {
 			isa = PBXGroup;
 			children = (
 				EA60222E1F259757001591BC /* TrueCallerDemo */,
 				EA6022481F259757001591BC /* TrueCallerDemoTests */,
 				EA6022531F259757001591BC /* TrueCallerDemoUITests */,
+				EA5EE7421F301BFF00B30AF2 /* TrueCaller */,
 				EA60222D1F259757001591BC /* Products */,
 				EABC39951F298AFB00335C8E /* Frameworks */,
 			);
@@ -263,6 +308,7 @@
 				EA60222C1F259757001591BC /* TrueCallerDemo.app */,
 				EA6022451F259757001591BC /* TrueCallerDemoTests.xctest */,
 				EA6022501F259757001591BC /* TrueCallerDemoUITests.xctest */,
+				EA5EE7411F301BFF00B30AF2 /* TrueCaller.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -448,8 +494,6 @@
 		EA6022E91F25A2D4001591BC /* delegate */ = {
 			isa = PBXGroup;
 			children = (
-				EA7691371F2D75C20059512A /* GlobalVars.h */,
-				EA7691381F2D75C20059512A /* GlobalVars.m */,
 				EA6022851F25A1EB001591BC /* Constants.h */,
 				EA6022321F259757001591BC /* AppDelegate.h */,
 				EA6022331F259757001591BC /* AppDelegate.m */,
@@ -550,6 +594,8 @@
 				EA2BD3A11F2735D400CC2572 /* PhoneViewController.m */,
 				EABC39AE1F29EA5200335C8E /* TrueCallerDemoTabbarViewController.h */,
 				EABC39AF1F29EA5200335C8E /* TrueCallerDemoTabbarViewController.m */,
+				EAE9F10D1F303D0D00D8CB93 /* ContactViewController.h */,
+				EAE9F10E1F303D0D00D8CB93 /* ContactViewController.m */,
 			);
 			name = ContactViewController;
 			sourceTree = "<group>";
@@ -557,6 +603,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		EA5EE7401F301BFF00B30AF2 /* TrueCaller */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EA5EE74A1F301BFF00B30AF2 /* Build configuration list for PBXNativeTarget "TrueCaller" */;
+			buildPhases = (
+				EA5EE73D1F301BFF00B30AF2 /* Sources */,
+				EA5EE73E1F301BFF00B30AF2 /* Frameworks */,
+				EA5EE73F1F301BFF00B30AF2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TrueCaller;
+			productName = TrueCaller;
+			productReference = EA5EE7411F301BFF00B30AF2 /* TrueCaller.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		EA60222B1F259757001591BC /* TrueCallerDemo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EA6022591F259757001591BC /* Build configuration list for PBXNativeTarget "TrueCallerDemo" */;
@@ -564,10 +627,12 @@
 				EA6022281F259757001591BC /* Sources */,
 				EA6022291F259757001591BC /* Frameworks */,
 				EA60222A1F259757001591BC /* Resources */,
+				EA7F13261F2F643A0030FCEC /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EA5EE7481F301BFF00B30AF2 /* PBXTargetDependency */,
 			);
 			name = TrueCallerDemo;
 			productName = TrueCallerDemo;
@@ -619,6 +684,11 @@
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Doan Van Vu";
 				TargetAttributes = {
+					EA5EE7401F301BFF00B30AF2 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 2FXVJFZPXW;
+						ProvisioningStyle = Automatic;
+					};
 					EA60222B1F259757001591BC = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 2FXVJFZPXW;
@@ -657,11 +727,19 @@
 				EA60222B1F259757001591BC /* TrueCallerDemo */,
 				EA6022441F259757001591BC /* TrueCallerDemoTests */,
 				EA60224F1F259757001591BC /* TrueCallerDemoUITests */,
+				EA5EE7401F301BFF00B30AF2 /* TrueCaller */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EA5EE73F1F301BFF00B30AF2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EA60222A1F259757001591BC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -691,10 +769,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EA5EE73D1F301BFF00B30AF2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA5EE7451F301BFF00B30AF2 /* CallDirectoryHandler.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EA6022281F259757001591BC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAE9F10F1F303D0D00D8CB93 /* ContactViewController.m in Sources */,
 				EA6022801F25A1C3001591BC /* FriendContactCellObject.m in Sources */,
 				EA6022D61F25A2A3001591BC /* NIButtonUtilities.m in Sources */,
 				EA6022371F259757001591BC /* ViewController.m in Sources */,
@@ -707,7 +794,6 @@
 				EA6022691F25A133001591BC /* ContactsViewController.m in Sources */,
 				EABC39A91F2990BA00335C8E /* CallViewController.m in Sources */,
 				EA6022A31F25A280001591BC /* NICellBackgrounds.m in Sources */,
-				EA7691391F2D75C20059512A /* GlobalVars.m in Sources */,
 				EA60226A1F25A133001591BC /* FriendsTableViewController.m in Sources */,
 				EABC39A61F2990B300335C8E /* OutgoingCallViewController.m in Sources */,
 				EA6022DC1F25A2A3001591BC /* NIImageUtilities.m in Sources */,
@@ -766,6 +852,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		EA5EE7481F301BFF00B30AF2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EA5EE7401F301BFF00B30AF2 /* TrueCaller */;
+			targetProxy = EA5EE7471F301BFF00B30AF2 /* PBXContainerItemProxy */;
+		};
 		EA6022471F259757001591BC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EA60222B1F259757001591BC /* TrueCallerDemo */;
@@ -798,6 +889,34 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		EA5EE74B1F301BFF00B30AF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				DEVELOPMENT_TEAM = 2FXVJFZPXW;
+				INFOPLIST_FILE = TrueCaller/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = VNG.TrueCallerDemo.TrueCaller;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		EA5EE74C1F301BFF00B30AF2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				DEVELOPMENT_TEAM = 2FXVJFZPXW;
+				INFOPLIST_FILE = TrueCaller/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = VNG.TrueCallerDemo.TrueCaller;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		EA6022571F259757001591BC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -965,6 +1084,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EA5EE74A1F301BFF00B30AF2 /* Build configuration list for PBXNativeTarget "TrueCaller" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA5EE74B1F301BFF00B30AF2 /* Debug */,
+				EA5EE74C1F301BFF00B30AF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EA6022271F259757001591BC /* Build configuration list for PBXProject "TrueCallerDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

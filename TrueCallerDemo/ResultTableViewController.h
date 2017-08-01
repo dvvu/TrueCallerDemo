@@ -11,6 +11,6 @@
 
 @interface ResultTableViewController : UITableViewController
 
-- (void)repareData:(NSArray<ContactEntity*>*) listContactBook;
+- (void)repareData:(NSArray<ContactEntity*>*)listContactBook;
 
 @end

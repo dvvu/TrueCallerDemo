@@ -19,7 +19,6 @@
 #import "NimbusCore.h"
 #import "ContactBook.h"
 #import "Constants.h"
-#import "GlobalVars.h"
 
 @interface PhoneViewController () <NITableViewModelDelegate, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, CNContactViewControllerDelegate, ABNewPersonViewControllerDelegate>
 
@@ -30,13 +29,14 @@
 @property (nonatomic, weak) IBOutlet UIView* backgroundView;
 @property (nonatomic, weak) IBOutlet UIView* keyBoardView;
 @property (nonatomic, weak) IBOutlet UILabel* phoneLabel;
+
 @property (nonatomic, strong) NSArray<ContactEntity*>* searchContactList;
+@property (nonatomic, strong) NSArray<ContactEntity*>* contactEntityList;
 @property (nonatomic) dispatch_queue_t resultSearchContactQueue;
 @property (nonatomic, strong) NITableViewModel* model;
 @property (nonatomic) float keyboardHeaderHeight;
 @property (nonatomic) UILabel* tableHeaderLabel;
 @property (nonatomic) NSArray* symbolsArray;
-@property (nonatomic) GlobalVars* globalVars;
 @property (nonatomic) UIView* headerView;
 
 @end
@@ -47,10 +47,11 @@
     
     [super viewDidLoad];
     
-    _globalVars = [GlobalVars sharedInstance];
 }
 
-- (void)prepareData {
+- (void)prepareData:(NSArray<ContactEntity*>*)contactEntityList {
+    
+    _contactEntityList = contactEntityList;
     
     [self searchText:_phoneLabel.text];
     [self prepareUI];
@@ -135,7 +136,7 @@
     if (indexPath.row == _searchContactList.count) {
         
         // search into directory Cell
-        
+        [[[UIAlertView alloc] initWithTitle:@"Waiting..." message: @"Searching your directory..." delegate:nil cancelButtonTitle:@"CLOSE" otherButtonTitles: nil, nil] show];
     } else {
         
         // action click to call contact cell.
@@ -199,14 +200,14 @@
         
         NSMutableArray* mutableArray = [[NSMutableArray alloc] init];
         
-        for (int i = 0; i < _globalVars.contactEntityList.count; i++) {
+        for (int i = 0; i < _contactEntityList.count; i++) {
 
-            NSArray* phone = [_globalVars.contactEntityList objectAtIndex:i].phone;
+            NSArray* phone = [_contactEntityList objectAtIndex:i].phone;
             NSPredicate* predicate = [NSPredicate predicateWithFormat:@"SELF contains[cd] %@", searchText];
             
             if ([phone filteredArrayUsingPredicate:predicate].count > 0) {
                 
-                [mutableArray addObject:[_globalVars.contactEntityList objectAtIndex:i]];
+                [mutableArray addObject:[_contactEntityList objectAtIndex:i]];
             }
         }
         
@@ -365,7 +366,7 @@
         
         if(_showKeyboardButton.isHidden) {
             
-            _keyboardViewHeight.constant = self.view.frame.size.height * 0.5 - _keyboardHeaderHeight;
+            _keyboardViewHeight.constant = self.view.frame.size.height * 0.55 - _keyboardHeaderHeight;
         }
         
         [_tableView setHidden:YES];
@@ -378,7 +379,7 @@
         
         // show keyboardheaderView
         _keyboardHeaderView.constant = _keyboardHeaderHeight;
-        _keyboardViewHeight.constant = self.view.frame.size.height * 0.5;
+        _keyboardViewHeight.constant = self.view.frame.size.height * 0.55;
         [_tableView setHidden:NO];
         _tableHeaderLabel.text = [[@"Ket qua tim kiem cho '" stringByAppendingString:text] stringByAppendingString:@"'"];
         
@@ -396,10 +397,10 @@
     // show keyboard
     if ([_phoneLabel.text length] > 0) {
         
-        _keyboardViewHeight.constant = self.view.frame.size.height * 0.5;
+        _keyboardViewHeight.constant = self.view.frame.size.height * 0.55;
     } else {
         
-        _keyboardViewHeight.constant = self.view.frame.size.height * 0.5 - _keyboardHeaderHeight;
+        _keyboardViewHeight.constant = self.view.frame.size.height * 0.55 - _keyboardHeaderHeight;
     }
     
     [_showKeyboardButton setHidden:YES];
@@ -429,6 +430,11 @@
         
         [self.view layoutIfNeeded];
     }];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    
+    return UIStatusBarStyleLightContent;
 }
 
 @end
