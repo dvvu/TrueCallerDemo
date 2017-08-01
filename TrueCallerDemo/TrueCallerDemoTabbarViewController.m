@@ -96,6 +96,7 @@
 - (void)getContactsBook {
     
     [_contactBook getContacts:^(NSMutableArray* contactEntityList, NSError* error) {
+        
         if(error.code == ContactLoadingFailError) {
             
             [[[UIAlertView alloc] initWithTitle:@"This Contact is empty." message: @"Please! Check your contacts and try again!" delegate:nil cancelButtonTitle:@"CLOSE" otherButtonTitles: nil, nil] show];

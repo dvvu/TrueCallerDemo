@@ -11,7 +11,7 @@
 
 @interface ContactTableViewCell : UITableViewCell <NICell>
 
-@property (nonatomic, strong) id<ContactModelProtocol> model;
+@property (nonatomic, strong) id<ContactModelProtocol>model;
 @property (nonatomic, strong) UIImageView* profileImageView;
 @property (nonatomic, strong) NSString* identifier;
 @property (nonatomic, strong) UILabel* nameLabel;

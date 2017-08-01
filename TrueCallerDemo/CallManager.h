@@ -36,6 +36,6 @@
 - (void)endCall;
 
 #pragma mark - CallManager delegate
-@property (nonatomic, weak) id<CallManagerDelegate> delegate;
+@property (nonatomic, weak) id<CallManagerDelegate>delegate;
 
 @end

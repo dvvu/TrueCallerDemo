@@ -366,7 +366,7 @@
         
         if(_showKeyboardButton.isHidden) {
             
-            _keyboardViewHeight.constant = self.view.frame.size.height * 0.5 - _keyboardHeaderHeight;
+            _keyboardViewHeight.constant = self.view.frame.size.height * 0.55 - _keyboardHeaderHeight;
         }
         
         [_tableView setHidden:YES];
@@ -379,7 +379,7 @@
         
         // show keyboardheaderView
         _keyboardHeaderView.constant = _keyboardHeaderHeight;
-        _keyboardViewHeight.constant = self.view.frame.size.height * 0.5;
+        _keyboardViewHeight.constant = self.view.frame.size.height * 0.55;
         [_tableView setHidden:NO];
         _tableHeaderLabel.text = [[@"Ket qua tim kiem cho '" stringByAppendingString:text] stringByAppendingString:@"'"];
         
@@ -397,10 +397,10 @@
     // show keyboard
     if ([_phoneLabel.text length] > 0) {
         
-        _keyboardViewHeight.constant = self.view.frame.size.height * 0.5;
+        _keyboardViewHeight.constant = self.view.frame.size.height * 0.55;
     } else {
         
-        _keyboardViewHeight.constant = self.view.frame.size.height * 0.5 - _keyboardHeaderHeight;
+        _keyboardViewHeight.constant = self.view.frame.size.height * 0.55 - _keyboardHeaderHeight;
     }
     
     [_showKeyboardButton setHidden:YES];
