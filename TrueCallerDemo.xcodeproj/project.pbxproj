@@ -69,6 +69,7 @@
 		EABC39A91F2990BA00335C8E /* CallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EABC39A81F2990BA00335C8E /* CallViewController.m */; };
 		EABC39AC1F29A70C00335C8E /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EABC39AB1F29A70C00335C8E /* ContactsUI.framework */; };
 		EABC39B01F29EA5200335C8E /* TrueCallerDemoTabbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EABC39AF1F29EA5200335C8E /* TrueCallerDemoTabbarViewController.m */; };
+		EAE9F10F1F303D0D00D8CB93 /* ContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE9F10E1F303D0D00D8CB93 /* ContactViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -238,6 +239,8 @@
 		EABC39AD1F29E69A00335C8E /* TabbarDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabbarDelegate.h; sourceTree = "<group>"; };
 		EABC39AE1F29EA5200335C8E /* TrueCallerDemoTabbarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrueCallerDemoTabbarViewController.h; sourceTree = "<group>"; };
 		EABC39AF1F29EA5200335C8E /* TrueCallerDemoTabbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrueCallerDemoTabbarViewController.m; sourceTree = "<group>"; };
+		EAE9F10D1F303D0D00D8CB93 /* ContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactViewController.h; sourceTree = "<group>"; };
+		EAE9F10E1F303D0D00D8CB93 /* ContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -591,6 +594,8 @@
 				EA2BD3A11F2735D400CC2572 /* PhoneViewController.m */,
 				EABC39AE1F29EA5200335C8E /* TrueCallerDemoTabbarViewController.h */,
 				EABC39AF1F29EA5200335C8E /* TrueCallerDemoTabbarViewController.m */,
+				EAE9F10D1F303D0D00D8CB93 /* ContactViewController.h */,
+				EAE9F10E1F303D0D00D8CB93 /* ContactViewController.m */,
 			);
 			name = ContactViewController;
 			sourceTree = "<group>";
@@ -776,6 +781,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAE9F10F1F303D0D00D8CB93 /* ContactViewController.m in Sources */,
 				EA6022801F25A1C3001591BC /* FriendContactCellObject.m in Sources */,
 				EA6022D61F25A2A3001591BC /* NIButtonUtilities.m in Sources */,
 				EA6022371F259757001591BC /* ViewController.m in Sources */,

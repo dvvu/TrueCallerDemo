@@ -136,7 +136,7 @@
     if (indexPath.row == _searchContactList.count) {
         
         // search into directory Cell
-        
+        [[[UIAlertView alloc] initWithTitle:@"Waiting..." message: @"Searching your directory..." delegate:nil cancelButtonTitle:@"CLOSE" otherButtonTitles: nil, nil] show];
     } else {
         
         // action click to call contact cell.
@@ -430,6 +430,11 @@
         
         [self.view layoutIfNeeded];
     }];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    
+    return UIStatusBarStyleLightContent;
 }
 
 @end

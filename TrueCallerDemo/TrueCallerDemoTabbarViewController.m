@@ -29,10 +29,9 @@
     [super viewDidLoad];
     self.delegate = self;
     
-    _contactBook = [ContactBook sharedInstance];
     _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT - self.tabBar.frame.size.height)];
     [_backgroundView setBackgroundColor:[UIColor lightGrayColor]];
-    
+    _contactBook = [ContactBook sharedInstance];
     [self.view addSubview:_backgroundView];
     
     if (iOS_VERSION_GREATER_THAN_OR_EQUAL_TO(9.0)) {
@@ -61,6 +60,12 @@
 #pragma mark - checkPermissionButton
 
 - (void)setupCheckPermissionButton {
+    
+    UIGraphicsBeginImageContext(_backgroundView.frame.size);
+    [[UIImage imageNamed:@"background"] drawInRect:_backgroundView.bounds];
+    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    _backgroundView.backgroundColor = [UIColor colorWithPatternImage:image];
     
     UIButton* checkPermissionButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [checkPermissionButton setTitle:@"Allow access to contacts" forState:UIControlStateNormal];
@@ -118,7 +123,6 @@
                         ContactsViewController* contactViewController = (ContactsViewController *)navContactViewController.viewControllers[0];
                         [contactViewController prepareData:contactEntityList];
                     }
-                    
                 } else {
                     
                     if ([viewController isKindOfClass:[PhoneViewController class]]) {
