@@ -17,7 +17,6 @@
 		EA60223F1F259757001591BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA60223D1F259757001591BC /* LaunchScreen.storyboard */; };
 		EA60224A1F259757001591BC /* TrueCallerDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022491F259757001591BC /* TrueCallerDemoTests.m */; };
 		EA6022551F259757001591BC /* TrueCallerDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022541F259757001591BC /* TrueCallerDemoUITests.m */; };
-		EA6022691F25A133001591BC /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022661F25A133001591BC /* ContactsViewController.m */; };
 		EA60226A1F25A133001591BC /* FriendsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022681F25A133001591BC /* FriendsTableViewController.m */; };
 		EA60226E1F25A14D001591BC /* ResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA60226D1F25A14D001591BC /* ResultTableViewController.m */; };
 		EA6022721F25A166001591BC /* ContactCache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6022711F25A166001591BC /* ContactCache.m */; };
@@ -69,7 +68,7 @@
 		EABC39A91F2990BA00335C8E /* CallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EABC39A81F2990BA00335C8E /* CallViewController.m */; };
 		EABC39AC1F29A70C00335C8E /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EABC39AB1F29A70C00335C8E /* ContactsUI.framework */; };
 		EABC39B01F29EA5200335C8E /* TrueCallerDemoTabbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EABC39AF1F29EA5200335C8E /* TrueCallerDemoTabbarViewController.m */; };
-		EAE9F10F1F303D0D00D8CB93 /* ContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE9F10E1F303D0D00D8CB93 /* ContactViewController.m */; };
+		EAE9F11E1F308D8B00D8CB93 /* ContactListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE9F11D1F308D8B00D8CB93 /* ContactListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,8 +131,6 @@
 		EA6022501F259757001591BC /* TrueCallerDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrueCallerDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA6022541F259757001591BC /* TrueCallerDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrueCallerDemoUITests.m; sourceTree = "<group>"; };
 		EA6022561F259757001591BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EA6022651F25A133001591BC /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
-		EA6022661F25A133001591BC /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		EA6022671F25A133001591BC /* FriendsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsTableViewController.h; sourceTree = "<group>"; };
 		EA6022681F25A133001591BC /* FriendsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsTableViewController.m; sourceTree = "<group>"; };
 		EA60226C1F25A14D001591BC /* ResultTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultTableViewController.h; sourceTree = "<group>"; };
@@ -239,8 +236,8 @@
 		EABC39AD1F29E69A00335C8E /* TabbarDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabbarDelegate.h; sourceTree = "<group>"; };
 		EABC39AE1F29EA5200335C8E /* TrueCallerDemoTabbarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrueCallerDemoTabbarViewController.h; sourceTree = "<group>"; };
 		EABC39AF1F29EA5200335C8E /* TrueCallerDemoTabbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrueCallerDemoTabbarViewController.m; sourceTree = "<group>"; };
-		EAE9F10D1F303D0D00D8CB93 /* ContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactViewController.h; sourceTree = "<group>"; };
-		EAE9F10E1F303D0D00D8CB93 /* ContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactViewController.m; sourceTree = "<group>"; };
+		EAE9F11C1F308D8B00D8CB93 /* ContactListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactListViewController.h; sourceTree = "<group>"; };
+		EAE9F11D1F308D8B00D8CB93 /* ContactListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -586,16 +583,14 @@
 			children = (
 				EA60226C1F25A14D001591BC /* ResultTableViewController.h */,
 				EA60226D1F25A14D001591BC /* ResultTableViewController.m */,
-				EA6022651F25A133001591BC /* ContactsViewController.h */,
-				EA6022661F25A133001591BC /* ContactsViewController.m */,
 				EA6022671F25A133001591BC /* FriendsTableViewController.h */,
 				EA6022681F25A133001591BC /* FriendsTableViewController.m */,
 				EA2BD3A01F2735D400CC2572 /* PhoneViewController.h */,
 				EA2BD3A11F2735D400CC2572 /* PhoneViewController.m */,
 				EABC39AE1F29EA5200335C8E /* TrueCallerDemoTabbarViewController.h */,
 				EABC39AF1F29EA5200335C8E /* TrueCallerDemoTabbarViewController.m */,
-				EAE9F10D1F303D0D00D8CB93 /* ContactViewController.h */,
-				EAE9F10E1F303D0D00D8CB93 /* ContactViewController.m */,
+				EAE9F11C1F308D8B00D8CB93 /* ContactListViewController.h */,
+				EAE9F11D1F308D8B00D8CB93 /* ContactListViewController.m */,
 			);
 			name = ContactViewController;
 			sourceTree = "<group>";
@@ -781,7 +776,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAE9F10F1F303D0D00D8CB93 /* ContactViewController.m in Sources */,
 				EA6022801F25A1C3001591BC /* FriendContactCellObject.m in Sources */,
 				EA6022D61F25A2A3001591BC /* NIButtonUtilities.m in Sources */,
 				EA6022371F259757001591BC /* ViewController.m in Sources */,
@@ -791,7 +785,6 @@
 				EA6022E31F25A2A3001591BC /* NIRuntimeClassModifications.m in Sources */,
 				EA6022DA1F25A2A3001591BC /* NIError.m in Sources */,
 				EA60227F1F25A1C3001591BC /* ContactCellObject.m in Sources */,
-				EA6022691F25A133001591BC /* ContactsViewController.m in Sources */,
 				EABC39A91F2990BA00335C8E /* CallViewController.m in Sources */,
 				EA6022A31F25A280001591BC /* NICellBackgrounds.m in Sources */,
 				EA60226A1F25A133001591BC /* FriendsTableViewController.m in Sources */,
@@ -811,6 +804,7 @@
 				EA6022A01F25A280001591BC /* NICellFactory.m in Sources */,
 				EA6022D51F25A2A3001591BC /* NIActions.m in Sources */,
 				EA6022E11F25A2A3001591BC /* NIOperations.m in Sources */,
+				EAE9F11E1F308D8B00D8CB93 /* ContactListViewController.m in Sources */,
 				EA6022E61F25A2A3001591BC /* NIState.m in Sources */,
 				EA6022A21F25A280001591BC /* NIMutableTableViewModel.m in Sources */,
 				EA6022D91F25A2A3001591BC /* NIDeviceOrientation.m in Sources */,

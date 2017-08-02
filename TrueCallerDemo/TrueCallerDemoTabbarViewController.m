@@ -7,7 +7,7 @@
 //
 
 #import "TrueCallerDemoTabbarViewController.h"
-#import "ContactsViewController.h"
+#import "ContactListViewController.h"
 #import "PhoneViewController.h"
 #import "ContactEntity.h"
 #import "ContactBook.h"
@@ -114,14 +114,13 @@
                 
                 if ([viewController isKindOfClass:[UINavigationController class]]) {
                     
-                    // ContactsViewController
+                    // ContactListViewController
                     UINavigationController* navContactViewController = (UINavigationController *)viewController;
-                  
                     
-                    if ([navContactViewController.viewControllers[0] isKindOfClass:[ContactsViewController class]]) {
-                       
-                        ContactsViewController* contactViewController = (ContactsViewController *)navContactViewController.viewControllers[0];
-                        [contactViewController prepareData:contactEntityList];
+                    if ([navContactViewController.viewControllers[0] isKindOfClass:[ContactListViewController class]]) {
+                        
+                        ContactListViewController* contactListViewController = (ContactListViewController *)navContactViewController.viewControllers[0];
+                        [contactListViewController prepareData:contactEntityList];
                     }
                 } else {
                     

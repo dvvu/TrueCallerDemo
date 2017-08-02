@@ -30,6 +30,17 @@
 @property (nonatomic, weak) IBOutlet UIView* keyBoardView;
 @property (nonatomic, weak) IBOutlet UILabel* phoneLabel;
 
+@property (nonatomic, weak) IBOutlet UIButton* zeroKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* fristKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* secondKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* thridKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* fourthKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* fifthKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* sixthKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* seventhKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* eighthKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* ninthKeyboardButton;
+
 @property (nonatomic, strong) NSArray<ContactEntity*>* searchContactList;
 @property (nonatomic, strong) NSArray<ContactEntity*>* contactEntityList;
 @property (nonatomic) dispatch_queue_t resultSearchContactQueue;
@@ -46,7 +57,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
+    [self setupKeyboardButton];
 }
 
 - (void)prepareData:(NSArray<ContactEntity*>*)contactEntityList {
@@ -81,7 +92,7 @@
     
     // setup clearButton
     UIButton* clearPhoneNumberButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    clearPhoneNumberButton.frame = CGRectMake(DEVICE_WIDTH - 33, 0, 25, 25);
+    clearPhoneNumberButton.frame = CGRectMake(DEVICE_WIDTH - 33, 5, 20, 20);
     [clearPhoneNumberButton setImage:[UIImage imageNamed:@"ic_clearText"] forState:UIControlStateNormal];
     [clearPhoneNumberButton addTarget:self action:@selector(clearHeader:) forControlEvents:UIControlEventTouchUpInside];
     [_headerView addSubview:clearPhoneNumberButton];
@@ -432,9 +443,47 @@
     }];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
+#pragma mark - setup KeyBoardButton
+
+- (void)setupKeyboardButton {
     
-    return UIStatusBarStyleLightContent;
+    [self setTitleKeyBoardButton:_zeroKeyboardButton withMainText:@" 0" subText:@" +"];
+    [self setTitleKeyBoardButton:_fristKeyboardButton withMainText:@"1" subText:@""];
+    [self setTitleKeyBoardButton:_secondKeyboardButton withMainText:@"  2" subText:@" ABC"];
+    [self setTitleKeyBoardButton:_thridKeyboardButton withMainText:@"3" subText:@" DEF"];
+    [self setTitleKeyBoardButton:_fourthKeyboardButton withMainText:@"   4" subText:@" GHI"];
+    [self setTitleKeyBoardButton:_fifthKeyboardButton withMainText:@"  5" subText:@" JKL"];
+    [self setTitleKeyBoardButton:_sixthKeyboardButton withMainText:@"6" subText:@" MNO"];
+    [self setTitleKeyBoardButton:_seventhKeyboardButton withMainText:@"    7" subText:@" PQRS"];
+    [self setTitleKeyBoardButton:_eighthKeyboardButton withMainText:@"  8" subText:@" TUV"];
+    [self setTitleKeyBoardButton:_ninthKeyboardButton withMainText:@" 9" subText:@" WXYZ"];
+}
+
+#pragma mark - set Title KeyBoardButton
+
+- (void)setTitleKeyBoardButton:(UIButton*)button withMainText:(NSString *)mainText subText:(NSString *)subText {
+    
+    NSMutableParagraphStyle* style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    [style setAlignment:NSTextAlignmentCenter];
+    [style setLineBreakMode:NSLineBreakByWordWrapping];
+    
+    UIFont* lineFristFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:30.0f];
+    UIFont* lineSecondFont = [UIFont fontWithName:@"HelveticaNeue-Light"  size:10.0f];
+   
+    NSDictionary* customStringFrist = @{ NSFontAttributeName:lineFristFont,
+                                         NSParagraphStyleAttributeName:style};
+    
+    NSDictionary* customStringSecond = @{ NSFontAttributeName:lineSecondFont,
+                                          NSParagraphStyleAttributeName:style};
+    
+    NSMutableAttributedString* attString = [[NSMutableAttributedString alloc] init];
+    
+    [attString appendAttributedString:[[NSAttributedString alloc] initWithString:mainText attributes:customStringFrist]];
+    [attString appendAttributedString:[[NSAttributedString alloc] initWithString:subText attributes:customStringSecond]];
+    
+    [button setAttributedTitle:attString forState:UIControlStateNormal];
+    [[button titleLabel] setTextColor:[UIColor grayColor]];
+    [[button titleLabel] setLineBreakMode:NSLineBreakByWordWrapping];
 }
 
 @end

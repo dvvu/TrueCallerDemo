@@ -144,15 +144,15 @@
     
     // setup text
     UIFont* font = [UIFont systemFontOfSize: 50];
-    CGSize textSize = [_textNameDefault sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:50]}];
-    NSMutableAttributedString* nameAttString = [[NSMutableAttributedString alloc] initWithString:_textNameDefault];
+    CGSize textSize = [_textNameDefault.uppercaseString sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:50]}];
+    NSMutableAttributedString* nameAttString = [[NSMutableAttributedString alloc] initWithString:_textNameDefault.uppercaseString];
     NSRange range = NSMakeRange(0, [nameAttString length]);
     [nameAttString addAttribute:NSFontAttributeName value:font range:range];
-    [nameAttString addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:range];
+    [nameAttString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:range];
     
     // Create image
     CGSize imageSize = CGSizeMake(imageWidth, imageHeight);
-    UIColor* fillColor = [UIColor blackColor];
+    UIColor* fillColor = [UIColor lightGrayColor];
     
     // Begin ImageContext Options
     UIGraphicsBeginImageContextWithOptions(imageSize, YES, 0);

@@ -15,7 +15,7 @@
 #import "ContactBook.h"
 #import "NimbusCore.h"
 
-@interface ResultTableViewController () <NITableViewModelDelegate, ABPersonViewControllerDelegate>
+@interface ResultTableViewController () <NITableViewModelDelegate>
 
 @property (nonatomic) dispatch_queue_t resultSearchContactQueue;
 @property (nonatomic, strong ) NITableViewModel* model;
@@ -30,7 +30,7 @@
     [super viewDidLoad];
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
     // Dimiss keyboard when drag
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     [self.tableView registerClass:[ContactTableViewCell class] forCellReuseIdentifier:@"ContactTableViewCell"];
@@ -85,29 +85,6 @@
         
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }];
-    
-    // Fetch the address book
-    ABAddressBookRef addressBook = ABAddressBookCreate();
-    CFArrayRef people = ABAddressBookCopyPeopleWithName(addressBook, (__bridge CFStringRef)cellObject.contactTitle);
-    
-    if ((people != nil) && (CFArrayGetCount(people) > 0)) {
-        
-        ABRecordRef person = CFArrayGetValueAtIndex(people, 0);
-        ABPersonViewController* picker = [[ABPersonViewController alloc] init];
-        picker.personViewDelegate = self;
-        picker.displayedPerson = person;
-        
-        // Allow users to edit the person’s information
-        picker.allowsEditing = YES;
-        [self.navigationController pushViewController:picker animated:YES];
-    }
-}
-
-#pragma mark - ABPersonview delegate
-
-- (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
-    
-    return TRUE;
 }
 
 #pragma mark - heigh for cell

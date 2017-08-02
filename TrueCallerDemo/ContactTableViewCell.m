@@ -7,6 +7,7 @@
 //
 
 #import "ContactTableViewCell.h"
+#define CELLHEIGHT 70
 
 @implementation ContactTableViewCell
 
@@ -34,7 +35,6 @@
     }
     
     return self;
-
 }
 
 #pragma mark - selected cell
@@ -64,9 +64,10 @@
 #pragma mark - update layout
 
 - (void)setupLayoutForCell {
-    
+
     _nameLabel = [[UILabel alloc] init];
     _profileImageView = [[UIImageView alloc] init];
+    [_nameLabel setFont:[UIFont systemFontOfSize:16]];
     [self.contentView addSubview:_nameLabel];
     [self.contentView addSubview:_profileImageView];
     
@@ -84,7 +85,8 @@
                                   toItem:nil
                                   attribute:NSLayoutAttributeNotAnAttribute
                                   multiplier:1.0
-                                  constant:self.contentView.frame.size.height * 0.9]];
+                                  constant:CELLHEIGHT * 0.7]];
+    
     // Ratio = 1
     [_profileImageView addConstraint:[NSLayoutConstraint
                                   constraintWithItem:_profileImageView
@@ -120,7 +122,7 @@
                                                  toItem:_profileImageView
                                                  attribute: NSLayoutAttributeLeft
                                                  multiplier:1.0
-                                                 constant:self.contentView.frame.size.height * 0.9 + 8];
+                                                 constant:CELLHEIGHT * 0.7 + 16];
     // Space to right = 8
     NSLayoutConstraint* rightNameConstraint = [NSLayoutConstraint
                                               constraintWithItem:_nameLabel
@@ -132,12 +134,11 @@
                                               constant:8];
     
     [self.contentView addConstraints:@[leftNameConstraint,rightNameConstraint]];
-    
 }
 
 + (CGFloat)heightForObject:(id)object atIndexPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView {
     
-    return 60;
+    return CELLHEIGHT;
 }
 
 @end
