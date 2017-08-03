@@ -15,6 +15,7 @@
 #import "NimbusCore.h"
 #import "Constants.h"
 #import "ContactCache.h"
+#import "Masonry.h"
 
 @interface ContactListViewController () <NITableViewModelDelegate, UISearchResultsUpdating, UITableViewDelegate, ABPersonViewControllerDelegate>
 
@@ -63,7 +64,7 @@
 #pragma mark - Create searchBar
 
 - (void)createSearchController {
-    
+   
     _searchResultTableViewController = [[ResultTableViewController alloc] init];
     _searchController = [[UISearchController alloc] initWithSearchResultsController:_searchResultTableViewController];
     _searchController.searchResultsUpdater = self;
@@ -71,7 +72,6 @@
     _searchController.dimsBackgroundDuringPresentation = YES;
     [_searchController.searchBar sizeToFit];
     [_searchBarView addSubview:_searchController.searchBar];
-    
     self.definesPresentationContext = YES;
 }
 
@@ -252,6 +252,14 @@
     UITableViewHeaderFooterView* header = (UITableViewHeaderFooterView *)view;
     header.textLabel.textColor = [UIColor grayColor];
     header.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator {
+    
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+        
+        [_searchController.searchBar sizeToFit];
+    } completion:nil];
 }
 
 @end

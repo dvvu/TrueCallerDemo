@@ -249,7 +249,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                 <state key="normal" title="*">
-                                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="typeNumberOrSymbol:" destination="has-kB-icG" eventType="touchUpInside" id="krv-HT-soo"/>
@@ -260,7 +260,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                 <state key="normal" title="#   ">
-                                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="typeNumberOrSymbol:" destination="has-kB-icG" eventType="touchUpInside" id="a66-7N-44x"/>
@@ -276,7 +276,7 @@
                                                     <action selector="typeNumberOrSymbol:" destination="has-kB-icG" eventType="touchUpInside" id="cNm-El-dlr"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wS7-7g-mH0">
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wS7-7g-mH0">
                                                 <rect key="frame" x="250" y="296.5" width="125" height="74"/>
                                                 <inset key="contentEdgeInsets" minX="40" minY="15" maxX="40" maxY="15"/>
                                                 <state key="normal" title="Hide" image="close"/>
@@ -284,7 +284,7 @@
                                                     <action selector="hideKeyboard:" destination="has-kB-icG" eventType="touchUpInside" id="aTD-UC-UMP"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6mm-ab-c5s">
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6mm-ab-c5s">
                                                 <rect key="frame" x="125" y="296.5" width="125" height="74"/>
                                                 <inset key="contentEdgeInsets" minX="30" minY="10" maxX="30" maxY="10"/>
                                                 <state key="normal" image="call"/>
@@ -451,7 +451,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="lys-bE-jdg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.76470588235294112" green="1" blue="0.7481549103190408" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <connections>
                             <outlet property="dataSource" destination="9kh-li-wZc" id="gJm-fy-gh8"/>
                             <outlet property="delegate" destination="9kh-li-wZc" id="xL2-HD-dRV"/>
