@@ -111,10 +111,12 @@
                                             </button>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXb-VQ-bO9">
                                                 <rect key="frame" x="330.5" y="0.0" width="44.5" height="30"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="gXb-VQ-bO9" secondAttribute="height" multiplier="3:2" id="CUl-l2-Ddo"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <inset key="contentEdgeInsets" minX="2" minY="0.0" maxX="10" maxY="0.0"/>
                                                 <state key="normal" image="ic_back">
                                                     <color key="titleColor" red="0.113765806" green="0.2267728299" blue="0.91571867470000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -154,6 +156,7 @@
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MSE-9v-gVM">
                                                 <rect key="frame" x="0.0" y="0.0" width="125" height="74"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <state key="normal" title="1">
                                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -415,6 +418,8 @@
                     <tabBarItem key="tabBarItem" title="Call" image="ic_phone" id="v20-up-dZl"/>
                     <connections>
                         <outlet property="backgroundView" destination="Pi8-93-6r9" id="oEZ-YS-vjc"/>
+                        <outlet property="callKeyboardButton" destination="6mm-ab-c5s" id="LNh-ry-ll7"/>
+                        <outlet property="closeKeyboardButton" destination="wS7-7g-mH0" id="lVm-YB-W5a"/>
                         <outlet property="eighthKeyboardButton" destination="hOM-VD-DUm" id="ldt-jb-UJL"/>
                         <outlet property="fifthKeyboardButton" destination="FE4-C9-lhD" id="dbf-Jc-hgE"/>
                         <outlet property="fourthKeyboardButton" destination="iu2-8G-BPb" id="HUo-OC-yk1"/>
@@ -424,10 +429,12 @@
                         <outlet property="keyboardViewHeight" destination="ZIH-NQ-pfa" id="OTj-Hy-gep"/>
                         <outlet property="ninthKeyboardButton" destination="BeE-KQ-jbW" id="Hj5-ZU-NRo"/>
                         <outlet property="phoneLabel" destination="v2P-2w-Pe4" id="gds-jY-4kN"/>
+                        <outlet property="poundKeyboardButton" destination="mE7-W2-is1" id="871-GL-Tlz"/>
                         <outlet property="secondKeyboardButton" destination="QKW-VB-vLF" id="7ia-YL-RAR"/>
                         <outlet property="seventhKeyboardButton" destination="hGN-hX-e2M" id="EDP-ir-kd5"/>
                         <outlet property="showKeyboardButton" destination="hnk-YT-Gl7" id="JY9-CP-ZCz"/>
                         <outlet property="sixthKeyboardButton" destination="6GT-z7-H2b" id="HiT-c1-5D6"/>
+                        <outlet property="starKeyboardButton" destination="wwM-UO-i1x" id="shd-rN-rVI"/>
                         <outlet property="tableView" destination="2Gd-OO-5Ds" id="3u0-wi-m2v"/>
                         <outlet property="thridKeyboardButton" destination="q6K-h6-97w" id="L5r-5V-HyX"/>
                         <outlet property="zeroKeyboardButton" destination="9A8-ja-I4S" id="jgc-ZN-PEF"/>
@@ -779,7 +786,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gn7-Um-6k0" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="contacts" id="wud-F0-JST"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hpz-Bm-9G6">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hpz-Bm-9G6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

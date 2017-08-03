@@ -40,6 +40,10 @@
 @property (nonatomic, weak) IBOutlet UIButton* seventhKeyboardButton;
 @property (nonatomic, weak) IBOutlet UIButton* eighthKeyboardButton;
 @property (nonatomic, weak) IBOutlet UIButton* ninthKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* starKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* poundKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* callKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* closeKeyboardButton;
 
 @property (nonatomic, strong) NSArray<ContactEntity*>* searchContactList;
 @property (nonatomic, strong) NSArray<ContactEntity*>* contactEntityList;
@@ -457,12 +461,17 @@
     [self setTitleKeyBoardButton:_seventhKeyboardButton withMainText:@"    7" subText:@" PQRS"];
     [self setTitleKeyBoardButton:_eighthKeyboardButton withMainText:@"  8" subText:@" TUV"];
     [self setTitleKeyBoardButton:_ninthKeyboardButton withMainText:@" 9" subText:@" WXYZ"];
+    [_starKeyboardButton setBackgroundImage:[self imageWithColor:[UIColor grayColor]] forState:UIControlStateHighlighted];
+    [_poundKeyboardButton setBackgroundImage:[self imageWithColor:[UIColor grayColor]] forState:UIControlStateHighlighted];
+    [_callKeyboardButton setBackgroundImage:[self imageWithColor:[UIColor grayColor]] forState:UIControlStateHighlighted];
+    [_closeKeyboardButton setBackgroundImage:[self imageWithColor:[UIColor grayColor]] forState:UIControlStateHighlighted];
 }
 
 #pragma mark - set Title KeyBoardButton
 
 - (void)setTitleKeyBoardButton:(UIButton*)button withMainText:(NSString *)mainText subText:(NSString *)subText {
     
+    [button setBackgroundImage:[self imageWithColor:[UIColor grayColor]] forState:UIControlStateHighlighted];
     NSMutableParagraphStyle* style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     [style setAlignment:NSTextAlignmentCenter];
     [style setLineBreakMode:NSLineBreakByWordWrapping];
@@ -482,8 +491,24 @@
     [attString appendAttributedString:[[NSAttributedString alloc] initWithString:subText attributes:customStringSecond]];
     
     [button setAttributedTitle:attString forState:UIControlStateNormal];
-    [[button titleLabel] setTextColor:[UIColor grayColor]];
+    [[button titleLabel] setTextColor:[UIColor lightGrayColor]];
     [[button titleLabel] setLineBreakMode:NSLineBreakByWordWrapping];
 }
 
+#pragma mark - draw test
+
+- (UIImage *)imageWithColor:(UIColor *)color {
+    
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
 @end
