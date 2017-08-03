@@ -7,7 +7,14 @@
 //
 
 #import "ContactTableViewCell.h"
+#import "Masonry.h"
 #define CELLHEIGHT 70
+
+@interface ContactTableViewCell ()
+
+@property (nonatomic)UIEdgeInsets padding;
+
+@end
 
 @implementation ContactTableViewCell
 
@@ -19,6 +26,7 @@
    
     if (self) {
         
+        _padding = UIEdgeInsetsMake(10, 10, 10, 10);
         [self setupLayoutForCell];
     }
     
@@ -71,69 +79,20 @@
     [self.contentView addSubview:_nameLabel];
     [self.contentView addSubview:_profileImageView];
     
-    // ProfileImage
-    _profileImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [_profileImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerY.equalTo(self.contentView);
+        make.left.equalTo(self.contentView).with.offset(_padding.left);
+        make.size.mas_equalTo(CGSizeMake(CELLHEIGHT * 0.7, CELLHEIGHT * 0.7));
+    }];
     
-    // Center Y
-    [[_profileImageView.centerYAnchor constraintEqualToAnchor:self.contentView.centerYAnchor] setActive:YES];
-    
-    // Height = 0.9 parent View
-    [_profileImageView addConstraint:[NSLayoutConstraint
-                                  constraintWithItem:_profileImageView
-                                  attribute:NSLayoutAttributeHeight
-                                  relatedBy:NSLayoutRelationEqual
-                                  toItem:nil
-                                  attribute:NSLayoutAttributeNotAnAttribute
-                                  multiplier:1.0
-                                  constant:CELLHEIGHT * 0.7]];
-    
-    // Ratio = 1
-    [_profileImageView addConstraint:[NSLayoutConstraint
-                                  constraintWithItem:_profileImageView
-                                  attribute:NSLayoutAttributeHeight
-                                  relatedBy:NSLayoutRelationEqual
-                                  toItem:_profileImageView
-                                  attribute:NSLayoutAttributeWidth
-                                  multiplier:1
-                                  constant:0]];
-    // Space to left = 8
-    NSLayoutConstraint* leftProfileImageConstraint = [NSLayoutConstraint
-                                                 constraintWithItem:_profileImageView
-                                                 attribute:NSLayoutAttributeLeft
-                                                 relatedBy:NSLayoutRelationEqual
-                                                 toItem:self.contentView
-                                                 attribute: NSLayoutAttributeLeft
-                                                 multiplier:1.0
-                                                 constant:8];
-    
-    [self.contentView addConstraints:@[leftProfileImageConstraint]];
-    
-    // Name
-    _nameLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    // Center Y
-    [[_nameLabel.centerYAnchor constraintEqualToAnchor:self.contentView.centerYAnchor] setActive:YES];
-    
-    // Space to _profileImage left = 8
-    NSLayoutConstraint* leftNameConstraint = [NSLayoutConstraint
-                                                 constraintWithItem:_nameLabel
-                                                 attribute:NSLayoutAttributeLeft
-                                                 relatedBy:NSLayoutRelationEqual
-                                                 toItem:_profileImageView
-                                                 attribute: NSLayoutAttributeLeft
-                                                 multiplier:1.0
-                                                 constant:CELLHEIGHT * 0.7 + 16];
-    // Space to right = 8
-    NSLayoutConstraint* rightNameConstraint = [NSLayoutConstraint
-                                              constraintWithItem:_nameLabel
-                                              attribute:NSLayoutAttributeRight
-                                              relatedBy:NSLayoutRelationEqual
-                                              toItem:self.contentView
-                                              attribute: NSLayoutAttributeRight
-                                              multiplier:1.0
-                                              constant:8];
-    
-    [self.contentView addConstraints:@[leftNameConstraint,rightNameConstraint]];
+    [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerY.equalTo(self.contentView);
+        make.left.equalTo(_profileImageView).with.offset(_padding.left + CELLHEIGHT * 0.7);
+        make.right.equalTo(self.contentView).with.offset(-_padding.right);
+        make.height.lessThanOrEqualTo(self.contentView.mas_height);
+    }];
 }
 
 + (CGFloat)heightForObject:(id)object atIndexPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView {
