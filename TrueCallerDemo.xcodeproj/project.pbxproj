@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2041110F5480CF3C094940A8 /* Pods_TrueCallerDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A11971B715B45E736ED76AEB /* Pods_TrueCallerDemo.framework */; };
 		EA2BD3A21F2735D400CC2572 /* PhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2BD3A11F2735D400CC2572 /* PhoneViewController.m */; };
 		EA5EE7451F301BFF00B30AF2 /* CallDirectoryHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5EE7441F301BFF00B30AF2 /* CallDirectoryHandler.m */; };
 		EA5EE7491F301BFF00B30AF2 /* TrueCaller.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EA5EE7411F301BFF00B30AF2 /* TrueCaller.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -110,6 +111,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A11971B715B45E736ED76AEB /* Pods_TrueCallerDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrueCallerDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C26CCC43230BC489E71A1304 /* Pods-TrueCallerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrueCallerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrueCallerDemo/Pods-TrueCallerDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		EA2BD3A01F2735D400CC2572 /* PhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneViewController.h; sourceTree = "<group>"; };
 		EA2BD3A11F2735D400CC2572 /* PhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneViewController.m; sourceTree = "<group>"; };
 		EA5EE7411F301BFF00B30AF2 /* TrueCaller.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TrueCaller.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -238,6 +241,7 @@
 		EABC39AF1F29EA5200335C8E /* TrueCallerDemoTabbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrueCallerDemoTabbarViewController.m; sourceTree = "<group>"; };
 		EAE9F11C1F308D8B00D8CB93 /* ContactListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactListViewController.h; sourceTree = "<group>"; };
 		EAE9F11D1F308D8B00D8CB93 /* ContactListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactListViewController.m; sourceTree = "<group>"; };
+		F7E217BF38F1D04F743C31C5 /* Pods-TrueCallerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrueCallerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrueCallerDemo/Pods-TrueCallerDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +261,7 @@
 				EABC399B1F298B0900335C8E /* Intents.framework in Frameworks */,
 				EABC39991F298B0200335C8E /* CallKit.framework in Frameworks */,
 				EABC39971F298AFB00335C8E /* Accelerate.framework in Frameworks */,
+				2041110F5480CF3C094940A8 /* Pods_TrueCallerDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +282,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5487866701BA6127F39ADD71 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C26CCC43230BC489E71A1304 /* Pods-TrueCallerDemo.debug.xcconfig */,
+				F7E217BF38F1D04F743C31C5 /* Pods-TrueCallerDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		EA5EE7421F301BFF00B30AF2 /* TrueCaller */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,6 +310,7 @@
 				EA5EE7421F301BFF00B30AF2 /* TrueCaller */,
 				EA60222D1F259757001591BC /* Products */,
 				EABC39951F298AFB00335C8E /* Frameworks */,
+				5487866701BA6127F39ADD71 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -574,6 +589,7 @@
 				EABC399A1F298B0900335C8E /* Intents.framework */,
 				EABC39981F298B0200335C8E /* CallKit.framework */,
 				EABC39961F298AFB00335C8E /* Accelerate.framework */,
+				A11971B715B45E736ED76AEB /* Pods_TrueCallerDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -619,10 +635,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EA6022591F259757001591BC /* Build configuration list for PBXNativeTarget "TrueCallerDemo" */;
 			buildPhases = (
+				849A40050AC170625B3D288D /* [CP] Check Pods Manifest.lock */,
 				EA6022281F259757001591BC /* Sources */,
 				EA6022291F259757001591BC /* Frameworks */,
 				EA60222A1F259757001591BC /* Resources */,
 				EA7F13261F2F643A0030FCEC /* Embed App Extensions */,
+				C051C3582B0AE9E60F240B9E /* [CP] Embed Pods Frameworks */,
+				B4FA93DE328D3A0508A2841D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -762,6 +781,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		849A40050AC170625B3D288D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B4FA93DE328D3A0508A2841D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TrueCallerDemo/Pods-TrueCallerDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C051C3582B0AE9E60F240B9E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TrueCallerDemo/Pods-TrueCallerDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EA5EE73D1F301BFF00B30AF2 /* Sources */ = {
@@ -1005,6 +1072,7 @@
 		};
 		EA60225A1F259757001591BC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C26CCC43230BC489E71A1304 /* Pods-TrueCallerDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2FXVJFZPXW;
@@ -1018,6 +1086,7 @@
 		};
 		EA60225B1F259757001591BC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F7E217BF38F1D04F743C31C5 /* Pods-TrueCallerDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2FXVJFZPXW;
