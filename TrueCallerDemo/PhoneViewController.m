@@ -117,14 +117,14 @@
         
         make.top.greaterThanOrEqualTo(_headerView).with.offset(0);
         make.left.equalTo(_headerView).with.offset(8);
-        make.right.equalTo(clearPhoneNumberButton).with.offset(-8);
+        make.right.equalTo(clearPhoneNumberButton).offset(-12);
         make.height.equalTo(_headerView.mas_height);
     }];
     
     [clearPhoneNumberButton mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.centerY.equalTo(_headerView);
-        make.right.equalTo(_headerView).with.offset(-8);
+        make.right.equalTo(_headerView).offset(-8);
         make.height.equalTo(@20);
         make.width.equalTo(@20);
     }];
