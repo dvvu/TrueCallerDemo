@@ -19,6 +19,7 @@
 #import "NimbusCore.h"
 #import "ContactBook.h"
 #import "Constants.h"
+#import "Masonry.h"
 
 @interface PhoneViewController () <NITableViewModelDelegate, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, CNContactViewControllerDelegate, ABNewPersonViewControllerDelegate>
 
@@ -29,6 +30,21 @@
 @property (nonatomic, weak) IBOutlet UIView* backgroundView;
 @property (nonatomic, weak) IBOutlet UIView* keyBoardView;
 @property (nonatomic, weak) IBOutlet UILabel* phoneLabel;
+
+@property (nonatomic, weak) IBOutlet UIButton* zeroKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* fristKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* secondKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* thridKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* fourthKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* fifthKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* sixthKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* seventhKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* eighthKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* ninthKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* starKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* poundKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* callKeyboardButton;
+@property (nonatomic, weak) IBOutlet UIButton* closeKeyboardButton;
 
 @property (nonatomic, strong) NSArray<ContactEntity*>* searchContactList;
 @property (nonatomic, strong) NSArray<ContactEntity*>* contactEntityList;
@@ -46,7 +62,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
+    [self setupKeyboardButton];
 }
 
 - (void)prepareData:(NSArray<ContactEntity*>*)contactEntityList {
@@ -62,35 +78,56 @@
 
 - (void)prepareUI {
     
+    // setup tableView
+    [_tableView registerClass:[ContactTableViewCell class] forCellReuseIdentifier:@"ContactTableViewCell"];
+    _resultSearchContactQueue = dispatch_queue_create("RESULT_SEARCH_CONTACT_QUEUE", DISPATCH_QUEUE_SERIAL);
+    _tableView.delegate = self;
+    
     // setup keyboard height
     _keyboardHeaderHeight = KEYBOARD_HEADER_HEIGHT;
     _keyboardViewHeight.constant = self.view.frame.size.height * 0.5 - _keyboardHeaderHeight;
     _symbolsArray = [NSArray arrayWithObjects:@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"*", @"#", nil];
     
     // setup headerView
-    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 25)];
+    _headerView = [UIView new];
     _headerView.layer.shadowColor = [UIColor blackColor].CGColor;
     _headerView.layer.masksToBounds = NO;
     _headerView.layer.shadowOffset = CGSizeMake(0, 0.1);
     _headerView.layer.shadowOpacity = 0.1;
     [_headerView setBackgroundColor:[UIColor whiteColor]];
     
-    _tableHeaderLabel = [[UILabel alloc] init];
-    _tableHeaderLabel.frame = CGRectMake(8, 0, DEVICE_WIDTH - 41, 25);
-    [_headerView addSubview:_tableHeaderLabel];
-    
-    // setup clearButton
     UIButton* clearPhoneNumberButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    clearPhoneNumberButton.frame = CGRectMake(DEVICE_WIDTH - 33, 0, 25, 25);
     [clearPhoneNumberButton setImage:[UIImage imageNamed:@"ic_clearText"] forState:UIControlStateNormal];
     [clearPhoneNumberButton addTarget:self action:@selector(clearHeader:) forControlEvents:UIControlEventTouchUpInside];
+   
+    _tableHeaderLabel = [UILabel new];
+    [_headerView addSubview:_tableHeaderLabel];
     [_headerView addSubview:clearPhoneNumberButton];
     _tableView.tableHeaderView = _headerView;
     
-    // setup tableView
-    [_tableView registerClass:[ContactTableViewCell class] forCellReuseIdentifier:@"ContactTableViewCell"];
-    _resultSearchContactQueue = dispatch_queue_create("RESULT_SEARCH_CONTACT_QUEUE", DISPATCH_QUEUE_SERIAL);
-    _tableView.delegate = self;
+    [_headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.greaterThanOrEqualTo(_backgroundView).with.offset(0);
+        make.left.equalTo(_backgroundView).with.offset(0);
+        make.right.equalTo(_backgroundView).with.offset(0);
+        make.height.equalTo(@25);
+    }];
+    
+    [_tableHeaderLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.greaterThanOrEqualTo(_headerView).with.offset(0);
+        make.left.equalTo(_headerView).with.offset(8);
+        make.right.equalTo(clearPhoneNumberButton).offset(-12);
+        make.height.equalTo(_headerView.mas_height);
+    }];
+    
+    [clearPhoneNumberButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerY.equalTo(_headerView);
+        make.right.equalTo(_headerView).offset(-8);
+        make.height.equalTo(@20);
+        make.width.equalTo(@20);
+    }];
 }
 
 #pragma mark - setupView
@@ -432,9 +469,84 @@
     }];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
+#pragma mark - setup KeyBoardButton
+
+- (void)setupKeyboardButton {
     
-    return UIStatusBarStyleLightContent;
+    UIColor* keyboardClickColor = [UIColor colorWithRed:195/255.f green:1.f blue:191/255.f alpha:1.f];
+    
+    [self setTitleKeyBoardButton:_zeroKeyboardButton withMainText:@" 0" subText:@" +"];
+    [self setTitleKeyBoardButton:_fristKeyboardButton withMainText:@"1" subText:@""];
+    [self setTitleKeyBoardButton:_secondKeyboardButton withMainText:@"  2" subText:@" ABC"];
+    [self setTitleKeyBoardButton:_thridKeyboardButton withMainText:@"3" subText:@" DEF"];
+    [self setTitleKeyBoardButton:_fourthKeyboardButton withMainText:@"   4" subText:@" GHI"];
+    [self setTitleKeyBoardButton:_fifthKeyboardButton withMainText:@"  5" subText:@" JKL"];
+    [self setTitleKeyBoardButton:_sixthKeyboardButton withMainText:@"6" subText:@" MNO"];
+    [self setTitleKeyBoardButton:_seventhKeyboardButton withMainText:@"    7" subText:@" PQRS"];
+    [self setTitleKeyBoardButton:_eighthKeyboardButton withMainText:@"  8" subText:@" TUV"];
+    [self setTitleKeyBoardButton:_ninthKeyboardButton withMainText:@" 9" subText:@" WXYZ"];
+    [_starKeyboardButton setBackgroundImage:[self imageWithColor:keyboardClickColor] forState:UIControlStateHighlighted];
+    [_poundKeyboardButton setBackgroundImage:[self imageWithColor:keyboardClickColor] forState:UIControlStateHighlighted];
+    [_callKeyboardButton setBackgroundImage:[self imageWithColor:keyboardClickColor] forState:UIControlStateHighlighted];
+    [_closeKeyboardButton setBackgroundImage:[self imageWithColor:keyboardClickColor] forState:UIControlStateHighlighted];
+    
+    _callKeyboardButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    _closeKeyboardButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+}
+
+#pragma mark - set Title KeyBoardButton
+
+- (void)setTitleKeyBoardButton:(UIButton*)button withMainText:(NSString *)mainText subText:(NSString *)subText {
+    
+    [button setBackgroundImage:[self imageWithColor:[UIColor colorWithRed:195/255.f green:1.f blue:191/255.f alpha:1.f]] forState:UIControlStateHighlighted];
+    NSMutableParagraphStyle* style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    [style setAlignment:NSTextAlignmentCenter];
+    [style setLineBreakMode:NSLineBreakByWordWrapping];
+    
+    UIFont* lineFristFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:30.0f];
+    UIFont* lineSecondFont = [UIFont fontWithName:@"HelveticaNeue-Light"  size:10.0f];
+   
+    NSDictionary* customStringFrist = @{ NSFontAttributeName:lineFristFont,
+                                         NSParagraphStyleAttributeName:style};
+    
+    NSDictionary* customStringSecond = @{ NSFontAttributeName:lineSecondFont,
+                                          NSParagraphStyleAttributeName:style};
+    
+    NSMutableAttributedString* attString = [[NSMutableAttributedString alloc] init];
+    
+    [attString appendAttributedString:[[NSAttributedString alloc] initWithString:mainText attributes:customStringFrist]];
+    [attString appendAttributedString:[[NSAttributedString alloc] initWithString:subText attributes:customStringSecond]];
+    
+    [button setAttributedTitle:attString forState:UIControlStateNormal];
+    [[button titleLabel] setTextColor:[UIColor lightGrayColor]];
+    [[button titleLabel] setLineBreakMode:NSLineBreakByWordWrapping];
+}
+
+#pragma mark - draw test
+
+- (UIImage *)imageWithColor:(UIColor *)color {
+    
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator {
+    
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+        
+        [self showHideKeyBoardheaderView:_phoneLabel.text];
+    } completion:nil];
 }
 
 @end
